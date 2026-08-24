@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://dnusmuatnpak1"]
+
+[ext_resource type="Script" uid="uid://b2wouy5sapvrc" path="res://Scripts/projectile_base.gd" id="1_3aqcq"]
+[ext_resource type="Texture2D" uid="uid://dhcwb0k260tag" path="res://icon.svg" id="2_aggla"]
+[ext_resource type="Script" uid="uid://c0wxkab66wxsc" path="res://Scripts/hitbox_component.gd" id="3_k2xcd"]
+[ext_resource type="Script" uid="uid://bykitm8bfeu6f" path="res://Scripts/projectile_movement_component.gd" id="4_aggla"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_h2w44"]
+radius = 12.0
+
+[node name="ProjectileBase" type="Node2D" unique_id=1472777239]
+script = ExtResource("1_3aqcq")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1321294681]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_aggla")
+
+[node name="HitboxComponent" type="Area2D" parent="." unique_id=1610901348]
+collision_layer = 2
+collision_mask = 53
+script = ExtResource("3_k2xcd")
+metadata/_custom_type_script = "uid://c0wxkab66wxsc"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent" unique_id=138438916]
+shape = SubResource("CircleShape2D_h2w44")
+
+[node name="ProjectileMovementComponent" type="Node2D" parent="." unique_id=2020725441]
+script = ExtResource("4_aggla")
+metadata/_custom_type_script = "uid://bykitm8bfeu6f"

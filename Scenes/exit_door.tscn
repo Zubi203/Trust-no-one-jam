@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://dlvltc76gop2r"]
+
+[ext_resource type="Script" uid="uid://oju1pr6ase7t" path="res://Scripts/exit_door.gd" id="1_b4nh8"]
+[ext_resource type="Texture2D" uid="uid://dhcwb0k260tag" path="res://icon.svg" id="2_dog84"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h2w44"]
+size = Vector2(44, 264)
+
+[node name="ExitDoor" type="StaticBody2D" unique_id=371905997]
+script = ExtResource("1_b4nh8")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=849572726]
+modulate = Color(0, 0, 0, 1)
+scale = Vector2(0.375, 2.15625)
+texture = ExtResource("2_dog84")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=242218645]
+shape = SubResource("RectangleShape2D_h2w44")

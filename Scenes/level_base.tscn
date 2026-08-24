@@ -1,0 +1,127 @@
+[gd_scene format=3 uid="uid://caldp4r2nqs1p"]
+
+[ext_resource type="PackedScene" uid="uid://bcsilowh3oyr6" path="res://Scenes/player.tscn" id="1_ikmr1"]
+[ext_resource type="PackedScene" uid="uid://dsrpqrosgans7" path="res://Scenes/escape_trigger.tscn" id="2_fhsqj"]
+[ext_resource type="PackedScene" uid="uid://dqemcylkf2ckp" path="res://Scenes/enemy.tscn" id="3_38dla"]
+[ext_resource type="PackedScene" uid="uid://dlvltc76gop2r" path="res://Scenes/exit_door.tscn" id="4_n5e7m"]
+[ext_resource type="PackedScene" uid="uid://c5uk4kqn5iqp8" path="res://Scenes/level_end_trigger.tscn" id="5_3ne40"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h2w44"]
+size = Vector2(1163, 41)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_38dla"]
+size = Vector2(1163, 132.44138)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ikmr1"]
+size = Vector2(1155, 87)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n5e7m"]
+size = Vector2(312, 439)
+
+[node name="LevelBase" type="Node2D" unique_id=82871209]
+
+[node name="Player" parent="." unique_id=2022812981 instance=ExtResource("1_ikmr1")]
+position = Vector2(94, 386)
+
+[node name="EscapeTrigger" parent="." unique_id=1318736820 instance=ExtResource("2_fhsqj")]
+position = Vector2(1791, 52)
+
+[node name="Enemy" parent="." unique_id=661474157 instance=ExtResource("3_38dla")]
+position = Vector2(807, 472)
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1028112961]
+position = Vector2(934, 171)
+
+[node name="TerrainBlockout" type="Node2D" parent="." unique_id=1781128419]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="TerrainBlockout" unique_id=1208860558 groups=["Terrain"]]
+position = Vector2(-1, 603)
+collision_layer = 4
+collision_mask = 3
+
+[node name="ColorRect" type="ColorRect" parent="TerrainBlockout/StaticBody2D" unique_id=867532864]
+offset_right = 1153.0
+offset_bottom = 43.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TerrainBlockout/StaticBody2D" unique_id=332582386]
+position = Vector2(571.5, 21.5)
+shape = SubResource("RectangleShape2D_h2w44")
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="TerrainBlockout" unique_id=1808932416 groups=["Terrain"]]
+position = Vector2(100, 463.00003)
+rotation = 1.5700206
+collision_layer = 4
+collision_mask = 3
+
+[node name="ColorRect" type="ColorRect" parent="TerrainBlockout/StaticBody2D4" unique_id=1541854279]
+offset_right = 1153.0
+offset_bottom = 134.89659
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TerrainBlockout/StaticBody2D4" unique_id=1753256079]
+position = Vector2(571.49994, 67.22069)
+shape = SubResource("RectangleShape2D_38dla")
+
+[node name="StaticBody2D6" type="StaticBody2D" parent="TerrainBlockout" unique_id=242355308 groups=["Terrain"]]
+position = Vector2(100, -876)
+rotation = 1.5700206
+collision_layer = 4
+collision_mask = 3
+
+[node name="ColorRect" type="ColorRect" parent="TerrainBlockout/StaticBody2D6" unique_id=1901922811]
+offset_right = 1153.0
+offset_bottom = 134.89659
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TerrainBlockout/StaticBody2D6" unique_id=1805651249]
+position = Vector2(571.49994, 67.22069)
+shape = SubResource("RectangleShape2D_38dla")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="TerrainBlockout" unique_id=1288083519 groups=["Terrain"]]
+position = Vector2(706, 520)
+collision_layer = 4
+collision_mask = 3
+
+[node name="ColorRect" type="ColorRect" parent="TerrainBlockout/StaticBody2D2" unique_id=1740862958]
+offset_right = 1153.0
+offset_bottom = 87.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TerrainBlockout/StaticBody2D2" unique_id=1535116077]
+position = Vector2(575.5, 44.5)
+shape = SubResource("RectangleShape2D_ikmr1")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="TerrainBlockout" unique_id=1103602856 groups=["Terrain"]]
+position = Vector2(1637, 203)
+collision_layer = 4
+collision_mask = 3
+
+[node name="ColorRect" type="ColorRect" parent="TerrainBlockout/StaticBody2D3" unique_id=834866120]
+offset_right = 309.0
+offset_bottom = 441.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TerrainBlockout/StaticBody2D3" unique_id=407935787]
+position = Vector2(154, 220.5)
+shape = SubResource("RectangleShape2D_n5e7m")
+
+[node name="StaticBody2D5" type="StaticBody2D" parent="TerrainBlockout" unique_id=1628645333 groups=["Terrain"]]
+position = Vector2(1038, 297)
+collision_layer = 4
+collision_mask = 3
+
+[node name="ColorRect" type="ColorRect" parent="TerrainBlockout/StaticBody2D5" unique_id=1036897837]
+offset_right = 309.0
+offset_bottom = 441.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TerrainBlockout/StaticBody2D5" unique_id=689514357]
+position = Vector2(154, 220.5)
+shape = SubResource("RectangleShape2D_n5e7m")
+
+[node name="Enemy2" parent="." unique_id=173945684 instance=ExtResource("3_38dla")]
+position = Vector2(432, 555)
+
+[node name="Enemy3" parent="." unique_id=656342768 instance=ExtResource("3_38dla")]
+position = Vector2(1492, 469)
+
+[node name="ExitDoor" parent="." unique_id=371905997 instance=ExtResource("4_n5e7m")]
+position = Vector2(34, 362)
+
+[node name="LevelEndTrigger" parent="." unique_id=1729793490 instance=ExtResource("5_3ne40")]
+position = Vector2(-17, 373)

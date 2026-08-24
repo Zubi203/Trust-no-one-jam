@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://dsrpqrosgans7"]
+
+[ext_resource type="Script" uid="uid://ykufufxp8bll" path="res://Scripts/escape_trigger.gd" id="1_kul33"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h2w44"]
+size = Vector2(76, 76)
+
+[node name="EscapeTrigger" type="Area2D" unique_id=1318736820]
+collision_layer = 0
+script = ExtResource("1_kul33")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=553100443]
+offset_left = -39.0
+offset_top = -40.0
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(1, 0, 0, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=35267100]
+shape = SubResource("RectangleShape2D_h2w44")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="ProjectileData" format=3 uid="uid://dlsob3bmxtstw"]
+
+[ext_resource type="Script" uid="uid://dpve1x8k31xkw" path="res://Scripts/projectile_data.gd" id="1_hr3dj"]
+[ext_resource type="PackedScene" uid="uid://dnusmuatnpak1" path="res://Scenes/projectile_base.tscn" id="1_vhn7r"]
+[ext_resource type="Texture2D" uid="uid://dhcwb0k260tag" path="res://icon.svg" id="3_rfvot"]
+
+[resource]
+script = ExtResource("1_hr3dj")
+name = "Pierce"
+sprite = ExtResource("3_rfvot")
+scene = ExtResource("1_vhn7r")
+metadata/_custom_type_script = "uid://dpve1x8k31xkw"

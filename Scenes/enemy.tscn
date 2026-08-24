@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://dqemcylkf2ckp"]
+
+[ext_resource type="Texture2D" uid="uid://dhcwb0k260tag" path="res://icon.svg" id="1_afpow"]
+[ext_resource type="Script" uid="uid://duh5xmnwt5ujc" path="res://Scripts/hurtbox_component.gd" id="2_287tu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h2w44"]
+size = Vector2(60, 60)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_h2w44"]
+radius = 34.98571
+
+[node name="Enemy" type="CharacterBody2D" unique_id=661474157]
+collision_mask = 12
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2113224878]
+modulate = Color(1, 0, 0, 1)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_afpow")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1275131203]
+shape = SubResource("RectangleShape2D_h2w44")
+
+[node name="HurtboxComponent" type="Area2D" parent="." unique_id=927197261]
+collision_layer = 32
+collision_mask = 2
+script = ExtResource("2_287tu")
+metadata/_custom_type_script = "uid://duh5xmnwt5ujc"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent" unique_id=965770629]
+shape = SubResource("CircleShape2D_h2w44")

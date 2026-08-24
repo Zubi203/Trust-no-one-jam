@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://bt0fe3ab3in38"]
+
+[ext_resource type="Script" uid="uid://rbgvhc1vnwsx" path="res://Scripts/clone.gd" id="1_eeqi5"]
+[ext_resource type="Script" uid="uid://jyd4i0dvnfdf" path="res://Scripts/shoot_component.gd" id="2_p7wtv"]
+[ext_resource type="Texture2D" uid="uid://dhcwb0k260tag" path="res://icon.svg" id="3_p7wtv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h2w44"]
+size = Vector2(44, 48)
+
+[node name="Clone" type="StaticBody2D" unique_id=125416237 node_paths=PackedStringArray("shoot_cooldown_timer") groups=["Terrain"]]
+collision_layer = 8
+collision_mask = 5
+script = ExtResource("1_eeqi5")
+shoot_cooldown_timer = NodePath("CooldownTimer")
+
+[node name="ShootProjectileComponent" type="Node2D" parent="." unique_id=1729045892]
+script = ExtResource("2_p7wtv")
+metadata/_custom_type_script = "uid://jyd4i0dvnfdf"
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1249825798]
+modulate = Color(1, 1, 1, 0.58431375)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("3_p7wtv")
+
+[node name="CooldownTimer" type="Timer" parent="." unique_id=48670849]
+wait_time = 0.1
+one_shot = true
+autostart = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1177241921]
+shape = SubResource("RectangleShape2D_h2w44")
+disabled = true
