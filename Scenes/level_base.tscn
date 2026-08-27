@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://chwwb6ku8oa53" path="res://Graphics/tilemap3.png" id="1_e3kpl"]
 [ext_resource type="PackedScene" uid="uid://bcsilowh3oyr6" path="res://Scenes/player.tscn" id="1_ikmr1"]
+[ext_resource type="PackedScene" uid="uid://dqemcylkf2ckp" path="res://Scenes/enemy.tscn" id="3_38dla"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2ssho"]
 texture = ExtResource("1_e3kpl")
@@ -1764,3 +1765,6 @@ zoom = Vector2(3, 3)
 
 [node name="Player" parent="." unique_id=2022812981 instance=ExtResource("1_ikmr1")]
 position = Vector2(667, 269)
+
+[node name="Enemy" parent="." unique_id=661474157 instance=ExtResource("3_38dla")]
+position = Vector2(666, 141)

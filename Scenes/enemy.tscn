@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://dqemcylkf2ckp"]
 
+[ext_resource type="Script" uid="uid://77j0en4ferhs" path="res://Scripts/grounded_enemy_movement.gd" id="1_287tu"]
 [ext_resource type="Texture2D" uid="uid://dhcwb0k260tag" path="res://icon.svg" id="1_afpow"]
 [ext_resource type="Script" uid="uid://duh5xmnwt5ujc" path="res://Scripts/hurtbox_component.gd" id="2_287tu"]
 
@@ -11,6 +12,7 @@ radius = 34.98571
 
 [node name="Enemy" type="CharacterBody2D" unique_id=661474157]
 collision_mask = 12
+script = ExtResource("1_287tu")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2113224878]
 modulate = Color(1, 0, 0, 1)
