@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://chmxcmn5d6617"]
+
+[ext_resource type="Script" uid="uid://bdpfd44noir3q" path="res://Scripts/possess_projectile.gd" id="1_jhqlw"]
+[ext_resource type="Texture2D" uid="uid://dhcwb0k260tag" path="res://icon.svg" id="2_mgi07"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_h2w44"]
+radius = 60.033325
+
+[node name="PossessProjectile" type="Area2D" unique_id=1872032264]
+modulate = Color(0.06999999, 0.20950007, 1, 1)
+scale = Vector2(0.08, 0.08)
+collision_layer = 0
+collision_mask = 5
+script = ExtResource("1_jhqlw")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=134347942]
+texture = ExtResource("2_mgi07")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=990315140]
+shape = SubResource("CircleShape2D_h2w44")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" uid="uid://dianwojmulqsw" path="res://Scripts/player_movement.gd" id="1_cvnsp"]
 [ext_resource type="Texture2D" uid="uid://dhcwb0k260tag" path="res://icon.svg" id="1_v0iea"]
-[ext_resource type="PackedScene" uid="uid://bt0fe3ab3in38" path="res://Scenes/clone.tscn" id="2_fkybt"]
+[ext_resource type="PackedScene" uid="uid://chmxcmn5d6617" path="res://Scenes/possess_projectile.tscn" id="2_fkybt"]
 [ext_resource type="Script" uid="uid://duh5xmnwt5ujc" path="res://Scripts/hurtbox_component.gd" id="3_6t5aa"]
-[ext_resource type="Script" uid="uid://jyd4i0dvnfdf" path="res://Scripts/shoot_component.gd" id="4_vgqql"]
+[ext_resource type="Script" uid="uid://dmi6igee3ffww" path="res://Scripts/SoundEmitterComponent.gd" id="6_x3wgy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h2w44"]
 size = Vector2(48, 48)
@@ -12,25 +12,34 @@ size = Vector2(48, 48)
 [sub_resource type="CircleShape2D" id="CircleShape2D_h2w44"]
 radius = 23.194826
 
-[node name="Player" type="CharacterBody2D" unique_id=2022812981 node_paths=PackedStringArray("coyote_timer", "shoot_cooldown_timer") groups=["Player"]]
+[sub_resource type="Gradient" id="Gradient_fkybt"]
+offsets = PackedFloat32Array(0.62435234, 0.66580313, 0.6761658)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_xpw1u"]
+gradient = SubResource("Gradient_fkybt")
+width = 32
+height = 32
+fill = 1
+fill_from = Vector2(0.521978, 0.489011)
+
+[node name="Player" type="CharacterBody2D" unique_id=2022812981 node_paths=PackedStringArray("coyote_timer") groups=["Player"]]
+scale = Vector2(0.3, 0.3)
 collision_mask = 12
 script = ExtResource("1_cvnsp")
-move_speed = 350.0
+move_speed = 150.0
+wall_climb_speed = 80.0
+wall_kick_horizontal_force = 300.0
+ceiling_climb_speed = 80.0
 acceleration = 1500.0
 braking = 2000.0
 coyote_time_duration = 0.1
 coyote_timer = NodePath("Timers/CoyoteTimer")
 jump_cut_damping_rate = 100000.0
-jump_height = 150.0
+jump_height = 60.0
 jump_time_to_peak = 0.4
 jump_time_to_descent = 0.3
-projectile_cooldowns = Dictionary[int, float]({
-0: 0.3,
-1: 0.5,
-2: 1.0
-})
-shoot_cooldown_timer = NodePath("Timers/ShootCooldown")
-clone_scene = ExtResource("2_fkybt")
+possess_projectile = ExtResource("2_fkybt")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=738153155]
 scale = Vector2(0.4, 0.4)
@@ -48,10 +57,6 @@ metadata/_custom_type_script = "uid://duh5xmnwt5ujc"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent" unique_id=1690174977]
 shape = SubResource("CircleShape2D_h2w44")
 
-[node name="ShootProjectileComponent" type="Node2D" parent="." unique_id=1259323899]
-script = ExtResource("4_vgqql")
-metadata/_custom_type_script = "uid://jyd4i0dvnfdf"
-
 [node name="Timers" type="Node" parent="." unique_id=465741518]
 
 [node name="CoyoteTimer" type="Timer" parent="Timers" unique_id=131325304]
@@ -61,3 +66,18 @@ one_shot = true
 wait_time = 0.1
 one_shot = true
 autostart = true
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="." unique_id=2089929346]
+modulate = Color(0.6814234, 0.6814234, 0.6814234, 0.65882355)
+offset_left = -16.0
+offset_top = -63.0
+offset_right = 16.0
+offset_bottom = -31.0
+step = 0.0
+value = 68.0
+fill_mode = 4
+texture_progress = SubResource("GradientTexture2D_xpw1u")
+
+[node name="SoundEmitterComponent" type="Node2D" parent="." unique_id=1989576507]
+script = ExtResource("6_x3wgy")
+metadata/_custom_type_script = "uid://dmi6igee3ffww"
