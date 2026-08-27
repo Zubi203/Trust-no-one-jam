@@ -1,0 +1,172 @@
+[gd_scene format=3 uid="uid://4n5o4vftwsy3"]
+
+[ext_resource type="Script" uid="uid://csrlkdycx5pvn" path="res://Scripts/character visual scripts/enemy_human_visuals.gd" id="1_hnek8"]
+[ext_resource type="Texture2D" uid="uid://bj5imhy5jk6pg" path="res://Graphics/Character/enemy 1 walking.png" id="2_72chj"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r6iak"]
+atlas = ExtResource("2_72chj")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hnek8"]
+atlas = ExtResource("2_72chj")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_72chj"]
+atlas = ExtResource("2_72chj")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x578o"]
+atlas = ExtResource("2_72chj")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5kf6p"]
+atlas = ExtResource("2_72chj")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r52x1"]
+atlas = ExtResource("2_72chj")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_e7nyl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r6iak")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hnek8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_72chj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x578o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5kf6p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r52x1")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 6.0
+}]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_x578o"]
+load_path = "res://.godot/imported/enemy 1.png-92e8deebd020d2a8409ad7445928e8a8.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_swgli"]
+atlas = SubResource("CompressedTexture2D_x578o")
+region = Rect2(42, 20, 14, 14)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_5kf6p"]
+load_path = "res://.godot/imported/enemy 1.png-92e8deebd020d2a8409ad7445928e8a8.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ipj4k"]
+atlas = SubResource("CompressedTexture2D_5kf6p")
+region = Rect2(20, 25, 12, 4)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_r52x1"]
+load_path = "res://.godot/imported/enemy 1.png-92e8deebd020d2a8409ad7445928e8a8.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nde5f"]
+atlas = SubResource("CompressedTexture2D_r52x1")
+region = Rect2(4, 39, 7, 3)
+margin = Rect2(0.5, 0, 0, 0)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_52deb"]
+load_path = "res://.godot/imported/enemy 1.png-92e8deebd020d2a8409ad7445928e8a8.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pmo2l"]
+atlas = SubResource("CompressedTexture2D_52deb")
+region = Rect2(3, 48, 9, 9)
+margin = Rect2(0.5, 0, 0, 0)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_11l55"]
+load_path = "res://.godot/imported/enemy 1.png-92e8deebd020d2a8409ad7445928e8a8.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8myui"]
+atlas = SubResource("CompressedTexture2D_11l55")
+region = Rect2(27, 5, 6, 9)
+
+[sub_resource type="Animation" id="Animation_nde5f"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Upper:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_52deb"]
+resource_name = "walking"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Upper:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Vector2(0, 0), Vector2(0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pmo2l"]
+_data = {
+&"RESET": SubResource("Animation_nde5f"),
+&"walking": SubResource("Animation_52deb")
+}
+
+[node name="Enemy visuals" type="Node2D" unique_id=462011330]
+texture_filter = 1
+script = ExtResource("1_hnek8")
+
+[node name="Feet" type="AnimatedSprite2D" parent="." unique_id=1378119683]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_e7nyl")
+autoplay = "default"
+frame_progress = 0.98245895
+
+[node name="Upper" type="Node2D" parent="." unique_id=1305928753]
+
+[node name="Chest" type="Sprite2D" parent="Upper" unique_id=6980973]
+position = Vector2(3, -5)
+texture = SubResource("AtlasTexture_swgli")
+
+[node name="Gun" type="Sprite2D" parent="Upper" unique_id=1041433630]
+position = Vector2(-7, -5)
+texture = SubResource("AtlasTexture_ipj4k")
+
+[node name="Arm Far" type="Sprite2D" parent="Upper" unique_id=677523840]
+position = Vector2(-7, -3)
+texture = SubResource("AtlasTexture_nde5f")
+offset = Vector2(0, 0.5)
+
+[node name="Arm near" type="Sprite2D" parent="Upper" unique_id=38537976]
+position = Vector2(-2, -6)
+texture = SubResource("AtlasTexture_pmo2l")
+offset = Vector2(0, 0.5)
+
+[node name="Head" type="Sprite2D" parent="Upper" unique_id=1297480161]
+position = Vector2(-3, -11)
+texture = SubResource("AtlasTexture_8myui")
+offset = Vector2(0, 0.5)
+
+[node name="Walking" type="AnimationPlayer" parent="." unique_id=145414227]
+libraries/ = SubResource("AnimationLibrary_pmo2l")
+autoplay = &"walking"
+speed_scale = 0.75
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1012539279]
+zoom = Vector2(2, 2)
