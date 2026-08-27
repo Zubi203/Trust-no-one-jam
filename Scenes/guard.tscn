@@ -1,0 +1,65 @@
+[gd_scene format=3 uid="uid://c57mhse7noj83"]
+
+[ext_resource type="PackedScene" uid="uid://dqemcylkf2ckp" path="res://Scenes/enemy.tscn" id="1_smm0d"]
+[ext_resource type="Script" uid="uid://b8dgf23f5e41m" path="res://Scripts/guard_movement.gd" id="2_cnet1"]
+[ext_resource type="Script" uid="uid://jyd4i0dvnfdf" path="res://Scripts/shoot_component.gd" id="2_smm0d"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3ne40"]
+radius = 30.0
+height = 126.666664
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_smm0d"]
+radius = 36.666664
+height = 120.0
+
+[sub_resource type="Gradient" id="Gradient_fkybt"]
+offsets = PackedFloat32Array(0.62435234, 0.66580313, 0.6761658)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_cnet1"]
+gradient = SubResource("Gradient_fkybt")
+width = 32
+height = 32
+fill = 1
+fill_from = Vector2(0.521978, 0.489011)
+
+[node name="Guard" unique_id=661474157 node_paths=PackedStringArray("reload_timer", "reload_timer_progress_bar") instance=ExtResource("1_smm0d")]
+script = ExtResource("2_cnet1")
+shoot_interval = 0.1
+reload_timer = NodePath("ReloadTimer")
+reload_duration = 1.2
+mag_size = 6
+reload_timer_progress_bar = NodePath("TextureProgressBar")
+gravity = 10.0
+jump_height = 40.0
+jump_time_to_peak = 0.3
+jump_time_to_descent = 0.2
+
+[node name="Sprite2D" parent="." index="0" unique_id=2113224878]
+scale = Vector2(0.5, 1)
+
+[node name="CollisionShape2D" parent="." index="1" unique_id=1275131203]
+shape = SubResource("CapsuleShape2D_3ne40")
+
+[node name="CollisionShape2D" parent="HurtboxComponent" parent_id_path=PackedInt32Array(927197261) index="0" unique_id=965770629]
+shape = SubResource("CapsuleShape2D_smm0d")
+
+[node name="ShootProjectileComponent" type="Node2D" parent="." index="3" unique_id=809406615]
+script = ExtResource("2_smm0d")
+metadata/_custom_type_script = "uid://jyd4i0dvnfdf"
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="." index="4" unique_id=413061350]
+modulate = Color(0.6814234, 0.6814234, 0.6814234, 0.65882355)
+offset_left = -16.0
+offset_top = -106.66666
+offset_right = 16.0
+offset_bottom = -74.66666
+step = 0.0
+value = 68.0
+fill_mode = 4
+texture_progress = SubResource("GradientTexture2D_cnet1")
+
+[node name="ReloadTimer" type="Timer" parent="." index="5" unique_id=691403276]
+wait_time = 0.1
+one_shot = true
+autostart = true

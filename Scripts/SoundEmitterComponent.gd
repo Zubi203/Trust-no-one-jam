@@ -16,5 +16,5 @@ func emit_sound(range: float):
 func _draw() -> void:
 	if should_draw_circle:
 		var color = Color.WHITE
-		color.a = 0.5
+		color.a = 0.1
 		draw_circle(position, radius, color)

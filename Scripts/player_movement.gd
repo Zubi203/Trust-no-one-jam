@@ -46,6 +46,7 @@ var last_footstep_time: float = 0
 @export var possess_projectile: PackedScene
 
 func _ready() -> void:
+	GameManager.SetCameraTarget.emit.call_deferred(self)
 	GameManager.EnablePlayerControl.connect(enable_control)
 	for child in get_children():
 		if child is SoundEmitterComponent:
@@ -175,6 +176,7 @@ func _try_shoot_projectile():
 	var projectile: PossessProjectile = possess_projectile.instantiate()
 	get_tree().current_scene.add_child(projectile)
 	projectile.set_projectile(global_position, Vector2(facing_direction, 0), self)
+	GameManager.SetCameraTarget.emit(projectile)
 	disable_control()
 
 func disable_control():
@@ -183,6 +185,7 @@ func disable_control():
 	control_enabled = false
 
 func enable_control(pos: Vector2):
+	GameManager.SetCameraTarget.emit(self)
 	global_position = pos
 	set_process(true)
 	set_physics_process(true)

@@ -28,6 +28,7 @@ func _get_input(delta: float):
 
 func _destroy():
 	GameManager.EnablePlayerControl.emit(global_position)
+	GameManager.SetCameraTarget.emit(player_controller)
 	queue_free()
 
 func _possess():
@@ -42,5 +43,12 @@ func _check_tether_distance():
 
 func _on_body_entered(body: Node2D) -> void:
 	if body == player_controller:
+		return
+	if body.is_in_group("Enemy"):
+		var controller = PlayerPossessionController.new()
+		body.add_child(controller)
+		controller.player = player_controller
+		GameManager.SetCameraTarget.emit(body)
+		_possess()
 		return
 	_destroy()

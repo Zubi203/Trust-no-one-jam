@@ -1,7 +1,7 @@
 class_name EnemyMovementComponent
 extends CharacterBody2D
 
-@export var move_speed: float = 200
+@export var move_speed: float = 100
 var direction: Vector2
 
 func direction_input(dir: Vector2):

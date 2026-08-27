@@ -6,8 +6,9 @@
 [ext_resource type="Script" uid="uid://duh5xmnwt5ujc" path="res://Scripts/hurtbox_component.gd" id="3_6t5aa"]
 [ext_resource type="Script" uid="uid://dmi6igee3ffww" path="res://Scripts/SoundEmitterComponent.gd" id="6_x3wgy"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_h2w44"]
-size = Vector2(48, 48)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_smm0d"]
+radius = 23.333332
+height = 46.666664
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_h2w44"]
 radius = 23.194826
@@ -36,7 +37,7 @@ braking = 2000.0
 coyote_time_duration = 0.1
 coyote_timer = NodePath("Timers/CoyoteTimer")
 jump_cut_damping_rate = 100000.0
-jump_height = 60.0
+jump_height = 70.0
 jump_time_to_peak = 0.4
 jump_time_to_descent = 0.3
 possess_projectile = ExtResource("2_fkybt")
@@ -46,7 +47,7 @@ scale = Vector2(0.4, 0.4)
 texture = ExtResource("1_v0iea")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1240337790]
-shape = SubResource("RectangleShape2D_h2w44")
+shape = SubResource("CapsuleShape2D_smm0d")
 
 [node name="HurtboxComponent" type="Area2D" parent="." unique_id=599852584]
 collision_layer = 16
