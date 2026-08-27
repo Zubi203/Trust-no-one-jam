@@ -1,0 +1,205 @@
+[gd_scene format=3 uid="uid://kw2wu7hwd6xu"]
+
+[ext_resource type="Script" uid="uid://c8obg7olto14s" path="res://Scripts/settings_menu.gd" id="1_icv2g"]
+[ext_resource type="Texture2D" uid="uid://t6lf0u2b463i" path="res://Graphics/Cross 256 px.png" id="2_7y5a0"]
+[ext_resource type="Script" uid="uid://cfw7hx86xxpor" path="res://Scripts/animated_button_component.gd" id="3_h2y1r"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_h2w44"]
+font_size = 32
+
+[node name="SettingsMenu" type="Control" unique_id=607017261 node_paths=PackedStringArray("master_slider", "sfx_slider", "music_slider")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_icv2g")
+master_slider = NodePath("CenterContainer/PanelContainer/MarginContainer/VBoxContainer/Control/MasterSlider")
+sfx_slider = NodePath("CenterContainer/PanelContainer/MarginContainer/VBoxContainer/Control3/SFXSlider")
+music_slider = NodePath("CenterContainer/PanelContainer/MarginContainer/VBoxContainer/Control2/MusicSlider")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=826134848]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.39215687)
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=679578283]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CenterContainer" unique_id=1914102994]
+custom_minimum_size = Vector2(600, 600)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/PanelContainer" unique_id=1619060452]
+layout_mode = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer" unique_id=1860688656]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1554899529]
+layout_mode = 2
+text = "Audio Settings"
+label_settings = SubResource("LabelSettings_h2w44")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Control5" type="Control" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=873365726]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Control" type="Control" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=431173310]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/Control" unique_id=430254513]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -59.0
+offset_top = -49.5
+offset_right = 59.0
+offset_bottom = -26.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Master Volume"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MasterSlider" type="HSlider" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/Control" unique_id=1021130279]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 113.0
+offset_top = -8.0
+offset_right = -113.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+max_value = 2.0
+step = 0.0
+
+[node name="Control2" type="Control" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=57899747]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/Control2" unique_id=401374397]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -59.0
+offset_top = -49.5
+offset_right = 59.0
+offset_bottom = -26.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Music Volume"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MusicSlider" type="HSlider" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/Control2" unique_id=2076598483]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 113.0
+offset_top = -8.0
+offset_right = -113.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+max_value = 2.0
+step = 0.0
+
+[node name="Control3" type="Control" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=430103599]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/Control3" unique_id=568703970]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -59.0
+offset_top = -49.5
+offset_right = 59.0
+offset_bottom = -26.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "SFX Volume"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SFXSlider" type="HSlider" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/Control3" unique_id=174355852]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 113.0
+offset_top = -8.0
+offset_right = -113.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+max_value = 2.0
+step = 0.0
+
+[node name="Control4" type="Control" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=789648387]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Control" type="Control" parent="CenterContainer/PanelContainer/MarginContainer" unique_id=625289583]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="CloseButton" type="TextureButton" parent="CenterContainer/PanelContainer/MarginContainer/Control" unique_id=1300743406]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -23.0
+offset_top = -19.0
+offset_right = 8.0
+offset_bottom = 12.0
+grow_horizontal = 0
+texture_normal = ExtResource("2_7y5a0")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="AnimatedButtonComponent" type="Node2D" parent="CenterContainer/PanelContainer/MarginContainer/Control/CloseButton" unique_id=1065460063]
+script = ExtResource("3_h2y1r")
+metadata/_custom_type_script = "uid://cfw7hx86xxpor"
+
+[connection signal="pressed" from="CenterContainer/PanelContainer/MarginContainer/Control/CloseButton" to="." method="_on_close_button_pressed"]

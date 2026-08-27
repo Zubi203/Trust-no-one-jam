@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://cgqkl1lpa62fv"]
+
+[ext_resource type="PackedScene" uid="uid://dqemcylkf2ckp" path="res://Scenes/enemy.tscn" id="1_uny1q"]
+[ext_resource type="Script" uid="uid://nrktwtgs8ot0" path="res://Scripts/dog_movement.gd" id="2_y1yv2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uny1q"]
+size = Vector2(120, 120)
+
+[node name="Dog" unique_id=661474157 instance=ExtResource("1_uny1q")]
+scale = Vector2(0.4, 0.25)
+script = ExtResource("2_y1yv2")
+acceleration = 500.0
+braking = 800.0
+gravity = 10.0
+jump_height = 70.0
+jump_time_to_peak = 0.3
+jump_time_to_descent = 0.2
+move_speed = 350.0
+
+[node name="CollisionShape2D" parent="." index="1" unique_id=1275131203]
+shape = SubResource("RectangleShape2D_uny1q")

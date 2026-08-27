@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://bmcju035wpc8t"]
+
+[ext_resource type="Texture2D" uid="uid://dhcwb0k260tag" path="res://icon.svg" id="1_lmw43"]
+[ext_resource type="Script" uid="uid://c0wxkab66wxsc" path="res://Scripts/hitbox_component.gd" id="2_rxfxu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_65ton"]
+size = Vector2(24, 24)
+
+[node name="MeleeAttack" type="Node2D" unique_id=1908629196]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1558536182]
+modulate = Color(1, 0, 0, 0.6666667)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_lmw43")
+
+[node name="HitboxComponent" type="Area2D" parent="." unique_id=62707310]
+script = ExtResource("2_rxfxu")
+metadata/_custom_type_script = "uid://c0wxkab66wxsc"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent" unique_id=1993738514]
+shape = SubResource("RectangleShape2D_65ton")

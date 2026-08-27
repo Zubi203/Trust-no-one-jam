@@ -1,0 +1,124 @@
+[gd_scene format=3 uid="uid://bn680qg8um0nn"]
+
+[ext_resource type="Script" uid="uid://cfw7hx86xxpor" path="res://Scripts/animated_button_component.gd" id="1_8drjq"]
+[ext_resource type="PackedScene" uid="uid://dsysmowc6irin" path="res://Scenes/level_select_button.tscn" id="1_lp4ky"]
+[ext_resource type="Script" uid="uid://dwdvmh66uw7is" path="res://Scripts/level_select.gd" id="1_vmt22"]
+[ext_resource type="Texture2D" uid="uid://d3blu83qjrnil" path="res://Graphics/Setting 2 256 px.png" id="4_job45"]
+[ext_resource type="PackedScene" uid="uid://kw2wu7hwd6xu" path="res://Scenes/settings_menu.tscn" id="5_y5wxr"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_y5wxr"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_np8ms"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jiyln"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pwhrq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_adt4o"]
+
+[node name="LevelSelect" type="Control" unique_id=558124686]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_vmt22")
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1234961512]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GridContainer" type="GridContainer" parent="CenterContainer" unique_id=1950616078]
+custom_minimum_size = Vector2(900, 500)
+layout_mode = 2
+theme_override_constants/h_separation = 50
+theme_override_constants/v_separation = 50
+columns = 3
+
+[node name="LevelSelectButton" parent="CenterContainer/GridContainer" unique_id=343268401 instance=ExtResource("1_lp4ky")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+type = 2
+
+[node name="LevelSelectButton2" parent="CenterContainer/GridContainer" unique_id=1927022725 instance=ExtResource("1_lp4ky")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+type = 3
+
+[node name="LevelSelectButton3" parent="CenterContainer/GridContainer" unique_id=84053259 instance=ExtResource("1_lp4ky")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+type = 4
+
+[node name="LevelSelectButton4" parent="CenterContainer/GridContainer" unique_id=309278773 instance=ExtResource("1_lp4ky")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+type = 5
+
+[node name="LevelSelectButton5" parent="CenterContainer/GridContainer" unique_id=2130142358 instance=ExtResource("1_lp4ky")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+type = 6
+
+[node name="LevelSelectButton6" parent="CenterContainer/GridContainer" unique_id=557970347 instance=ExtResource("1_lp4ky")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+type = 7
+
+[node name="BackButton" type="Button" parent="." unique_id=825174809]
+custom_minimum_size = Vector2(120, 100)
+layout_mode = 1
+anchors_preset = -1
+offset_left = 50.0
+offset_top = 50.0
+offset_right = 8.0
+offset_bottom = 8.0
+offset_transform_position = Vector2(0.045, 0)
+text = "BACK"
+
+[node name="AnimatedButtonComponent" type="Node2D" parent="BackButton" unique_id=710492814]
+script = ExtResource("1_8drjq")
+metadata/_custom_type_script = "uid://cfw7hx86xxpor"
+
+[node name="SettingsButton" type="Button" parent="." unique_id=1306615540]
+custom_minimum_size = Vector2(80, 80)
+custom_maximum_size = Vector2(80, 80)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -170.0
+offset_top = 40.0
+offset_right = -50.0
+offset_bottom = 163.0
+grow_horizontal = 0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_y5wxr")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_np8ms")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_jiyln")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_pwhrq")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_adt4o")
+icon = ExtResource("4_job45")
+icon_alignment = 1
+expand_icon = true
+
+[node name="AnimatedButtonComponent" type="Node2D" parent="SettingsButton" unique_id=1032720401]
+script = ExtResource("1_8drjq")
+metadata/_custom_type_script = "uid://cfw7hx86xxpor"
+
+[node name="SettingsMenu" parent="." unique_id=607017261 instance=ExtResource("5_y5wxr")]
+visible = false
+layout_mode = 1
+
+[connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="SettingsButton" to="." method="_on_settings_button_pressed"]

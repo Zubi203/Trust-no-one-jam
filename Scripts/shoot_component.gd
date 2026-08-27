@@ -8,14 +8,7 @@ extends Node2D
 }
 
 func shoot(type: GameManager.ProjectileTypes, target_direction: Vector2):
-	var owner_hurtbox = _get_hurtbox_sibling()
+	var owner_body = get_parent()
 	var projectile: ProjectileBase = load(projectile_data_paths[type]).scene.instantiate()
 	get_tree().current_scene.add_child(projectile)
-	projectile.set_projectile(owner_hurtbox, global_position, target_direction)
-
-func _get_hurtbox_sibling() -> HurtboxComponent:
-	var parent = get_parent()
-	for sibling in parent.get_children():
-		if sibling is HurtboxComponent:
-			return sibling
-	return null
+	projectile.set_projectile(owner_body, global_position, target_direction)

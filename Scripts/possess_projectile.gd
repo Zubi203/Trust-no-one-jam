@@ -2,8 +2,8 @@ class_name PossessProjectile
 extends Area2D
 
 var direction: Vector2 = Vector2.RIGHT
-@export var move_speed: float = 200
-@export var max_range: float =  100
+@export var move_speed: float = 250
+@export var max_range: float =  150
 var tether_point: Vector2
 var player_controller: PlayerMovement = null
 

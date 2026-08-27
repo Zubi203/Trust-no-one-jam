@@ -4,31 +4,32 @@
 [ext_resource type="Texture2D" uid="uid://dhcwb0k260tag" path="res://icon.svg" id="1_v0iea"]
 [ext_resource type="PackedScene" uid="uid://chmxcmn5d6617" path="res://Scenes/possess_projectile.tscn" id="2_fkybt"]
 [ext_resource type="Script" uid="uid://duh5xmnwt5ujc" path="res://Scripts/hurtbox_component.gd" id="3_6t5aa"]
+[ext_resource type="Script" uid="uid://vtswvvywpbhe" path="res://Scripts/health_component.gd" id="6_3smsa"]
 [ext_resource type="Script" uid="uid://dmi6igee3ffww" path="res://Scripts/SoundEmitterComponent.gd" id="6_x3wgy"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_smm0d"]
-radius = 23.333332
-height = 46.666664
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fkybt"]
+size = Vector2(89.99999, 119.999985)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_h2w44"]
 radius = 23.194826
 
 [sub_resource type="Gradient" id="Gradient_fkybt"]
-offsets = PackedFloat32Array(0.62435234, 0.66580313, 0.6761658)
+interpolation_mode = 1
+offsets = PackedFloat32Array(0.634715, 0.66580313, 0.70207256)
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_xpw1u"]
 gradient = SubResource("Gradient_fkybt")
-width = 32
-height = 32
+width = 96
+height = 96
 fill = 1
 fill_from = Vector2(0.521978, 0.489011)
 
-[node name="Player" type="CharacterBody2D" unique_id=2022812981 node_paths=PackedStringArray("coyote_timer") groups=["Player"]]
-scale = Vector2(0.3, 0.3)
+[node name="Player" type="CharacterBody2D" unique_id=2022812981 node_paths=PackedStringArray("coyote_timer", "possess_cooldown_timer", "possess_cooldown_timer_bar", "collider") groups=["Player"]]
+scale = Vector2(0.4, 0.4)
 collision_mask = 12
 script = ExtResource("1_cvnsp")
-move_speed = 150.0
+move_speed = 200.0
 wall_climb_speed = 80.0
 wall_kick_horizontal_force = 300.0
 ceiling_climb_speed = 80.0
@@ -37,17 +38,21 @@ braking = 2000.0
 coyote_time_duration = 0.1
 coyote_timer = NodePath("Timers/CoyoteTimer")
 jump_cut_damping_rate = 100000.0
-jump_height = 70.0
+jump_height = 110.0
 jump_time_to_peak = 0.4
 jump_time_to_descent = 0.3
 possess_projectile = ExtResource("2_fkybt")
+possess_cooldown_timer = NodePath("Timers/PossessCooldown")
+possess_cooldown_timer_bar = NodePath("PlayerUI/HBoxContainer/PossessCooldownBar")
+collider = NodePath("CollisionShape2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=738153155]
-scale = Vector2(0.4, 0.4)
+scale = Vector2(0.8, 1)
 texture = ExtResource("1_v0iea")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1240337790]
-shape = SubResource("CapsuleShape2D_smm0d")
+scale = Vector2(0.9999998, 0.9999998)
+shape = SubResource("RectangleShape2D_fkybt")
 
 [node name="HurtboxComponent" type="Area2D" parent="." unique_id=599852584]
 collision_layer = 16
@@ -63,22 +68,41 @@ shape = SubResource("CircleShape2D_h2w44")
 [node name="CoyoteTimer" type="Timer" parent="Timers" unique_id=131325304]
 one_shot = true
 
-[node name="ShootCooldown" type="Timer" parent="Timers" unique_id=98609055]
+[node name="PossessCooldown" type="Timer" parent="Timers" unique_id=98609055]
 wait_time = 0.1
 one_shot = true
-autostart = true
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="." unique_id=2089929346]
+[node name="SoundEmitterComponent" type="Node2D" parent="." unique_id=1989576507]
+script = ExtResource("6_x3wgy")
+metadata/_custom_type_script = "uid://dmi6igee3ffww"
+
+[node name="PlayerUI" type="CanvasLayer" parent="." unique_id=1925825849]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PlayerUI" unique_id=1049078288]
+anchors_preset = -1
+offset_left = 50.0
+offset_top = 50.0
+offset_right = 627.0
+offset_bottom = 155.0
+theme_override_constants/separation = 40
+alignment = 1
+
+[node name="PossessCooldownBar" type="TextureProgressBar" parent="PlayerUI/HBoxContainer" unique_id=2089929346]
 modulate = Color(0.6814234, 0.6814234, 0.6814234, 0.65882355)
-offset_left = -16.0
-offset_top = -63.0
-offset_right = 16.0
-offset_bottom = -31.0
+layout_mode = 2
 step = 0.0
 value = 68.0
 fill_mode = 4
 texture_progress = SubResource("GradientTexture2D_xpw1u")
 
-[node name="SoundEmitterComponent" type="Node2D" parent="." unique_id=1989576507]
-script = ExtResource("6_x3wgy")
-metadata/_custom_type_script = "uid://dmi6igee3ffww"
+[node name="HealthBar" type="ProgressBar" parent="PlayerUI/HBoxContainer" unique_id=578738288]
+custom_minimum_size = Vector2(160, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+value = 41.11
+show_percentage = false
+
+[node name="HealthComponent" type="Node2D" parent="." unique_id=391860573 node_paths=PackedStringArray("health_bar")]
+script = ExtResource("6_3smsa")
+health_bar = NodePath("../PlayerUI/HBoxContainer/HealthBar")
+metadata/_custom_type_script = "uid://vtswvvywpbhe"

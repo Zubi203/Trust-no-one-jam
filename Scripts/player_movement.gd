@@ -44,6 +44,14 @@ var last_footstep_time: float = 0
 
 @export_category("Possess")
 @export var possess_projectile: PackedScene
+@export var possess_cooldown_timer: Timer
+@export var possess_cooldown_duration: float = 3
+@export var possess_cooldown_timer_bar: Range
+@export var collider: CollisionShape2D = null
+
+@export_category("Visuals")
+var sprite: Sprite2D = null
+var base_sprite_scale: Vector2
 
 func _ready() -> void:
 	GameManager.SetCameraTarget.emit.call_deferred(self)
@@ -51,6 +59,11 @@ func _ready() -> void:
 	for child in get_children():
 		if child is SoundEmitterComponent:
 			sound_emitter = child
+		if child is Sprite2D:
+			sprite = child
+			base_sprite_scale = sprite.scale
+	if possess_cooldown_timer_bar:
+		possess_cooldown_timer_bar.max_value = possess_cooldown_duration
 
 
 func _physics_process(delta: float) -> void:
@@ -64,6 +77,9 @@ func _process(_delta: float) -> void:
 	if is_on_floor() and not was_on_floor:
 		_on_landing()
 	was_on_floor = is_on_floor()
+	
+	if possess_cooldown_timer_bar and possess_cooldown_timer:
+		possess_cooldown_timer_bar.value = possess_cooldown_timer.time_left
 
 
 func _get_input(delta: float):
@@ -148,10 +164,12 @@ func _try_emit_sound(sound_range: float):
 
 func _jump():
 	velocity.y = jump_velocity
+	_jump_animation()
 	_try_emit_sound(jump_volume)
 
 func _on_landing():
 	_try_emit_sound(max_landing_volume)
+	_landing_animation()
 
 func _moving_sounds():
 	var time = Time.get_unix_time_from_system()
@@ -171,20 +189,30 @@ func _moving_sounds():
 				_try_emit_sound(wall_and_ceiling_volume)
 
 func _try_shoot_projectile():
+	if possess_cooldown_timer == null:
+		return
+	if possess_cooldown_timer.time_left:
+		return
 	if possess_projectile == null:
 		return
 	var projectile: PossessProjectile = possess_projectile.instantiate()
 	get_tree().current_scene.add_child(projectile)
 	projectile.set_projectile(global_position, Vector2(facing_direction, 0), self)
 	GameManager.SetCameraTarget.emit(projectile)
+	if possess_cooldown_timer_bar:
+		possess_cooldown_timer_bar.value = possess_cooldown_duration
 	disable_control()
 
 func disable_control():
 	set_process(false)
 	set_physics_process(false)
+	_disable_collider.call_deferred()
 	control_enabled = false
 
 func enable_control(pos: Vector2):
+	_enable_collider.call_deferred()
+	if possess_cooldown_timer:
+		possess_cooldown_timer.start(possess_cooldown_duration)
 	GameManager.SetCameraTarget.emit(self)
 	global_position = pos
 	set_process(true)
@@ -192,3 +220,44 @@ func enable_control(pos: Vector2):
 	control_enabled = true
 	if not visible:
 		show()
+
+func _landing_animation():
+	if sprite == null:
+		return
+	sprite.scale = base_sprite_scale
+	var base_offset = sprite.offset
+	var tween = get_tree().create_tween()
+	tween.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK).set_parallel(true)
+	tween.tween_property(sprite, "scale:x", base_sprite_scale.x + 0.2, 0.1)
+	tween.tween_property(sprite, "scale:y", base_sprite_scale.y - 0.2, 0.1)
+	tween.tween_property(sprite, "offset:y", base_offset.y + 6, 0.1)
+	tween.set_parallel(false)
+	tween.tween_interval(0.1)
+	tween.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK).set_parallel(true)
+	tween.tween_property(sprite, "scale:x", base_sprite_scale.x, 0.1)
+	tween.tween_property(sprite, "scale:y", base_sprite_scale.y, 0.1)
+	tween.tween_property(sprite, "offset:y", base_offset.y, 0.1)
+
+func _jump_animation():
+	if sprite == null:
+		return
+	sprite.scale = base_sprite_scale
+	var tween = get_tree().create_tween()
+	tween.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK).set_parallel(true)
+	tween.tween_property(sprite, "scale:x", base_sprite_scale.x - 0.2, 0.1)
+	tween.tween_property(sprite, "scale:y", base_sprite_scale.y + 0.2, 0.1)
+	tween.set_parallel(false)
+	tween.tween_interval(0.1)
+	tween.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK).set_parallel(true)
+	tween.tween_property(sprite, "scale:x", base_sprite_scale.x, 0.1)
+	tween.tween_property(sprite, "scale:y", base_sprite_scale.y, 0.1)
+
+func _enable_collider():
+	if collider == null:
+		return
+	collider.disabled = false
+
+func _disable_collider():
+	if collider == null:
+		return
+	collider.disabled = true

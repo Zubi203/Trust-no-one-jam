@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://dsysmowc6irin"]
+
+[ext_resource type="Script" uid="uid://d2j4xkluie3e2" path="res://Scripts/level_select_button.gd" id="1_k1syi"]
+[ext_resource type="Script" uid="uid://cfw7hx86xxpor" path="res://Scripts/animated_button_component.gd" id="2_yqa6l"]
+
+[node name="LevelSelectButton" type="Button" unique_id=343268401]
+offset_right = 8.0
+offset_bottom = 8.0
+script = ExtResource("1_k1syi")
+
+[node name="AnimatedButtonComponent" type="Node2D" parent="." unique_id=149519433]
+script = ExtResource("2_yqa6l")
+metadata/_custom_type_script = "uid://cfw7hx86xxpor"

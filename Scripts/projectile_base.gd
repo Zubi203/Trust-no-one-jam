@@ -3,11 +3,11 @@ extends Node2D
 
 @export var active_duration: float = 4
 var direction: Vector2 = Vector2.RIGHT
-var owner_hurtbox: HurtboxComponent = null
+var owner_object: Node2D = null
 var projectile_data: ProjectileData = null
 
-func set_projectile(owner_box: Area2D, pos: Vector2, target_direction: Vector2, data: ProjectileData = null):
-	owner_hurtbox = owner_box
+func set_projectile(owner_obj: Node2D, pos: Vector2, target_direction: Vector2, data: ProjectileData = null):
+	owner_object = owner_obj
 	global_position = pos
 	direction = target_direction
 	projectile_data = data
@@ -19,7 +19,7 @@ func _set_children_components():
 		if child is Sprite2D and projectile_data != null:
 			child.texture = projectile_data.sprite
 		if child is HitboxComponent:
-			child.owner_object = owner_hurtbox
+			child.owner_object = owner_object
 		if child is ProjectileMovementComponent:
 			child.direction = direction
 

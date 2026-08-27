@@ -1,0 +1,391 @@
+[gd_scene format=3 uid="uid://b1axeffq6ci6j"]
+
+[ext_resource type="Script" uid="uid://covvsfxtehb2w" path="res://Scripts/title_screen.gd" id="1_qdg8d"]
+[ext_resource type="Script" uid="uid://cfw7hx86xxpor" path="res://Scripts/animated_button_component.gd" id="2_kjbj0"]
+[ext_resource type="PackedScene" uid="uid://kw2wu7hwd6xu" path="res://Scenes/settings_menu.tscn" id="3_kjbj0"]
+[ext_resource type="Texture2D" uid="uid://t6lf0u2b463i" path="res://Graphics/Cross 256 px.png" id="4_sufyd"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_h2w44"]
+font_size = 80
+shadow_size = 14
+shadow_color = Color(0, 0, 0, 0.89411765)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xpw1u"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yhcui"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pi8ck"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_e8jn2"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c1n37"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_65ton"]
+font_size = 40
+
+[sub_resource type="LabelSettings" id="LabelSettings_h4qv3"]
+font_size = 32
+
+[node name="TitleScreen" type="Control" unique_id=2002825568 node_paths=PackedStringArray("title_menu", "credits")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_qdg8d")
+title_menu = NodePath("VBoxContainer")
+credits = NodePath("CreditsMenu")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1116721840]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer" unique_id=558713498]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 50
+
+[node name="HSplitContainer" type="HSplitContainer" parent="VBoxContainer/MarginContainer" unique_id=1457366087]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="VBoxContainer/MarginContainer/HSplitContainer" unique_id=846290630]
+layout_mode = 2
+text = "PLACEHOLDER
+TITLE"
+label_settings = SubResource("LabelSettings_h2w44")
+vertical_alignment = 1
+
+[node name="Control" type="Control" parent="VBoxContainer/MarginContainer/HSplitContainer" unique_id=1042318021]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=22304137]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Padding" type="Control" parent="VBoxContainer/HBoxContainer" unique_id=419139444]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer" unique_id=1248357022]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 30
+
+[node name="PlayButton" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer" unique_id=2022153496]
+custom_minimum_size = Vector2(0, 70)
+custom_maximum_size = Vector2(400, 100)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxEmpty_xpw1u")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_yhcui")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_pi8ck")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_e8jn2")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_c1n37")
+alignment = 0
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer/PlayButton" unique_id=1713240036]
+z_index = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 26.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "PLAY"
+label_settings = SubResource("LabelSettings_65ton")
+vertical_alignment = 1
+
+[node name="Panel" type="Panel" parent="VBoxContainer/HBoxContainer/VBoxContainer/PlayButton" unique_id=777529743]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="AnimatedButtonComponent" type="Node2D" parent="VBoxContainer/HBoxContainer/VBoxContainer/PlayButton" unique_id=1559330633]
+script = ExtResource("2_kjbj0")
+metadata/_custom_type_script = "uid://cfw7hx86xxpor"
+
+[node name="SettingsButton" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1827845089]
+custom_minimum_size = Vector2(0, 70)
+custom_maximum_size = Vector2(400, 100)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxEmpty_xpw1u")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_yhcui")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_pi8ck")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_e8jn2")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_c1n37")
+alignment = 0
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer/SettingsButton" unique_id=967017166]
+z_index = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 26.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "SETTINGS"
+label_settings = SubResource("LabelSettings_65ton")
+vertical_alignment = 1
+
+[node name="Panel" type="Panel" parent="VBoxContainer/HBoxContainer/VBoxContainer/SettingsButton" unique_id=1635959074]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="AnimatedButtonComponent" type="Node2D" parent="VBoxContainer/HBoxContainer/VBoxContainer/SettingsButton" unique_id=1639824913]
+script = ExtResource("2_kjbj0")
+metadata/_custom_type_script = "uid://cfw7hx86xxpor"
+
+[node name="CreditsButton" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer" unique_id=823279585]
+custom_minimum_size = Vector2(0, 70)
+custom_maximum_size = Vector2(400, 100)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxEmpty_xpw1u")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_yhcui")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_pi8ck")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_e8jn2")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_c1n37")
+alignment = 0
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer/CreditsButton" unique_id=134705974]
+z_index = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 26.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "CREDITS"
+label_settings = SubResource("LabelSettings_65ton")
+vertical_alignment = 1
+
+[node name="Panel" type="Panel" parent="VBoxContainer/HBoxContainer/VBoxContainer/CreditsButton" unique_id=54609488]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="AnimatedButtonComponent" type="Node2D" parent="VBoxContainer/HBoxContainer/VBoxContainer/CreditsButton" unique_id=588136054]
+script = ExtResource("2_kjbj0")
+metadata/_custom_type_script = "uid://cfw7hx86xxpor"
+
+[node name="ExitButton" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer" unique_id=725939026]
+custom_minimum_size = Vector2(0, 70)
+custom_maximum_size = Vector2(400, 100)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxEmpty_xpw1u")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_yhcui")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_pi8ck")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_e8jn2")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_c1n37")
+alignment = 0
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer/ExitButton" unique_id=9314038]
+z_index = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 26.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "EXIT"
+label_settings = SubResource("LabelSettings_65ton")
+vertical_alignment = 1
+
+[node name="Panel" type="Panel" parent="VBoxContainer/HBoxContainer/VBoxContainer/ExitButton" unique_id=1239302842]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="AnimatedButtonComponent" type="Node2D" parent="VBoxContainer/HBoxContainer/VBoxContainer/ExitButton" unique_id=542542301]
+script = ExtResource("2_kjbj0")
+metadata/_custom_type_script = "uid://cfw7hx86xxpor"
+
+[node name="Padding3" type="Control" parent="VBoxContainer/HBoxContainer" unique_id=2009910936]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="Padding2" type="Control" parent="VBoxContainer/HBoxContainer" unique_id=868825864]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="Padding4" type="Control" parent="VBoxContainer/HBoxContainer" unique_id=1634680202]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="SettingsMenu" parent="." unique_id=607017261 instance=ExtResource("3_kjbj0")]
+visible = false
+layout_mode = 1
+
+[node name="CreditsMenu" type="ColorRect" parent="." unique_id=389796627]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.39215687)
+
+[node name="CenterContainer" type="CenterContainer" parent="CreditsMenu" unique_id=732540532]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CreditsMenu/CenterContainer" unique_id=665608232]
+custom_minimum_size = Vector2(800, 800)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CreditsMenu/CenterContainer/PanelContainer" unique_id=1253174684]
+layout_mode = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 30
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CreditsMenu/CenterContainer/PanelContainer/MarginContainer" unique_id=961825041]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CreditsMenu/CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=958695219]
+layout_mode = 2
+text = "Credits"
+label_settings = SubResource("LabelSettings_h4qv3")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Control5" type="Control" parent="CreditsMenu/CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1585418292]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Control" type="Control" parent="CreditsMenu/CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=497119061]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Label" type="RichTextLabel" parent="CreditsMenu/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/Control" unique_id=114764154]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 24
+theme_override_font_sizes/bold_font_size = 26
+bbcode_enabled = true
+text = "[b]Zubi[/b]
+Programming and Game Design"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Control2" type="Control" parent="CreditsMenu/CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1671904619]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Label" type="RichTextLabel" parent="CreditsMenu/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/Control2" unique_id=1864157433]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 24
+theme_override_font_sizes/bold_font_size = 26
+bbcode_enabled = true
+text = "[b]Troy[/b]
+Art and Game Design"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Control3" type="Control" parent="CreditsMenu/CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1153740401]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Label" type="RichTextLabel" parent="CreditsMenu/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/Control3" unique_id=1043236319]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 24
+theme_override_font_sizes/bold_font_size = 26
+theme_override_font_sizes/bold_italics_font_size = 26
+bbcode_enabled = true
+text = "[b]Alan[/b]
+Music and Sound Design"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Control4" type="Control" parent="CreditsMenu/CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1990238911]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Control" type="Control" parent="CreditsMenu/CenterContainer/PanelContainer/MarginContainer" unique_id=154646837]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="CreditsCloseButton" type="TextureButton" parent="CreditsMenu/CenterContainer/PanelContainer/MarginContainer/Control" unique_id=252208467]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -23.0
+offset_top = -11.0
+offset_right = 8.0
+offset_bottom = 20.0
+grow_horizontal = 0
+texture_normal = ExtResource("4_sufyd")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="AnimatedButtonComponent" type="Node2D" parent="CreditsMenu/CenterContainer/PanelContainer/MarginContainer/Control/CreditsCloseButton" unique_id=988441543]
+script = ExtResource("2_kjbj0")
+metadata/_custom_type_script = "uid://cfw7hx86xxpor"
+
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/CreditsButton" to="." method="_on_credits_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="pressed" from="CreditsMenu/CenterContainer/PanelContainer/MarginContainer/Control/CreditsCloseButton" to="." method="_on_credits_close_button_pressed"]
