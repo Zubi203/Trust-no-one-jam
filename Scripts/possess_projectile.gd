@@ -15,6 +15,7 @@ func set_projectile(pos: Vector2, dir: Vector2, player: PlayerMovement):
 
 func _physics_process(delta: float) -> void:
 	translate(direction * move_speed * delta)
+	rotation = direction.angle()
 
 func _process(_delta: float) -> void:
 	_get_input(_delta)

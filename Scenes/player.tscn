@@ -1,17 +1,17 @@
 [gd_scene format=3 uid="uid://bcsilowh3oyr6"]
 
 [ext_resource type="Script" uid="uid://dianwojmulqsw" path="res://Scripts/player_movement.gd" id="1_cvnsp"]
-[ext_resource type="Texture2D" uid="uid://dhcwb0k260tag" path="res://icon.svg" id="1_v0iea"]
 [ext_resource type="PackedScene" uid="uid://chmxcmn5d6617" path="res://Scenes/possess_projectile.tscn" id="2_fkybt"]
 [ext_resource type="Script" uid="uid://duh5xmnwt5ujc" path="res://Scripts/hurtbox_component.gd" id="3_6t5aa"]
+[ext_resource type="Texture2D" uid="uid://yfh7768juin7" path="res://Graphics/placeholders/player_character.png" id="3_x3wgy"]
 [ext_resource type="Script" uid="uid://vtswvvywpbhe" path="res://Scripts/health_component.gd" id="6_3smsa"]
 [ext_resource type="Script" uid="uid://dmi6igee3ffww" path="res://Scripts/SoundEmitterComponent.gd" id="6_x3wgy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fkybt"]
-size = Vector2(89.99999, 119.999985)
+size = Vector2(10.000002, 21.500008)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_h2w44"]
-radius = 23.194826
+radius = 7.499999
 
 [sub_resource type="Gradient" id="Gradient_fkybt"]
 interpolation_mode = 1
@@ -26,7 +26,6 @@ fill = 1
 fill_from = Vector2(0.521978, 0.489011)
 
 [node name="Player" type="CharacterBody2D" unique_id=2022812981 node_paths=PackedStringArray("coyote_timer", "possess_cooldown_timer", "possess_cooldown_timer_bar", "collider") groups=["Player"]]
-scale = Vector2(0.4, 0.4)
 collision_mask = 12
 script = ExtResource("1_cvnsp")
 move_speed = 200.0
@@ -38,9 +37,12 @@ braking = 2000.0
 coyote_time_duration = 0.1
 coyote_timer = NodePath("Timers/CoyoteTimer")
 jump_cut_damping_rate = 100000.0
-jump_height = 110.0
 jump_time_to_peak = 0.4
 jump_time_to_descent = 0.3
+jump_volume = 100.0
+max_landing_volume = 150.0
+footsteps_volume = 70.0
+wall_and_ceiling_volume = 50.0
 possess_projectile = ExtResource("2_fkybt")
 possess_cooldown_timer = NodePath("Timers/PossessCooldown")
 possess_cooldown_timer_bar = NodePath("PlayerUI/HBoxContainer/PossessCooldownBar")
@@ -48,10 +50,13 @@ collider = NodePath("CollisionShape2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=738153155]
 scale = Vector2(0.8, 1)
-texture = ExtResource("1_v0iea")
+texture = ExtResource("3_x3wgy")
+region_enabled = true
+region_rect = Rect2(16, 19, 17, 29)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1240337790]
-scale = Vector2(0.9999998, 0.9999998)
+position = Vector2(0, 3.250001)
+scale = Vector2(0.9999995, 0.9999995)
 shape = SubResource("RectangleShape2D_fkybt")
 
 [node name="HurtboxComponent" type="Area2D" parent="." unique_id=599852584]

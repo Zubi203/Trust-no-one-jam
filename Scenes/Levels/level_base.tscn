@@ -26,7 +26,7 @@ tile_set = ExtResource("1_38dla")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1028112961]
 position = Vector2(946, 167)
-zoom = Vector2(2, 2)
+zoom = Vector2(3, 3)
 script = ExtResource("2_n5e7m")
 follow_rate = 4.0
 
@@ -37,12 +37,18 @@ position = Vector2(667, 269)
 position = Vector2(760, 308)
 acceleration = 350.0
 braking = 500.0
+question_mark = null
+exclamation_point = null
 
 [node name="Guard" parent="." unique_id=661474157 instance=ExtResource("5_3ne40")]
 position = Vector2(1035, 217)
+question_mark = null
+exclamation_point = null
 
 [node name="FlyingEnemy" parent="." unique_id=203052609 instance=ExtResource("7_2ssho")]
 position = Vector2(1218, 136)
+question_mark = null
+exclamation_point = null
 
 [node name="LevelUI" type="CanvasLayer" parent="." unique_id=787522193 node_paths=PackedStringArray("pause_menu")]
 script = ExtResource("8_614yd")

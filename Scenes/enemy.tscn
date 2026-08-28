@@ -1,20 +1,28 @@
 [gd_scene format=3 uid="uid://dqemcylkf2ckp"]
 
 [ext_resource type="Script" uid="uid://iu53fsp7nj7o" path="res://Scripts/enemy_movement_component.gd" id="1_287tu"]
-[ext_resource type="Texture2D" uid="uid://dhcwb0k260tag" path="res://icon.svg" id="1_afpow"]
+[ext_resource type="Texture2D" uid="uid://bort4u1kumq5" path="res://Graphics/placeholders/enemy_1_spritesheet.png" id="2_afpow"]
+[ext_resource type="Texture2D" uid="uid://cje7cn53vgxk2" path="res://Graphics/Exclamation sign 256 px.png" id="3_0830c"]
 [ext_resource type="Script" uid="uid://vtswvvywpbhe" path="res://Scripts/health_component.gd" id="4_287tu"]
+[ext_resource type="Texture2D" uid="uid://bd5nyk8pnn2oy" path="res://Graphics/Question 256 px.png" id="4_0830c"]
+[ext_resource type="Script" uid="uid://dpv1jn585hnr1" path="res://Scripts/vision_cone_component.gd" id="6_ghaa6"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fkybt"]
-radius = 62.0
-height = 124.0
+radius = 8.0
+height = 34.0
 
-[node name="Enemy" type="CharacterBody2D" unique_id=661474157 groups=["Enemy"]]
+[node name="Enemy" type="CharacterBody2D" unique_id=661474157 node_paths=PackedStringArray("detection_indicator", "line_of_sight") groups=["Enemy"]]
 collision_mask = 12
 script = ExtResource("1_287tu")
+detection_indicator = NodePath("DetectionIndicator")
+question_mark = ExtResource("4_0830c")
+exclamation_point = ExtResource("3_0830c")
+line_of_sight = NodePath("LineOfSight")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2113224878]
-modulate = Color(1, 0, 0, 1)
-texture = ExtResource("1_afpow")
+texture = ExtResource("2_afpow")
+region_enabled = true
+region_rect = Rect2(0, 0, 23, 35)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1275131203]
 shape = SubResource("CapsuleShape2D_fkybt")
@@ -25,8 +33,21 @@ health_bar = NodePath("../HealthBar")
 metadata/_custom_type_script = "uid://vtswvvywpbhe"
 
 [node name="HealthBar" type="ProgressBar" parent="." unique_id=1849800551]
-offset_left = -76.0
-offset_top = -117.0
-offset_right = 79.0
-offset_bottom = -90.0
+offset_left = -14.0
+offset_top = -19.0
+offset_right = 14.0
+offset_bottom = -15.0
 show_percentage = false
+
+[node name="DetectionIndicator" type="Sprite2D" parent="." unique_id=1931476793]
+visible = false
+position = Vector2(0, -28.000004)
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("4_0830c")
+
+[node name="LineOfSight" type="RayCast2D" parent="." unique_id=1947471369]
+collision_mask = 4
+
+[node name="VisionConeComponent" type="Node2D" parent="." unique_id=511229003]
+script = ExtResource("6_ghaa6")
+metadata/_custom_type_script = "uid://dpv1jn585hnr1"

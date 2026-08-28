@@ -1,22 +1,66 @@
 [gd_scene format=3 uid="uid://chmxcmn5d6617"]
 
 [ext_resource type="Script" uid="uid://bdpfd44noir3q" path="res://Scripts/possess_projectile.gd" id="1_jhqlw"]
-[ext_resource type="Texture2D" uid="uid://dhcwb0k260tag" path="res://icon.svg" id="2_mgi07"]
+[ext_resource type="Texture2D" uid="uid://yfh7768juin7" path="res://Graphics/placeholders/player_character.png" id="2_jhqlw"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_h2w44"]
-radius = 60.033325
+radius = 4.1231055
+
+[sub_resource type="Animation" id="Animation_mgi07"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [25]
+}
+
+[sub_resource type="Animation" id="Animation_kgs2e"]
+resource_name = "possess_projectile"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.099999994, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [26, 27, 28, 29]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rq2q0"]
+_data = {
+&"RESET": SubResource("Animation_mgi07"),
+&"possess_projectile": SubResource("Animation_kgs2e")
+}
 
 [node name="PossessProjectile" type="Area2D" unique_id=1872032264]
-modulate = Color(0.06999999, 0.20950007, 1, 1)
-scale = Vector2(0.3, 0.3)
 collision_layer = 0
 collision_mask = 5
 script = ExtResource("1_jhqlw")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=134347942]
-texture = ExtResource("2_mgi07")
+texture = ExtResource("2_jhqlw")
+offset = Vector2(7.19, 0)
+hframes = 42
+frame = 25
+region_rect = Rect2(1588, 0, 1100, 64)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=990315140]
 shape = SubResource("CircleShape2D_h2w44")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1924620612]
+libraries/ = SubResource("AnimationLibrary_rq2q0")
+autoplay = &"possess_projectile"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

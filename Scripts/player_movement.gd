@@ -72,6 +72,9 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 func _process(_delta: float) -> void:
+	
+	if sprite:
+		sprite.flip_h = facing_direction < 0
 	_moving_sounds()
 	
 	if is_on_floor() and not was_on_floor:
@@ -208,6 +211,8 @@ func disable_control():
 	set_physics_process(false)
 	_disable_collider.call_deferred()
 	control_enabled = false
+	if visible:
+		hide()
 
 func enable_control(pos: Vector2):
 	_enable_collider.call_deferred()
@@ -215,6 +220,7 @@ func enable_control(pos: Vector2):
 		possess_cooldown_timer.start(possess_cooldown_duration)
 	GameManager.SetCameraTarget.emit(self)
 	global_position = pos
+	velocity = Vector2.ZERO
 	set_process(true)
 	set_physics_process(true)
 	control_enabled = true

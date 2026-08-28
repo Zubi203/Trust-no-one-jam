@@ -3,17 +3,28 @@
 [ext_resource type="PackedScene" uid="uid://dqemcylkf2ckp" path="res://Scenes/enemy.tscn" id="1_a0nct"]
 [ext_resource type="Script" uid="uid://dy15qoegj7nqx" path="res://Scripts/flying_enemy.gd" id="2_gcrhg"]
 [ext_resource type="Script" uid="uid://dmi6igee3ffww" path="res://Scripts/SoundEmitterComponent.gd" id="3_gcrhg"]
+[ext_resource type="Texture2D" uid="uid://o350yimm1syh" path="res://Graphics/placeholders/flying_enemy.png" id="3_tvc0l"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jhqlw"]
+radius = 13.038404
 
 [node name="FlyingEnemy" unique_id=661474157 node_paths=PackedStringArray("sound_emitter_component") instance=ExtResource("1_a0nct")]
-scale = Vector2(0.4, 0.4)
 motion_mode = 1
 script = ExtResource("2_gcrhg")
-call_distance = 900.0
+call_distance = 220.0
 acceleration = 350.0
 braking = 500.0
 sound_emitter_component = NodePath("SoundEmitterComponent")
 call_cooldown = 1.0
 move_speed = 250.0
+
+[node name="Sprite2D" parent="." index="0" unique_id=2113224878]
+texture = ExtResource("3_tvc0l")
+region_enabled = true
+region_rect = Rect2(18, 18, 27, 27)
+
+[node name="CollisionShape2D" parent="." index="1" unique_id=1275131203]
+shape = SubResource("CircleShape2D_jhqlw")
 
 [node name="SoundEmitterComponent" type="Node2D" parent="." index="3" unique_id=1278282804]
 script = ExtResource("3_gcrhg")
