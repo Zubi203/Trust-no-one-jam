@@ -6,7 +6,7 @@ var animation_player: AnimationPlayer
 var character_body: CharacterBody2D
 @export var animation_name: String
 
-signal state_transition
+signal state_transition (source_state: State, new_state_name: String)
 
 func enter() -> void:
 	if animated_sprite:

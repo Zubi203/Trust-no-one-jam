@@ -11,12 +11,14 @@ extends EnemyMovementComponent
 @onready var jump_gravity: float = ((-2.0 * jump_height) / (jump_time_to_peak * jump_time_to_peak)) * -1.0
 @onready var fall_gravity: float = ((-2.0 * jump_height) / (jump_time_to_descent * jump_time_to_descent)) * -1.0
 
+@export var acceleration: float = 500
+@export var braking: float = 800
 
 func move(delta: float):
-	if direction:
-		velocity.x = direction.x * move_speed
+	if direction.x:
+		velocity.x = move_toward(velocity.x, direction.x * move_speed * speed_multiplier, acceleration * delta)
 	else:
-		velocity.x = 0
+		velocity.x = move_toward(velocity.x, 0.0, braking * delta)
 	if not is_on_floor():
 		velocity.y += _get_custom_gravity() * delta
 

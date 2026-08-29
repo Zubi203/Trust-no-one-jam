@@ -2,20 +2,61 @@
 
 [ext_resource type="PackedScene" uid="uid://dqemcylkf2ckp" path="res://Scenes/enemy.tscn" id="1_uny1q"]
 [ext_resource type="Script" uid="uid://nrktwtgs8ot0" path="res://Scripts/dog_movement.gd" id="2_y1yv2"]
+[ext_resource type="Texture2D" uid="uid://onmu6kivxq8a" path="res://Graphics/placeholders/crab.png" id="3_y1yv2"]
+[ext_resource type="Script" uid="uid://c454tpnr6cqvg" path="res://Scripts/dog_patrol.gd" id="4_bno1h"]
+[ext_resource type="Script" uid="uid://c4vrwa04b7dqo" path="res://Scripts/dog_suspicious.gd" id="5_6yb15"]
+[ext_resource type="Script" uid="uid://bo7h0f4ash4rb" path="res://Scenes/alert.gd" id="6_usue5"]
+[ext_resource type="Script" uid="uid://dmi6igee3ffww" path="res://Scripts/SoundEmitterComponent.gd" id="7_12smy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uny1q"]
-size = Vector2(120, 120)
+size = Vector2(8, 10)
 
 [node name="Dog" unique_id=661474157 instance=ExtResource("1_uny1q")]
-scale = Vector2(0.4, 0.25)
 script = ExtResource("2_y1yv2")
-acceleration = 500.0
-braking = 800.0
+explode_sound_range = 300.0
 gravity = 10.0
 jump_height = 70.0
 jump_time_to_peak = 0.3
 jump_time_to_descent = 0.2
-move_speed = 350.0
+acceleration = 500.0
+braking = 800.0
+move_speed = 250.0
+
+[node name="Sprite2D" parent="." index="0" unique_id=2113224878]
+texture = ExtResource("3_y1yv2")
+region_rect = Rect2(0, 4, 15, 11)
 
 [node name="CollisionShape2D" parent="." index="1" unique_id=1275131203]
 shape = SubResource("RectangleShape2D_uny1q")
+
+[node name="VisionConeComponent" parent="." index="5" unique_id=511229003]
+fov_angle = 20.0
+cone_range = 120.0
+
+[node name="Patrol" parent="FiniteStateMachine" parent_id_path=PackedInt32Array(1983450659) index="0" unique_id=1735616744]
+script = ExtResource("4_bno1h")
+
+[node name="Suspicious" parent="FiniteStateMachine" parent_id_path=PackedInt32Array(1983450659) index="1" unique_id=1771401790]
+script = ExtResource("5_6yb15")
+state_duration = 5.0
+jump_cooldown = 1.0
+
+[node name="Alert" parent="FiniteStateMachine" parent_id_path=PackedInt32Array(1983450659) index="2" unique_id=457502729]
+script = ExtResource("6_usue5")
+explode_range = 20.0
+
+[node name="LedgeEndDetectorRight" parent="Raycasts" parent_id_path=PackedInt32Array(918429820) index="0" unique_id=685131770]
+position = Vector2(12, 5)
+
+[node name="LedgeEndDetectorLeft" parent="Raycasts" parent_id_path=PackedInt32Array(918429820) index="1" unique_id=1608294603]
+position = Vector2(-12, 5)
+
+[node name="WallDetectorRight" parent="Raycasts" parent_id_path=PackedInt32Array(918429820) index="3" unique_id=1146679392]
+target_position = Vector2(20, 0)
+
+[node name="WallDetectorLeft" parent="Raycasts" parent_id_path=PackedInt32Array(918429820) index="4" unique_id=1271537339]
+target_position = Vector2(-20, 0)
+
+[node name="SoundEmitterComponent" type="Node2D" parent="." index="8" unique_id=1401351276]
+script = ExtResource("7_12smy")
+metadata/_custom_type_script = "uid://dmi6igee3ffww"

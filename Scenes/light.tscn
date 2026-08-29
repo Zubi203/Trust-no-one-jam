@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://cim4akd0rx8j3"]
+
+[node name="Light" type="Area2D" unique_id=1112758081]
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=2067336473]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=839463866]

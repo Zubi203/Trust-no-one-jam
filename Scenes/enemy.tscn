@@ -2,24 +2,27 @@
 
 [ext_resource type="Script" uid="uid://iu53fsp7nj7o" path="res://Scripts/enemy_movement_component.gd" id="1_287tu"]
 [ext_resource type="Texture2D" uid="uid://bort4u1kumq5" path="res://Graphics/placeholders/enemy_1_spritesheet.png" id="2_afpow"]
-[ext_resource type="Texture2D" uid="uid://cje7cn53vgxk2" path="res://Graphics/Exclamation sign 256 px.png" id="3_0830c"]
 [ext_resource type="Script" uid="uid://vtswvvywpbhe" path="res://Scripts/health_component.gd" id="4_287tu"]
 [ext_resource type="Texture2D" uid="uid://bd5nyk8pnn2oy" path="res://Graphics/Question 256 px.png" id="4_0830c"]
 [ext_resource type="Script" uid="uid://dpv1jn585hnr1" path="res://Scripts/vision_cone_component.gd" id="6_ghaa6"]
 [ext_resource type="Script" uid="uid://colc37fd136ad" path="res://Scripts/state_machine.gd" id="7_auwsv"]
 [ext_resource type="Script" uid="uid://dabjn6elwxib8" path="res://Scripts/state.gd" id="8_8uf12"]
+[ext_resource type="Script" uid="uid://tsvcgjjalj1a" path="res://Scripts/possessed_state.gd" id="8_auwsv"]
+[ext_resource type="Script" uid="uid://do70l7naolca8" path="res://Scripts/stunned.gd" id="9_8uf12"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fkybt"]
 radius = 8.0
 height = 34.0
 
-[node name="Enemy" type="CharacterBody2D" unique_id=661474157 node_paths=PackedStringArray("detection_indicator", "line_of_sight") groups=["Enemy"]]
+[node name="Enemy" type="CharacterBody2D" unique_id=661474157 node_paths=PackedStringArray("detection_indicator", "line_of_sight", "wall_detector_right", "wall_detector_left", "ledge_end_detector_right", "ledge_end_detector_left") groups=["Enemy"]]
 collision_mask = 12
 script = ExtResource("1_287tu")
 detection_indicator = NodePath("DetectionIndicator")
-question_mark = ExtResource("4_0830c")
-exclamation_point = ExtResource("3_0830c")
-line_of_sight = NodePath("LineOfSight")
+line_of_sight = NodePath("Raycasts/LineOfSight")
+wall_detector_right = NodePath("Raycasts/WallDetectorRight")
+wall_detector_left = NodePath("Raycasts/WallDetectorLeft")
+ledge_end_detector_right = NodePath("Raycasts/LedgeEndDetectorRight")
+ledge_end_detector_left = NodePath("Raycasts/LedgeEndDetectorLeft")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2113224878]
 texture = ExtResource("2_afpow")
@@ -47,9 +50,6 @@ position = Vector2(0, -28.000004)
 scale = Vector2(0.05, 0.05)
 texture = ExtResource("4_0830c")
 
-[node name="LineOfSight" type="RayCast2D" parent="." unique_id=1947471369]
-collision_mask = 4
-
 [node name="VisionConeComponent" type="Node2D" parent="." unique_id=511229003]
 script = ExtResource("6_ghaa6")
 metadata/_custom_type_script = "uid://dpv1jn585hnr1"
@@ -70,3 +70,34 @@ metadata/_custom_type_script = "uid://dabjn6elwxib8"
 [node name="Alert" type="Node" parent="FiniteStateMachine" unique_id=457502729]
 script = ExtResource("8_8uf12")
 metadata/_custom_type_script = "uid://dabjn6elwxib8"
+
+[node name="Possessed" type="Node" parent="FiniteStateMachine" unique_id=881628383]
+script = ExtResource("8_auwsv")
+metadata/_custom_type_script = "uid://dabjn6elwxib8"
+
+[node name="Stunned" type="Node" parent="FiniteStateMachine" unique_id=383194571]
+script = ExtResource("9_8uf12")
+metadata/_custom_type_script = "uid://dabjn6elwxib8"
+
+[node name="Raycasts" type="Node2D" parent="." unique_id=918429820]
+
+[node name="LedgeEndDetectorRight" type="RayCast2D" parent="Raycasts" unique_id=685131770]
+position = Vector2(12, 16)
+target_position = Vector2(0, 12)
+collision_mask = 4
+
+[node name="LedgeEndDetectorLeft" type="RayCast2D" parent="Raycasts" unique_id=1608294603]
+position = Vector2(-12, 16)
+target_position = Vector2(0, 12)
+collision_mask = 4
+
+[node name="LineOfSight" type="RayCast2D" parent="Raycasts" unique_id=1947471369]
+collision_mask = 4
+
+[node name="WallDetectorRight" type="RayCast2D" parent="Raycasts" unique_id=1146679392]
+target_position = Vector2(23, 0)
+collision_mask = 4
+
+[node name="WallDetectorLeft" type="RayCast2D" parent="Raycasts" unique_id=1271537339]
+target_position = Vector2(-24, 0)
+collision_mask = 4

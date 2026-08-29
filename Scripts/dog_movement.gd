@@ -1,12 +1,13 @@
 extends GroundedEnemyMovement
 
-@export var acceleration: float = 350
-@export var braking: float = 500
+@export var explode_sound_range: float = 300
 
-func move(delta: float):
-	if direction.x:
-		velocity.x = move_toward(velocity.x, direction.x * move_speed, acceleration * delta)
-	else:
-		velocity.x = move_toward(velocity.x, 0.0, braking * delta)
-	if not is_on_floor():
-		velocity.y += _get_custom_gravity() * delta
+func explode():
+	for child in get_children():
+		if child is SoundEmitterComponent:
+			child.emit_sound(300)
+	await get_tree().create_timer(0.1).timeout
+	queue_free()
+
+func action_input(dir: Vector2):
+	explode()

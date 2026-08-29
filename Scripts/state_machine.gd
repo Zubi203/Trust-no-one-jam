@@ -10,10 +10,6 @@ func _ready() -> void:
 		if child is State:
 			states[child.name.to_lower()] = child
 			child.state_transition.connect(change_state)
-	
-	if initial_state:
-		initial_state.enter()
-		current_state = initial_state
 
 func init(body: CharacterBody2D, animated_sprite: AnimatedSprite2D = null, animation_player: AnimationPlayer = null) -> void:
 	for key in states.keys():
@@ -21,6 +17,10 @@ func init(body: CharacterBody2D, animated_sprite: AnimatedSprite2D = null, anima
 			states[key].character_body = body
 			#states[key].animated_sprite = animated_sprite
 			#states[key].animation_player = animation_player
+	
+	if initial_state:
+		initial_state.enter()
+		current_state = initial_state
 
 func _physics_process(delta: float) -> void:
 	if current_state:
@@ -32,12 +32,12 @@ func _process(delta: float) -> void:
 
 func change_state(source_state: State, new_state_name: String) -> void:
 	if source_state != current_state:
-		print("desired state already active")
-		pass
+		#print("desired state already active")
+		return
 	var new_state: State = states.get(new_state_name)
 	if !new_state:
-		print("desired state does not exist")
-		pass
+		#print("desired state does not exist")
+		return
 	if current_state:
 		current_state.exit()
 	new_state.enter()

@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://bykitm8bfeu6f" path="res://Scripts/projectile_movement_component.gd" id="4_aggla"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_h2w44"]
-radius = 12.0
+radius = 19.999998
 
 [node name="ProjectileBase" type="Node2D" unique_id=1472777239]
 scale = Vector2(0.2, 0.2)
@@ -20,6 +20,7 @@ texture = ExtResource("2_aggla")
 collision_layer = 0
 collision_mask = 5
 script = ExtResource("3_k2xcd")
+damage = 1
 metadata/_custom_type_script = "uid://c0wxkab66wxsc"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent" unique_id=138438916]

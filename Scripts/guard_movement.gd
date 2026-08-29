@@ -9,7 +9,6 @@ var shoot_component: ShootProjectileComponent = null
 var current_mag: int
 @export var reload_timer_progress_bar: Range
 
-
 func _enemy_ready():
 	current_mag = mag_size
 	for child in get_children():

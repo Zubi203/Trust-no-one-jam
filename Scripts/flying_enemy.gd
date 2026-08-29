@@ -10,7 +10,7 @@ var last_call_time: float
 
 func move(delta: float):
 	if direction:
-		velocity = velocity.move_toward(direction * move_speed, delta * acceleration)
+		velocity = velocity.move_toward(direction * move_speed * speed_multiplier, delta * acceleration)
 	else:
 		velocity = velocity.move_toward(Vector2.ZERO, delta * braking)
 

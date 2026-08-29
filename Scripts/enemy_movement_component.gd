@@ -1,24 +1,38 @@
 class_name EnemyMovementComponent
 extends CharacterBody2D
 
+signal SoundHeard
+signal TargetSighted
+
 @export var move_speed: float = 100
+@export var speed_multiplier: float = 1
 var direction: Vector2
 
 @export var detection_indicator: Sprite2D
-@export var question_mark: Texture2D
-@export var exclamation_point: Texture2D
+@onready var question_mark: Texture2D = preload("uid://bd5nyk8pnn2oy")
+@onready var exclamation_point: Texture2D = preload("uid://cje7cn53vgxk2")
 
+@export_category("Raycasts")
 @export var line_of_sight: RayCast2D
+@export var wall_detector_right: RayCast2D
+@export var wall_detector_left: RayCast2D
+@export var ledge_end_detector_right: RayCast2D
+@export var ledge_end_detector_left: RayCast2D
+
 var target_body: CharacterBody2D = null
 var target_point: Vector2
 
 var state_machine: FiniteStateMachine = null
+var vision_cone: VisionConeComponent = null
+
 
 func _ready() -> void:
+	_enemy_ready.call_deferred()
 	GameManager.EmitSound.connect(_on_sound_heard)
 	for child in get_children():
 		if child is VisionConeComponent:
 			child.PlayerDetected.connect(_on_vision_cone_entered)
+			vision_cone = child
 		if child is FiniteStateMachine:
 			state_machine = child
 			child.init(self)
@@ -27,7 +41,7 @@ func _enemy_ready():
 	pass
 
 func direction_input(dir: Vector2):
-	direction = dir
+	direction = dir.normalized()
 
 func action_input(dir: Vector2):
 	pass
@@ -57,8 +71,7 @@ func _on_sound_heard(origin_pos: Vector2, sound_range: float):
 	if dist > sound_range:
 		return
 	target_point = origin_pos
-	if state_machine.states.find_key(state_machine.current_state) == "patrol":
-		state_machine.change_state(state_machine.current_state, "suspicious")
+	SoundHeard.emit()
 
 func _has_line_of_sight() -> bool:
 	if line_of_sight == null:
@@ -72,11 +85,14 @@ func _on_vision_cone_entered():
 	_set_target(get_tree().get_first_node_in_group("Player"))
 	if not _has_line_of_sight():
 		return
-	state_machine.change_state(state_machine.current_state, "alert")
+	TargetSighted.emit()
 
-func _on_damage_taken(damage_source: CharacterBody2D):
+func _on_damage_taken(damage_source: Node2D):
+	if damage_source == null:
+		return
 	target_body = damage_source
-	state_machine.change_state(state_machine.current_state, "alert")
+	if not state_machine.states.find_key(state_machine.current_state) == "possessed":
+		state_machine.change_state(state_machine.current_state, "alert")
 
 func _set_target(target: Node2D):
 	target_body = target
@@ -86,3 +102,13 @@ func _set_target(target: Node2D):
 
 func _target_defeated():
 	target_body = null
+
+func try_possess_enemy() -> bool:
+	if state_machine.states.find_key(state_machine.current_state) == "patrol":
+		state_machine.change_state(state_machine.current_state, "possessed")
+		return true
+	return false
+
+func _exit_tree() -> void:
+	if state_machine.states.find_key(state_machine.current_state) == "possessed":
+		GameManager.PossessionEnd.emit(global_position)

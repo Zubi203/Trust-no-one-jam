@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://dk6hug7k1gxbo"]
+
+[ext_resource type="Script" uid="uid://bukukh4cq17is" path="res://Scripts/dog_spawner.gd" id="1_doay4"]
+[ext_resource type="PackedScene" uid="uid://cgqkl1lpa62fv" path="res://Scenes/dog.tscn" id="2_8fdxe"]
+[ext_resource type="Texture2D" uid="uid://dhcwb0k260tag" path="res://icon.svg" id="2_vodox"]
+
+[node name="DogSpawner" type="Node2D" unique_id=540580413]
+script = ExtResource("1_doay4")
+dog_scene = ExtResource("2_8fdxe")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1838929947]
+self_modulate = Color(0, 0, 0, 1)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_vodox")
+
+[node name="Timer" type="Timer" parent="." unique_id=1831087189]
+wait_time = 3.0
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

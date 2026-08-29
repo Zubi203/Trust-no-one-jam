@@ -6,6 +6,7 @@ signal ShakeCamera (intensity: float)
 signal SetCameraTarget (target: Node2D)
 signal ShowSettingsMenu
 signal HideSettingsMenu
+signal PossessionEnd (pos: Vector2)
 
 enum ProjectileTypes {
 	PIERCE,

@@ -54,6 +54,7 @@ var sprite: Sprite2D = null
 var base_sprite_scale: Vector2
 
 func _ready() -> void:
+	GameManager.PossessionEnd.connect(enable_control)
 	GameManager.SetCameraTarget.emit.call_deferred(self)
 	GameManager.EnablePlayerControl.connect(enable_control)
 	for child in get_children():
@@ -224,6 +225,7 @@ func enable_control(pos: Vector2):
 	set_process(true)
 	set_physics_process(true)
 	control_enabled = true
+	_jump()
 	if not visible:
 		show()
 

@@ -39,12 +39,13 @@ coyote_timer = NodePath("Timers/CoyoteTimer")
 jump_cut_damping_rate = 100000.0
 jump_time_to_peak = 0.4
 jump_time_to_descent = 0.3
-jump_volume = 100.0
-max_landing_volume = 150.0
-footsteps_volume = 70.0
-wall_and_ceiling_volume = 50.0
+jump_volume = 50.0
+max_landing_volume = 80.0
+footsteps_volume = 30.0
+wall_and_ceiling_volume = 20.0
 possess_projectile = ExtResource("2_fkybt")
 possess_cooldown_timer = NodePath("Timers/PossessCooldown")
+possess_cooldown_duration = 1.0
 possess_cooldown_timer_bar = NodePath("PlayerUI/HBoxContainer/PossessCooldownBar")
 collider = NodePath("CollisionShape2D")
 

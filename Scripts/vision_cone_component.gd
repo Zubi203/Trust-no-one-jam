@@ -5,7 +5,10 @@ signal PlayerDetected
 
 @export var fov_angle: float = 60
 @export var cone_range: float = 100
-var cone_direction: Vector2 = Vector2.RIGHT
+var cone_direction: Vector2 = Vector2.RIGHT:
+	set(value):
+		cone_direction = value
+		queue_redraw()
 
 var player: PlayerMovement = null
 
@@ -21,7 +24,7 @@ func _process(delta: float) -> void:
 	var looking_dir_angle: float = rad_to_deg(cone_direction.angle())
 	var player_dir_angle: float = rad_to_deg(global_position.direction_to(player.global_position).angle())
 	var abs_angle_difference = abs(looking_dir_angle - player_dir_angle)
-	if abs_angle_difference < fov_angle / 2:
+	if abs_angle_difference < fov_angle / 2 and player.visible:
 		PlayerDetected.emit()
 
 func _draw():

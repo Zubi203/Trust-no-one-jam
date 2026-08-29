@@ -46,10 +46,16 @@ func _on_body_entered(body: Node2D) -> void:
 	if body == player_controller:
 		return
 	if body.is_in_group("Enemy"):
-		var controller = PlayerPossessionController.new()
-		body.add_child(controller)
-		controller.player = player_controller
-		GameManager.SetCameraTarget.emit(body)
-		_possess()
+		_disable_collider.call_deferred()
+		if body is EnemyMovementComponent:
+			var possessed = body.try_possess_enemy()
+			if possessed:
+				GameManager.SetCameraTarget.emit(body)
+				_possess()
+			else:
+				_destroy()
 		return
 	_destroy()
+
+func _disable_collider():
+	$CollisionShape2D.disabled = true
