@@ -13,6 +13,8 @@ func _on_body_entered(_body: Node2D):
 		return
 	if _body.is_in_group("Terrain"):
 		_destroy()
+	if _body is EnemyMovementComponent:
+		_body._on_damage_taken(owner_object)
 	for child in _body.get_children():
 		if child is HealthComponent:
 			child.take_damage(damage)

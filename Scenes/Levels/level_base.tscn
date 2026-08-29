@@ -152,6 +152,12 @@ metadata/_custom_type_script = "uid://cfw7hx86xxpor"
 [node name="SettingsMenu" parent="LevelUI" unique_id=607017261 instance=ExtResource("10_ls6f5")]
 visible = false
 
+[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=494796227]
+color = Color(0.5069199, 0.5069203, 0.5069202, 1)
+
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="." unique_id=1177079893]
+energy = 0.2
+
 [connection signal="pressed" from="LevelUI/PauseButton" to="LevelUI" method="_on_pause_button_pressed"]
 [connection signal="pressed" from="LevelUI/PauseMenu/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/ResumeButton" to="LevelUI" method="_on_resume_button_pressed"]
 [connection signal="pressed" from="LevelUI/PauseMenu/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/SettingsButton2" to="LevelUI" method="_on_settings_button_2_pressed"]

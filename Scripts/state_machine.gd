@@ -6,17 +6,21 @@ extends Node
 var current_state: State
 
 func _ready() -> void:
+	for child in get_children():
+		if child is State:
+			states[child.name.to_lower()] = child
+			child.state_transition.connect(change_state)
 	
 	if initial_state:
 		initial_state.enter()
 		current_state = initial_state
 
-func init(body: CharacterBody2D, animated_sprite: AnimatedSprite2D, animation_player: AnimationPlayer) -> void:
+func init(body: CharacterBody2D, animated_sprite: AnimatedSprite2D = null, animation_player: AnimationPlayer = null) -> void:
 	for key in states.keys():
 		if states[key] is State:
 			states[key].character_body = body
-			states[key].animated_sprite = animated_sprite
-			states[key].animation_player = animation_player
+			#states[key].animated_sprite = animated_sprite
+			#states[key].animation_player = animation_player
 
 func _physics_process(delta: float) -> void:
 	if current_state:

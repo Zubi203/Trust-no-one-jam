@@ -6,6 +6,8 @@
 [ext_resource type="Script" uid="uid://vtswvvywpbhe" path="res://Scripts/health_component.gd" id="4_287tu"]
 [ext_resource type="Texture2D" uid="uid://bd5nyk8pnn2oy" path="res://Graphics/Question 256 px.png" id="4_0830c"]
 [ext_resource type="Script" uid="uid://dpv1jn585hnr1" path="res://Scripts/vision_cone_component.gd" id="6_ghaa6"]
+[ext_resource type="Script" uid="uid://colc37fd136ad" path="res://Scripts/state_machine.gd" id="7_auwsv"]
+[ext_resource type="Script" uid="uid://dabjn6elwxib8" path="res://Scripts/state.gd" id="8_8uf12"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fkybt"]
 radius = 8.0
@@ -51,3 +53,20 @@ collision_mask = 4
 [node name="VisionConeComponent" type="Node2D" parent="." unique_id=511229003]
 script = ExtResource("6_ghaa6")
 metadata/_custom_type_script = "uid://dpv1jn585hnr1"
+
+[node name="FiniteStateMachine" type="Node" parent="." unique_id=1983450659 node_paths=PackedStringArray("initial_state")]
+script = ExtResource("7_auwsv")
+initial_state = NodePath("Patrol")
+metadata/_custom_type_script = "uid://colc37fd136ad"
+
+[node name="Patrol" type="Node" parent="FiniteStateMachine" unique_id=1735616744]
+script = ExtResource("8_8uf12")
+metadata/_custom_type_script = "uid://dabjn6elwxib8"
+
+[node name="Suspicious" type="Node" parent="FiniteStateMachine" unique_id=1771401790]
+script = ExtResource("8_8uf12")
+metadata/_custom_type_script = "uid://dabjn6elwxib8"
+
+[node name="Alert" type="Node" parent="FiniteStateMachine" unique_id=457502729]
+script = ExtResource("8_8uf12")
+metadata/_custom_type_script = "uid://dabjn6elwxib8"

@@ -12,12 +12,16 @@ var direction: Vector2
 var target_body: CharacterBody2D = null
 var target_point: Vector2
 
+var state_machine: FiniteStateMachine = null
+
 func _ready() -> void:
 	GameManager.EmitSound.connect(_on_sound_heard)
 	for child in get_children():
 		if child is VisionConeComponent:
 			child.PlayerDetected.connect(_on_vision_cone_entered)
-			
+		if child is FiniteStateMachine:
+			state_machine = child
+			child.init(self)
 
 func _enemy_ready():
 	pass
@@ -35,6 +39,16 @@ func move(delta: float):
 	pass
 
 func _physics_process(delta: float) -> void:
+	if state_machine:
+		match state_machine.states.find_key(state_machine.current_state):
+			"patrol":
+				detection_indicator.hide()
+			"suspicious":
+				detection_indicator.show()
+				detection_indicator.texture = question_mark
+			"alert":
+				detection_indicator.show()
+				detection_indicator.texture = exclamation_point
 	move(delta)
 	move_and_slide()
 
@@ -43,12 +57,8 @@ func _on_sound_heard(origin_pos: Vector2, sound_range: float):
 	if dist > sound_range:
 		return
 	target_point = origin_pos
-	
-	if detection_indicator:
-		detection_indicator.show()
-		detection_indicator.texture = question_mark
-		await get_tree().create_timer(1).timeout
-		detection_indicator.hide()
+	if state_machine.states.find_key(state_machine.current_state) == "patrol":
+		state_machine.change_state(state_machine.current_state, "suspicious")
 
 func _has_line_of_sight() -> bool:
 	if line_of_sight == null:
@@ -62,14 +72,11 @@ func _on_vision_cone_entered():
 	_set_target(get_tree().get_first_node_in_group("Player"))
 	if not _has_line_of_sight():
 		return
-	if detection_indicator:
-		detection_indicator.show()
-		detection_indicator.texture = exclamation_point
-		await get_tree().create_timer(1).timeout
-		detection_indicator.hide()
+	state_machine.change_state(state_machine.current_state, "alert")
 
-func _on_damage_taken():
-	pass
+func _on_damage_taken(damage_source: CharacterBody2D):
+	target_body = damage_source
+	state_machine.change_state(state_machine.current_state, "alert")
 
 func _set_target(target: Node2D):
 	target_body = target
