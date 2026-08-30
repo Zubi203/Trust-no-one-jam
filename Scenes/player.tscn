@@ -5,9 +5,10 @@
 [ext_resource type="PackedScene" uid="uid://chmxcmn5d6617" path="res://Scenes/possess_projectile.tscn" id="2_fkybt"]
 [ext_resource type="Script" uid="uid://duh5xmnwt5ujc" path="res://Scripts/hurtbox_component.gd" id="3_6t5aa"]
 [ext_resource type="AudioStream" uid="uid://d022lqia3322j" path="res://Audio/Depossession.wav" id="3_8erm5"]
-[ext_resource type="Texture2D" uid="uid://yfh7768juin7" path="res://Graphics/placeholders/player_character.png" id="3_x3wgy"]
+[ext_resource type="PackedScene" uid="uid://cwydli72j1cqg" path="res://Scenes/shadow_burst.tscn" id="5_f1ek2"]
 [ext_resource type="Script" uid="uid://vtswvvywpbhe" path="res://Scripts/health_component.gd" id="6_3smsa"]
 [ext_resource type="Script" uid="uid://dmi6igee3ffww" path="res://Scripts/SoundEmitterComponent.gd" id="6_x3wgy"]
+[ext_resource type="PackedScene" uid="uid://dhie5xh4afced" path="res://Scenes/character visuals/player_visuals.tscn" id="9_f1ek2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fkybt"]
 size = Vector2(10.000002, 21.500008)
@@ -40,7 +41,26 @@ scale_min = 0.5
 scale_max = 1.5
 color = Color(0.105882354, 0.105882354, 0.105882354, 1)
 
-[node name="Player" type="CharacterBody2D" unique_id=2022812981 node_paths=PackedStringArray("coyote_timer", "audio", "possess_cooldown_timer", "possess_cooldown_timer_bar", "collider") groups=["Player"]]
+[sub_resource type="Curve" id="Curve_tx1dd"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.6294677, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_f1ek2"]
+curve = SubResource("Curve_tx1dd")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_pu2lt"]
+particle_flag_disable_z = true
+angle_min = 1.0728835e-05
+angle_max = 90.000015
+direction = Vector3(0, -1, 0)
+spread = 120.0
+initial_velocity_min = 70.0
+initial_velocity_max = 100.0
+gravity = Vector3(0, 98, 0)
+scale_max = 3.0
+scale_curve = SubResource("CurveTexture_f1ek2")
+
+[node name="Player" type="CharacterBody2D" unique_id=2022812981 node_paths=PackedStringArray("coyote_timer", "jump_buffer_timer", "audio", "possess_cooldown_timer", "possess_cooldown_timer_bar", "collider", "sprite", "damage_effect") groups=["Player"]]
 collision_mask = 12
 script = ExtResource("1_cvnsp")
 move_speed = 200.0
@@ -54,6 +74,7 @@ coyote_timer = NodePath("Timers/CoyoteTimer")
 jump_cut_damping_rate = 100000.0
 jump_time_to_peak = 0.4
 jump_time_to_descent = 0.3
+jump_buffer_timer = NodePath("Timers/JumpBuffer")
 jump_volume = 50.0
 max_landing_volume = 80.0
 footsteps_volume = 30.0
@@ -66,12 +87,9 @@ possess_cooldown_timer = NodePath("Timers/PossessCooldown")
 possess_cooldown_duration = 1.0
 possess_cooldown_timer_bar = NodePath("PlayerUI/HBoxContainer/PossessCooldownBar")
 collider = NodePath("CollisionShape2D")
-
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=738153155]
-scale = Vector2(0.8, 1)
-texture = ExtResource("3_x3wgy")
-region_enabled = true
-region_rect = Rect2(16, 19, 17, 29)
+sprite = NodePath("Player Visuals/Main animations")
+burst = ExtResource("5_f1ek2")
+damage_effect = NodePath("damagefx")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1240337790]
 position = Vector2(0, 3.250001)
@@ -94,6 +112,10 @@ one_shot = true
 
 [node name="PossessCooldown" type="Timer" parent="Timers" unique_id=98609055]
 wait_time = 0.1
+one_shot = true
+
+[node name="JumpBuffer" type="Timer" parent="Timers" unique_id=1883872660]
+wait_time = 0.15
 one_shot = true
 
 [node name="SoundEmitterComponent" type="Node2D" parent="." unique_id=1989576507]
@@ -139,3 +161,20 @@ process_material = SubResource("ParticleProcessMaterial_h2w44")
 
 [node name="PlayerAudio" type="AudioStreamPlayer2D" parent="." unique_id=1709419882]
 bus = &"SFX"
+
+[node name="damagefx" type="GPUParticles2D" parent="." unique_id=1882394019]
+emitting = false
+amount = 10
+lifetime = 0.2
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+process_material = SubResource("ParticleProcessMaterial_pu2lt")
+
+[node name="Player Visuals" parent="." unique_id=1131838389 instance=ExtResource("9_f1ek2")]
+
+[node name="Main animations" parent="Player Visuals" index="0" unique_id=1407210419]
+animation = &"walk"
+offset = Vector2(6.64, 0)
+
+[editable path="Player Visuals"]

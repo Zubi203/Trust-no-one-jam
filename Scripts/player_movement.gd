@@ -33,6 +33,9 @@ var on_floor: bool
 @onready var jump_gravity: float = ((-2.0 * jump_height) / (jump_time_to_peak * jump_time_to_peak)) * -1.0
 @onready var fall_gravity: float = ((-2.0 * jump_height) / (jump_time_to_descent * jump_time_to_descent)) * -1.0
 
+@export var jump_buffer_timer: Timer
+@export var jump_buffer_duration: float = 0.15
+
 @export_category("Sounds")
 var sound_emitter: SoundEmitterComponent = null
 @export var jump_volume: float = 200
@@ -54,8 +57,11 @@ var last_footstep_time: float = 0
 @export var collider: CollisionShape2D = null
 
 @export_category("Visuals")
-var sprite: Sprite2D = null
+@export var sprite: AnimatedSprite2D = null
+var animation_manager: PlayerVisuals = null
 var base_sprite_scale: Vector2
+@export var burst: PackedScene = null
+@export var damage_effect: GPUParticles2D = null
 
 func _ready() -> void:
 	GameManager.PossessionEnd.connect(enable_control_jump)
@@ -64,17 +70,36 @@ func _ready() -> void:
 	for child in get_children():
 		if child is SoundEmitterComponent:
 			sound_emitter = child
-		if child is Sprite2D:
-			sprite = child
-			base_sprite_scale = sprite.scale
+		if child is HealthComponent:
+			child.DamageTaken.connect(_on_take_damage)
+		if child is PlayerVisuals:
+			animation_manager = child
 	if possess_cooldown_timer_bar:
 		possess_cooldown_timer_bar.max_value = possess_cooldown_duration
+	if sprite:
+		base_sprite_scale = sprite.scale
 
 
 func _physics_process(delta: float) -> void:
 	_get_input(delta)
 	_move(delta)
+	_animate()
 	move_and_slide()
+
+func _animate():
+	if is_on_floor():
+		sprite.flip_v = false
+		if abs(velocity.x) > 0:
+			animation_manager.toggle_player_visuals(PlayerVisuals.PlayerVisualStates.WALKING)
+		else:
+			animation_manager.toggle_player_visuals(PlayerVisuals.PlayerVisualStates.IDLE)
+	else:
+		if velocity.y > 0:
+			sprite.flip_v = true
+			animation_manager.toggle_player_visuals(PlayerVisuals.PlayerVisualStates.JUMPING)
+		else:
+			sprite.flip_v = false
+			animation_manager.toggle_player_visuals(PlayerVisuals.PlayerVisualStates.JUMPING)
 
 func _process(_delta: float) -> void:
 	
@@ -100,16 +125,19 @@ func _get_input(delta: float):
 	match current_state:
 		MoveStates.NORMAL:
 			
-			if Input.is_action_just_pressed("jump") and (is_on_floor() or coyote_timer.time_left):
+			if Input.is_action_just_pressed("jump"):
+				jump_buffer_timer.start(jump_buffer_duration)
+			
+			if jump_buffer_timer.time_left and (is_on_floor() or coyote_timer.time_left):
 				_jump()
 			if Input.is_action_just_released("jump") and velocity.y < 0:
 				velocity.y = move_toward(velocity.y, velocity.y / 4, delta * jump_cut_damping_rate)
 			
-			if Input.is_action_pressed("grab"):
-				if is_on_ceiling_only():
-					current_state = MoveStates.CEILING
-				elif is_on_wall():
-					current_state = MoveStates.WALL
+			#if Input.is_action_pressed("grab"):
+			#	if is_on_ceiling_only():
+			#		current_state = MoveStates.CEILING
+			#	elif is_on_wall():
+			#		current_state = MoveStates.WALL
 			
 			if Input.is_action_just_pressed("possess"):
 				_try_shoot_projectile()
@@ -212,6 +240,10 @@ func _try_shoot_projectile():
 	disable_control()
 
 func disable_control():
+	if burst != null:
+		var effect = burst.instantiate()
+		effect.global_position = global_position
+		get_tree().current_scene.add_child(effect)
 	play_sound(possession_exit_sound)
 	GameManager.ShakeCamera.emit(1)
 	set_process(false)
@@ -235,6 +267,10 @@ func enable_control(pos: Vector2):
 	control_enabled = true
 	if not visible:
 		show()
+	if burst != null:
+		var effect = burst.instantiate()
+		effect.global_position = global_position
+		get_tree().current_scene.add_child(effect)
 
 func enable_control_jump(pos: Vector2):
 	enable_control(pos)
@@ -288,3 +324,9 @@ func play_sound(sound: AudioStream):
 		return
 	audio.stream = sound
 	audio.play()
+
+func _on_take_damage(amount: int):
+	GameManager.ShakeCamera.emit(amount)
+	if damage_effect != null:
+		if not damage_effect.emitting:
+			damage_effect.emitting = true

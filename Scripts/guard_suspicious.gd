@@ -58,7 +58,6 @@ func _check_target_reached():
 	if character_body is EnemyMovementComponent:
 		if character_body.global_position.distance_to(character_body.target_point) < target_reached_distance_threshold:
 			target_reached = true
-			_on_target_reached()
 		else:
 			target_reached = false
 
@@ -89,23 +88,6 @@ func _check_ledge():
 		if not character_body.ledge_end_detector_right.is_colliding() and move_direction == Vector2.RIGHT:
 			if character_body.target_point.y < character_body.global_position.y + 20:
 				_try_jump()
-
-func _on_target_reached():
-
-	await get_tree().create_timer(randf_range(0.5, 1)).timeout
-	aim_direction = Vector2(Vector2.RIGHT.x, 0.7)
-	_set_vision_cone(aim_direction)
-	await get_tree().create_timer(randf_range(0.5, 1)).timeout
-	aim_direction = Vector2(Vector2.RIGHT.x, -0.7)
-	_set_vision_cone(aim_direction)
-	await get_tree().create_timer(randf_range(0.5, 1)).timeout
-	aim_direction = Vector2(Vector2.LEFT.x, -0.7)
-	_set_vision_cone(aim_direction)
-	await get_tree().create_timer(randf_range(0.5, 1)).timeout
-	aim_direction = Vector2(Vector2.LEFT.x, 0.7)
-	_set_vision_cone(aim_direction)
-	await get_tree().create_timer(randf_range(0.5, 1)).timeout
-	_check_target_reached()
 
 func _restart_timer():
 	duration_timer = state_duration

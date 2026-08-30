@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://oucnildl2bb3"]
+
+[ext_resource type="Script" uid="uid://chstrh8rp4rue" path="res://Scripts/shadow_burst.gd" id="1_36pm0"]
+
+[sub_resource type="Curve" id="Curve_36pm0"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.6294677, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_a2evn"]
+curve = SubResource("Curve_36pm0")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_xdax1"]
+particle_flag_disable_z = true
+angle_min = 1.0728835e-05
+angle_max = 90.000015
+direction = Vector3(0, -1, 0)
+spread = 120.0
+initial_velocity_min = 30.0
+initial_velocity_max = 70.0
+gravity = Vector3(0, 98, 0)
+scale_max = 3.0
+scale_curve = SubResource("CurveTexture_a2evn")
+
+[node name="DamageFX" type="GPUParticles2D" unique_id=1148429780]
+amount = 10
+lifetime = 0.5
+explosiveness = 1.0
+randomness = 1.0
+process_material = SubResource("ParticleProcessMaterial_xdax1")
+script = ExtResource("1_36pm0")
+
+[connection signal="finished" from="." to="." method="_on_finished"]

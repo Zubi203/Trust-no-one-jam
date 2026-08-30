@@ -41,12 +41,6 @@ func _on_change_direction(dir: Vector2):
 	if move_direction.x == dir.x:
 		return
 	is_moving = false
-	await get_tree().create_timer(randf_range(0.5, 1)).timeout
-	aim_direction = Vector2(-dir.x, -0.7)
-	_set_vision_cone(aim_direction)
-	await get_tree().create_timer(randf_range(0.5, 1)).timeout
-	aim_direction = Vector2(-dir.x, 0.7)
-	_set_vision_cone(aim_direction)
 	await get_tree().create_timer(randf_range(1, 1.5)).timeout
 	aim_direction = dir
 	_set_vision_cone(aim_direction)

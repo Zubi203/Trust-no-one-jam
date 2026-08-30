@@ -20,7 +20,7 @@ signal finished_player_visual_animation(anim_name: String)
 
 var _curr_anim_name : String
 
-func toggle_player_visuals(visual_state : PlayerVisuals):
+func toggle_player_visuals(visual_state : PlayerVisuals.PlayerVisualStates):
 	match visual_state:
 		PlayerVisualStates.IDLE:
 			main_animations.play("idle")

@@ -30,7 +30,10 @@ func get_input():
 func _end_possession():
 	if character_body is EnemyMovementComponent:
 		character_body.direction_input(Vector2.ZERO)
-	state_transition.emit(self, "stunned")
+		for child in character_body.get_children():
+			if child is HealthComponent:
+				child.take_damage(10)
+	state_transition.emit(self, "patrol")
 	GameManager.PossessionEnd.emit(character_body.global_position)
 
 func _set_vision_cone(dir: Vector2):

@@ -7,17 +7,42 @@
 [ext_resource type="Script" uid="uid://vtswvvywpbhe" path="res://Scripts/health_component.gd" id="4_287tu"]
 [ext_resource type="Texture2D" uid="uid://bd5nyk8pnn2oy" path="res://Graphics/Question 256 px.png" id="4_0830c"]
 [ext_resource type="AudioStream" uid="uid://c0ugtoqmnq4ys" path="res://Audio/Ping fully alert.wav" id="4_ta2yt"]
+[ext_resource type="PackedScene" uid="uid://cwydli72j1cqg" path="res://Scenes/shadow_burst.tscn" id="5_ta2yt"]
 [ext_resource type="Script" uid="uid://dpv1jn585hnr1" path="res://Scripts/vision_cone_component.gd" id="6_ghaa6"]
+[ext_resource type="Shader" uid="uid://i5gwhx72h1g2" path="res://Scripts/damage_flash.gdshader" id="6_m4x7e"]
 [ext_resource type="Script" uid="uid://colc37fd136ad" path="res://Scripts/state_machine.gd" id="7_auwsv"]
 [ext_resource type="Script" uid="uid://dabjn6elwxib8" path="res://Scripts/state.gd" id="8_8uf12"]
 [ext_resource type="Script" uid="uid://tsvcgjjalj1a" path="res://Scripts/possessed_state.gd" id="8_auwsv"]
 [ext_resource type="Script" uid="uid://do70l7naolca8" path="res://Scripts/stunned.gd" id="9_8uf12"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mgi07"]
+shader = ExtResource("6_m4x7e")
+shader_parameter/progress_white = 0.0
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fkybt"]
 radius = 8.0
 height = 34.0
 
-[node name="Enemy" type="CharacterBody2D" unique_id=661474157 node_paths=PackedStringArray("detection_indicator", "line_of_sight", "wall_detector_right", "wall_detector_left", "ledge_end_detector_right", "ledge_end_detector_left", "audio") groups=["Enemy"]]
+[sub_resource type="Curve" id="Curve_ta2yt"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.6294677, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_gymyn"]
+curve = SubResource("Curve_ta2yt")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_m4x7e"]
+particle_flag_disable_z = true
+angle_min = 1.0728835e-05
+angle_max = 90.000015
+direction = Vector3(0, -1, 0)
+spread = 120.0
+initial_velocity_min = 30.0
+initial_velocity_max = 70.0
+gravity = Vector3(0, 98, 0)
+scale_max = 3.0
+scale_curve = SubResource("CurveTexture_gymyn")
+
+[node name="Enemy" type="CharacterBody2D" unique_id=661474157 node_paths=PackedStringArray("detection_indicator", "line_of_sight", "wall_detector_right", "wall_detector_left", "ledge_end_detector_right", "ledge_end_detector_left", "audio", "damage_effect") groups=["Enemy"]]
 collision_mask = 12
 script = ExtResource("1_287tu")
 detection_indicator = NodePath("DetectionIndicator")
@@ -30,8 +55,11 @@ audio = NodePath("EnemyAudio")
 possession_enter_sound = ExtResource("2_po0sg")
 suspicious_sound = ExtResource("3_56vhr")
 alert_sound = ExtResource("4_ta2yt")
+burst = ExtResource("5_ta2yt")
+damage_effect = NodePath("damagefx")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2113224878]
+material = SubResource("ShaderMaterial_mgi07")
 texture = ExtResource("2_afpow")
 region_enabled = true
 region_rect = Rect2(0, 0, 23, 35)
@@ -41,6 +69,7 @@ shape = SubResource("CapsuleShape2D_fkybt")
 
 [node name="HealthComponent" type="Node2D" parent="." unique_id=880399269 node_paths=PackedStringArray("health_bar")]
 script = ExtResource("4_287tu")
+max_health = 5
 health_bar = NodePath("../HealthBar")
 metadata/_custom_type_script = "uid://vtswvvywpbhe"
 
@@ -110,3 +139,12 @@ target_position = Vector2(-24, 0)
 collision_mask = 4
 
 [node name="EnemyAudio" type="AudioStreamPlayer2D" parent="." unique_id=612272393]
+
+[node name="damagefx" type="GPUParticles2D" parent="." unique_id=716811864]
+emitting = false
+amount = 10
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+process_material = SubResource("ParticleProcessMaterial_m4x7e")

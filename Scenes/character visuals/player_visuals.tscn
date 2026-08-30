@@ -477,6 +477,7 @@ script = ExtResource("1_v21oy")
 
 [node name="Main animations" type="AnimatedSprite2D" parent="." unique_id=1407210419]
 sprite_frames = SubResource("SpriteFrames_e7nyl")
-animation = &"possess"
+animation = &"walk"
+frame_progress = 0.44030765
 
 [connection signal="animation_finished" from="Main animations" to="." method="_on_main_animations_animation_finished"]
