@@ -3,6 +3,19 @@
 [ext_resource type="Script" uid="uid://bdpfd44noir3q" path="res://Scripts/possess_projectile.gd" id="1_jhqlw"]
 [ext_resource type="Texture2D" uid="uid://yfh7768juin7" path="res://Graphics/placeholders/player_character.png" id="2_jhqlw"]
 
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jhqlw"]
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(-0.28, -13.005, 0)
+emission_shape_scale = Vector3(8, 8, 1)
+emission_shape = 1
+emission_sphere_radius = 1.0
+angle_min = 1.0728835e-05
+angle_max = 90.000015
+gravity = Vector3(0, -3, 0)
+scale_min = 0.5
+scale_max = 1.5
+color = Color(0.105882354, 0.105882354, 0.105882354, 1)
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_h2w44"]
 radius = 4.1231055
 
@@ -48,6 +61,13 @@ _data = {
 collision_layer = 0
 collision_mask = 5
 script = ExtResource("1_jhqlw")
+
+[node name="BodyParticles" type="GPUParticles2D" parent="." unique_id=1601250002]
+position = Vector2(0, 13)
+amount = 200
+lifetime = 3.0
+randomness = 1.0
+process_material = SubResource("ParticleProcessMaterial_jhqlw")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=134347942]
 texture = ExtResource("2_jhqlw")

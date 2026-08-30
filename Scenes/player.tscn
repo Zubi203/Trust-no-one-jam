@@ -25,6 +25,19 @@ height = 96
 fill = 1
 fill_from = Vector2(0.521978, 0.489011)
 
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_h2w44"]
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(-0.28, 0.245, 0)
+emission_shape_scale = Vector3(4.735, 1.075, 1)
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+angle_min = 1.0728835e-05
+angle_max = 90.000015
+gravity = Vector3(0, -7, 0)
+scale_min = 0.5
+scale_max = 1.5
+color = Color(0.105882354, 0.105882354, 0.105882354, 1)
+
 [node name="Player" type="CharacterBody2D" unique_id=2022812981 node_paths=PackedStringArray("coyote_timer", "possess_cooldown_timer", "possess_cooldown_timer_bar", "collider") groups=["Player"]]
 collision_mask = 12
 script = ExtResource("1_cvnsp")
@@ -112,3 +125,9 @@ show_percentage = false
 script = ExtResource("6_3smsa")
 health_bar = NodePath("../PlayerUI/HBoxContainer/HealthBar")
 metadata/_custom_type_script = "uid://vtswvvywpbhe"
+
+[node name="BodyParticles" type="GPUParticles2D" parent="." unique_id=749912646]
+position = Vector2(0, 13)
+amount = 20
+randomness = 1.0
+process_material = SubResource("ParticleProcessMaterial_h2w44")
