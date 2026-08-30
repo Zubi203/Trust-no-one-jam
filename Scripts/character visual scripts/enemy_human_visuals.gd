@@ -6,12 +6,17 @@ extends Node2D
 var _posessed := true
 @onready var _upper_body = $Upper
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
+@onready var walking_animation = $"Walking bottom/Walking" as AnimationPlayer
+@onready var standing_bottom = $"Standing bottom" as Node2D
+@onready var walking_bottom = $"Walking bottom" as Node2D
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	if _posessed:
-		_upper_body.look_at(-get_global_mouse_position())
+func toggle_walking(is_walking : bool):
+	if is_walking:
+		walking_animation.play("walking")
+		walking_bottom.visible = true
+		standing_bottom.visible = false
+	else:
+		walking_bottom.visible = false
+		standing_bottom.visible = true
+		if walking_animation.is_playing():
+			walking_animation.stop()
