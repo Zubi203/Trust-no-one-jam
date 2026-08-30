@@ -53,6 +53,7 @@ _data = {
 }
 
 [node name="Elevator" type="Path2D" unique_id=1787862854]
+texture_filter = 1
 
 [node name="AnimatableBody2D" type="AnimatableBody2D" parent="." unique_id=2041433755]
 position = Vector2(-1, 2)

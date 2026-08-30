@@ -12,6 +12,7 @@ var _posessed := true
 @onready var flying_feet = $"Feet/flying feet"
 @onready var flying_jetpack = $"Jetpacks/flying jetpack"
 @onready var jetpacks = $Jetpacks
+@onready var walking_feet = $"Feet/walking feet" as AnimatedSprite2D
 
 func look_at_target_pos(target_pos: Vector2):
 	_upper_body.look_at(target_pos)
@@ -20,6 +21,7 @@ func look_at_target_pos(target_pos: Vector2):
 func toggle_walking(is_walking : bool):
 	if is_walking:
 		enemy_animations.play("walking")
+		walking_feet.play("walking")
 		walking_bottom.visible = true
 		standing_bottom.visible = false
 	else:
@@ -34,3 +36,6 @@ func toggle_flying(is_flying: bool):
 		walking_bottom.visible = false
 		standing_bottom.visible = false
 		flying_jetpack.visible = true
+	else:
+		flying_feet.visible = false
+		toggle_walking(false)

@@ -9,6 +9,8 @@ var shoot_component: ShootProjectileComponent = null
 var current_mag: int
 
 
+@onready var enemy_visuals = $"Enemy visuals" as EnemyHumanVisuals
+
 func _enemy_ready():
 	current_mag = mag_size
 	for child in get_children():
@@ -39,3 +41,20 @@ func _try_shoot_bullet(dir: Vector2):
 		current_mag = mag_size
 		play_sound(reload_sound)
 		reload_timer.start(reload_duration)
+
+func _process(_delta: float) -> void:
+	
+	if velocity.y != 0: 
+		enemy_visuals.toggle_flying(true)
+		return
+	else: 
+		enemy_visuals.toggle_flying(false)
+	
+	# Walking anim
+	if velocity.length() > 0:enemy_visuals.toggle_walking(true)
+	else: enemy_visuals.toggle_walking(false)
+	
+	# Sprite direction
+	if velocity.x > 0:
+		enemy_visuals.scale.x = -1
+	else: enemy_visuals.scale.x = 1

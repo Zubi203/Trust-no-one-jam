@@ -2,6 +2,7 @@ extends GroundedEnemyMovement
 
 @export var explode_sound_range: float = 300
 @export var explosion_scene: PackedScene
+@onready var mech_crab_visuals = $MechCrabVisuals as MechCrabVisuals
 
 func explode():
 	for child in get_children():
@@ -16,3 +17,17 @@ func explode():
 
 func action_input(dir: Vector2):
 	explode()
+
+func _process(_delta: float) -> void:
+	
+	if velocity.y > 0:
+		mech_crab_visuals.toggle_jumping(true)
+		return
+	else: mech_crab_visuals.toggle_jumping(false)
+	
+	if velocity.length() > 0: mech_crab_visuals.toggle_walking_animation(true)
+	else: mech_crab_visuals.toggle_walking_animation(false)
+	
+	if velocity.x > 0: mech_crab_visuals.scale.x = -1
+	else: mech_crab_visuals.scale.x = 1
+	

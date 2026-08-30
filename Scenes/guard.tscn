@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://dqemcylkf2ckp" path="res://Scenes/enemy.tscn" id="1_smm0d"]
 [ext_resource type="Script" uid="uid://b8dgf23f5e41m" path="res://Scripts/guard_movement.gd" id="2_cnet1"]
 [ext_resource type="Script" uid="uid://jyd4i0dvnfdf" path="res://Scripts/shoot_component.gd" id="2_smm0d"]
+[ext_resource type="PackedScene" uid="uid://4n5o4vftwsy3" path="res://Scenes/character visuals/enemy_human_visuals.tscn" id="3_1rcvf"]
 [ext_resource type="Script" uid="uid://dqpt6vndjlnli" path="res://Scenes/guard_patrol.gd" id="4_mk1iy"]
 [ext_resource type="Script" uid="uid://msi82b6tku73" path="res://Scripts/guard_suspicious.gd" id="5_dmkvq"]
 [ext_resource type="Script" uid="uid://kpmk6xed476f" path="res://Scripts/guard_alert.gd" id="6_36pg4"]
@@ -10,7 +11,19 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h2w44"]
 size = Vector2(6, 26)
 
-[node name="Guard" unique_id=661474157 node_paths=PackedStringArray("reload_timer") instance=ExtResource("1_smm0d")]
+[sub_resource type="Gradient" id="Gradient_fkybt"]
+offsets = PackedFloat32Array(0.62435234, 0.66580313, 0.6761658)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_cnet1"]
+gradient = SubResource("Gradient_fkybt")
+width = 32
+height = 32
+fill = 1
+fill_from = Vector2(0.521978, 0.489011)
+
+[node name="Guard" unique_id=661474157 node_paths=PackedStringArray("reload_timer", "reload_timer_progress_bar") instance=ExtResource("1_smm0d")]
+texture_filter = 1
 script = ExtResource("2_cnet1")
 shoot_interval = 0.3
 reload_timer = NodePath("ReloadTimer")
@@ -24,23 +37,38 @@ acceleration = 1000.0
 braking = 1200.0
 move_speed = 80.0
 
-[node name="Sprite2D" parent="." index="0" unique_id=2113224878]
+[node name="Enemy visuals" parent="." index="0" unique_id=462011330 instance=ExtResource("3_1rcvf")]
+position = Vector2(1, 2)
+
+[node name="Sprite2D" parent="." index="1" unique_id=2113224878]
+visible = false
 region_rect = Rect2(0, 0, 22, 35)
 
-[node name="CollisionShape2D" parent="." index="1" unique_id=1275131203]
+[node name="CollisionShape2D" parent="." index="2" unique_id=1275131203]
 position = Vector2(0, 4)
 shape = SubResource("RectangleShape2D_h2w44")
 
-[node name="ShootProjectileComponent" type="Node2D" parent="." index="2" unique_id=809406615]
+[node name="ShootProjectileComponent" type="Node2D" parent="." index="3" unique_id=809406615]
 script = ExtResource("2_smm0d")
 metadata/_custom_type_script = "uid://jyd4i0dvnfdf"
 
-[node name="ReloadTimer" type="Timer" parent="." index="3" unique_id=691403276]
+[node name="TextureProgressBar" type="TextureProgressBar" parent="." index="4" unique_id=413061350]
+modulate = Color(0.6814234, 0.6814234, 0.6814234, 0.65882355)
+offset_left = -16.0
+offset_top = -106.66666
+offset_right = 16.0
+offset_bottom = -74.66666
+step = 0.0
+value = 68.0
+fill_mode = 4
+texture_progress = SubResource("GradientTexture2D_cnet1")
+
+[node name="ReloadTimer" type="Timer" parent="." index="5" unique_id=691403276]
 wait_time = 0.1
 one_shot = true
 autostart = true
 
-[node name="VisionConeComponent" parent="." index="7" unique_id=511229003]
+[node name="VisionConeComponent" parent="." index="9" unique_id=511229003]
 cone_range = 50.0
 
 [node name="Patrol" parent="FiniteStateMachine" parent_id_path=PackedInt32Array(1983450659) index="0" unique_id=1735616744]
