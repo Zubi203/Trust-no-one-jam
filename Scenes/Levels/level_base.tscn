@@ -16,6 +16,7 @@ script = ExtResource("1_3ne40")
 [node name="Tilemap" type="Node2D" parent="." unique_id=880648551]
 
 [node name="BG" type="TileMapLayer" parent="Tilemap" unique_id=869018997]
+tile_set = ExtResource("1_38dla")
 
 [node name="Terrain" type="TileMapLayer" parent="Tilemap" unique_id=1783354277]
 texture_filter = 3
@@ -116,16 +117,6 @@ text = "Settings"
 script = ExtResource("9_ouscj")
 metadata/_custom_type_script = "uid://cfw7hx86xxpor"
 
-[node name="LevelSelectButton3" type="Button" parent="LevelUI/PauseMenu/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer" unique_id=1480538848]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_font_sizes/font_size = 20
-text = "LevelSelect"
-
-[node name="AnimatedButtonComponent" type="Node2D" parent="LevelUI/PauseMenu/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/LevelSelectButton3" unique_id=1256048192]
-script = ExtResource("9_ouscj")
-metadata/_custom_type_script = "uid://cfw7hx86xxpor"
-
 [node name="SettingsMenu" parent="LevelUI" unique_id=607017261 instance=ExtResource("10_ls6f5")]
 visible = false
 
@@ -138,4 +129,3 @@ energy = 0.2
 [connection signal="pressed" from="LevelUI/PauseButton" to="LevelUI" method="_on_pause_button_pressed"]
 [connection signal="pressed" from="LevelUI/PauseMenu/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/ResumeButton" to="LevelUI" method="_on_resume_button_pressed"]
 [connection signal="pressed" from="LevelUI/PauseMenu/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/SettingsButton2" to="LevelUI" method="_on_settings_button_2_pressed"]
-[connection signal="pressed" from="LevelUI/PauseMenu/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/LevelSelectButton3" to="LevelUI" method="_on_level_select_button_3_pressed"]

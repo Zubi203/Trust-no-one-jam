@@ -31,7 +31,7 @@ var vision_cone: VisionConeComponent = null
 @export var alert_sound: AudioStream
 
 @export var burst: PackedScene = null
-@export var damage_effect: PackedScene = null
+@export var damage_effect: GPUParticles2D
 
 func _ready() -> void:
 	_enemy_ready.call_deferred()
@@ -98,9 +98,7 @@ func _on_damage_taken(damage_source: Node2D):
 	if damage_source == null:
 		return
 	if damage_effect != null:
-		var effect = burst.instantiate()
-		effect.global_position = global_position
-		get_tree().current_scene.add_child(effect)
+		damage_effect.emitting = true
 	target_body = damage_source
 	if not state_machine.states.find_key(state_machine.current_state) == "possessed":
 		state_machine.change_state(state_machine.current_state, "alert")

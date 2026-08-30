@@ -20,7 +20,8 @@ func _physics_process(delta: float) -> void:
 	
 
 func _process(_delta: float) -> void:
-	_get_input(_delta)
+	#_get_input(_delta)
+	pass
 
 func _get_input(delta: float):
 	var dir = Input.get_vector("move_left", "move_right", "move_up", "move_down")
