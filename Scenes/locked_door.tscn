@@ -4,6 +4,17 @@
 [ext_resource type="Texture2D" uid="uid://b30qbv58hngm2" path="res://Graphics/parts sheet.png" id="2_43430"]
 [ext_resource type="AudioStream" uid="uid://hs8ucpl2dopw" path="res://Audio/Selector menu.wav" id="2_x7wjr"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_x7wjr"]
+atlas = ExtResource("2_43430")
+region = Rect2(64, 160, 32, 32)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_x7wjr"]
+load_path = "res://.godot/imported/parts sheet.png-c8829cf890f841e7624521eab3ea7638.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7fjom"]
+atlas = SubResource("CompressedTexture2D_x7wjr")
+region = Rect2(64, 160, 32, 32)
+
 [sub_resource type="Animation" id="Animation_x7wjr"]
 length = 0.001
 tracks/0/type = "value"
@@ -55,7 +66,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.4, 0.5, 0.9),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [-31.0, -31.0, -31.0, -56.0]
+"values": [-31.0, -31.0, -31.0, -65.0]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -67,7 +78,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.4, 0.5, 0.9),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [0.0, -31.0, -31.0, -56.0]
+"values": [0.0, -31.0, -31.0, -65.0]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -79,7 +90,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.4, 0.5, 0.9),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [31.0, 31.0, 31.0, 56.0]
+"values": [31.0, 31.0, 31.0, 63.0]
 }
 tracks/3/type = "method"
 tracks/3/imported = false
@@ -106,9 +117,10 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fldqa"]
-size = Vector2(14, 78)
+size = Vector2(14, 96)
 
 [node name="LockedDoor" type="StaticBody2D" unique_id=1092191354]
+texture_filter = 1
 collision_layer = 4
 script = ExtResource("1_vqfuk")
 
@@ -116,14 +128,17 @@ script = ExtResource("1_vqfuk")
 stream = ExtResource("2_x7wjr")
 
 [node name="Door" type="Node2D" parent="." unique_id=81750305]
+position = Vector2(0, 1)
 
 [node name="DoorTop" type="Sprite2D" parent="Door" unique_id=1946943374]
+position = Vector2(0, -2)
 texture = ExtResource("2_43430")
 offset = Vector2(0, -31)
 region_enabled = true
 region_rect = Rect2(136, 160, 16, 32)
 
 [node name="DoorMiddle" type="Sprite2D" parent="Door" unique_id=1989758182]
+position = Vector2(0, -1)
 texture = ExtResource("2_43430")
 region_enabled = true
 region_rect = Rect2(136, 160, 16, 32)
@@ -134,17 +149,29 @@ offset = Vector2(0, 31)
 region_enabled = true
 region_rect = Rect2(136, 160, 16, 32)
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=460133631]
+[node name="Door fill" type="Sprite2D" parent="Door" unique_id=1034540977]
+position = Vector2(0, 32)
 texture = ExtResource("2_43430")
-offset = Vector2(0, 56)
+offset = Vector2(0, 31)
 region_enabled = true
+region_rect = Rect2(136, 160, 16, 32)
+
+[node name="Door fill2" type="Sprite2D" parent="Door" unique_id=1129399476]
+position = Vector2(0, -96)
+texture = ExtResource("2_43430")
+offset = Vector2(0, 31)
+region_enabled = true
+region_rect = Rect2(136, 160, 16, 32)
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=460133631]
+position = Vector2(0, 64)
+texture = SubResource("AtlasTexture_x7wjr")
 region_rect = Rect2(64, 160, 32, 32)
 
 [node name="Sprite2D2" type="Sprite2D" parent="." unique_id=1997522675]
-texture = ExtResource("2_43430")
-offset = Vector2(0, -56)
+position = Vector2(0, -64)
+texture = SubResource("AtlasTexture_7fjom")
 flip_v = true
-region_enabled = true
 region_rect = Rect2(64, 160, 32, 32)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1459253956]
