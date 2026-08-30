@@ -55,7 +55,7 @@ texture = ExtResource("5_u2nfs")
 offset = Vector2(-14, -14)
 
 [node name="Player" parent="." index="5" unique_id=2022812981 instance=ExtResource("3_vhmir")]
-position = Vector2(372, -2308)
+position = Vector2(931, 209)
 
 [node name="Doors" type="Node2D" parent="." index="6" unique_id=1600281851]
 position = Vector2(-14, 0)
