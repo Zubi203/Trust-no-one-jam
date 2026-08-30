@@ -6,12 +6,31 @@ extends Node2D
 var _posessed := true
 @onready var _upper_body = $Upper
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
+@onready var enemy_animations = $"enemy animations" as AnimationPlayer
+@onready var standing_bottom = $"Feet/Standing feet" as Node2D
+@onready var walking_bottom = $"Feet/walking feet" as Node2D
+@onready var flying_feet = $"Feet/flying feet"
+@onready var flying_jetpack = $"Jetpacks/flying jetpack"
+@onready var jetpacks = $Jetpacks
 
+func look_at_target_pos(target_pos: Vector2):
+	_upper_body.look_at(target_pos)
+	jetpacks.look_at(target_pos)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	if _posessed:
-		_upper_body.look_at(-get_global_mouse_position())
+func toggle_walking(is_walking : bool):
+	if is_walking:
+		enemy_animations.play("walking")
+		walking_bottom.visible = true
+		standing_bottom.visible = false
+	else:
+		walking_bottom.visible = false
+		standing_bottom.visible = true
+		if enemy_animations.is_playing():
+			enemy_animations.stop()
+
+func toggle_flying(is_flying: bool):
+	if is_flying:
+		flying_feet.visible = true
+		walking_bottom.visible = false
+		standing_bottom.visible = false
+		flying_jetpack.visible = true
