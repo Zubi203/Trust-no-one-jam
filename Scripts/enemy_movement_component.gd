@@ -29,6 +29,8 @@ var vision_cone: VisionConeComponent = null
 @export var possession_enter_sound: AudioStream
 @export var suspicious_sound: AudioStream
 @export var alert_sound: AudioStream
+@export var attack_sound: AudioStream
+@export var reload_sound: AudioStream
 
 @export var burst: PackedScene = null
 @export var damage_effect: GPUParticles2D

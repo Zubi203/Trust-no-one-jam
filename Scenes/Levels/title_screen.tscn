@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://b1axeffq6ci6j"]
 
+[ext_resource type="Theme" uid="uid://b1x0cslrvyl6r" path="res://Resources/ui_theme.tres" id="1_h4qv3"]
 [ext_resource type="Script" uid="uid://covvsfxtehb2w" path="res://Scripts/title_screen.gd" id="1_qdg8d"]
 [ext_resource type="Script" uid="uid://cfw7hx86xxpor" path="res://Scripts/animated_button_component.gd" id="2_kjbj0"]
 [ext_resource type="PackedScene" uid="uid://kw2wu7hwd6xu" path="res://Scenes/settings_menu.tscn" id="3_kjbj0"]
@@ -9,6 +10,7 @@
 font_size = 80
 shadow_size = 14
 shadow_color = Color(0, 0, 0, 0.89411765)
+shadow_offset = Vector2(5, 5)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xpw1u"]
 
@@ -34,9 +36,20 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+theme = ExtResource("1_h4qv3")
 script = ExtResource("1_qdg8d")
 title_menu = NodePath("VBoxContainer")
 credits = NodePath("CreditsMenu")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1417631598]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.13101172, 0.13011798, 0.17056265, 1)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1116721840]
 layout_mode = 1
@@ -58,8 +71,8 @@ size_flags_vertical = 3
 
 [node name="Label" type="Label" parent="VBoxContainer/MarginContainer/HSplitContainer" unique_id=846290630]
 layout_mode = 2
-text = "PLACEHOLDER
-TITLE"
+text = "THE SHADOW
+OF A DOUBT"
 label_settings = SubResource("LabelSettings_h2w44")
 vertical_alignment = 1
 

@@ -1,14 +1,21 @@
 [gd_scene format=3 uid="uid://bcsilowh3oyr6"]
 
 [ext_resource type="Script" uid="uid://dianwojmulqsw" path="res://Scripts/player_movement.gd" id="1_cvnsp"]
-[ext_resource type="AudioStream" uid="uid://dou37mdjmsvvw" path="res://Audio/Possession.wav" id="2_3smsa"]
+[ext_resource type="AudioStream" uid="uid://bf5j5u6hu8mw1" path="res://Audio/26_Possession.wav" id="2_f1ek2"]
 [ext_resource type="PackedScene" uid="uid://chmxcmn5d6617" path="res://Scenes/possess_projectile.tscn" id="2_fkybt"]
 [ext_resource type="Script" uid="uid://duh5xmnwt5ujc" path="res://Scripts/hurtbox_component.gd" id="3_6t5aa"]
-[ext_resource type="AudioStream" uid="uid://d022lqia3322j" path="res://Audio/Depossession.wav" id="3_8erm5"]
+[ext_resource type="AudioStream" uid="uid://bsbhxfg0pu60u" path="res://Audio/27_Depossession.wav" id="3_tx1dd"]
+[ext_resource type="AudioStream" uid="uid://dqfqtfineqwup" path="res://Audio/19_footstep.wav" id="4_fd4e3"]
 [ext_resource type="PackedScene" uid="uid://cwydli72j1cqg" path="res://Scenes/shadow_burst.tscn" id="5_f1ek2"]
+[ext_resource type="AudioStream" uid="uid://bcvyn8o3aa2vx" path="res://Audio/18_footstep.wav" id="5_qqcod"]
 [ext_resource type="Script" uid="uid://vtswvvywpbhe" path="res://Scripts/health_component.gd" id="6_3smsa"]
+[ext_resource type="AudioStream" uid="uid://bv0kla7ohu1s8" path="res://Audio/17_footstep.wav" id="6_igrcy"]
 [ext_resource type="Script" uid="uid://dmi6igee3ffww" path="res://Scripts/SoundEmitterComponent.gd" id="6_x3wgy"]
+[ext_resource type="AudioStream" uid="uid://bn2rsyo5v8mji" path="res://Audio/16_footstep.wav" id="7_fs7ks"]
+[ext_resource type="AudioStream" uid="uid://baxhegcot0n7t" path="res://Audio/15_footstep.wav" id="8_l6n3p"]
 [ext_resource type="PackedScene" uid="uid://dhie5xh4afced" path="res://Scenes/character visuals/player_visuals.tscn" id="9_f1ek2"]
+[ext_resource type="AudioStream" uid="uid://bvsqwvorvmnah" path="res://Audio/31_jump.wav" id="9_olqyp"]
+[ext_resource type="AudioStream" uid="uid://cp1w0x6pcbtdj" path="res://Audio/14_footstep.wav" id="10_wpjfl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fkybt"]
 size = Vector2(10.000002, 21.500008)
@@ -18,8 +25,8 @@ radius = 7.499999
 
 [sub_resource type="Gradient" id="Gradient_fkybt"]
 interpolation_mode = 1
-offsets = PackedFloat32Array(0.634715, 0.66580313, 0.70207256)
-colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0)
+offsets = PackedFloat32Array(0.5569948, 0.61398965, 0.70207256)
+colors = PackedColorArray(0.135, 0.75, 0.1555, 1, 0.0010853444, 0.0010853446, 0.0010853445, 1, 1, 1, 1, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_xpw1u"]
 gradient = SubResource("Gradient_fkybt")
@@ -27,6 +34,17 @@ width = 96
 height = 96
 fill = 1
 fill_from = Vector2(0.521978, 0.489011)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_scl1n"]
+bg_color = Color(0.093096174, 0.0009826554, 0.00100252, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tk7xo"]
+bg_color = Color(0.79, 0.06319999, 0.06319999, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.09411765, 0, 0, 1)
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_h2w44"]
 particle_flag_disable_z = true
@@ -82,8 +100,11 @@ max_landing_volume = 80.0
 footsteps_volume = 30.0
 wall_and_ceiling_volume = 20.0
 audio = NodePath("PlayerAudio")
-possession_exit_sound = ExtResource("2_3smsa")
-possession_enter_sound = ExtResource("3_8erm5")
+possession_exit_sound = ExtResource("2_f1ek2")
+possession_enter_sound = ExtResource("3_tx1dd")
+footsteps = Array[AudioStream]([ExtResource("4_fd4e3"), ExtResource("5_qqcod"), ExtResource("6_igrcy"), ExtResource("7_fs7ks"), ExtResource("8_l6n3p")])
+jump_sound = ExtResource("9_olqyp")
+land_sound = ExtResource("10_wpjfl")
 possess_projectile = ExtResource("2_fkybt")
 possess_cooldown_timer = NodePath("Timers/PossessCooldown")
 possess_cooldown_duration = 1.0
@@ -151,6 +172,8 @@ texture_progress = SubResource("GradientTexture2D_xpw1u")
 custom_minimum_size = Vector2(160, 60)
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_styles/background = SubResource("StyleBoxFlat_scl1n")
+theme_override_styles/fill = SubResource("StyleBoxFlat_tk7xo")
 value = 41.11
 show_percentage = false
 

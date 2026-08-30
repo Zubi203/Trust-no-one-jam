@@ -29,7 +29,6 @@ shoot_interval = 0.3
 reload_timer = NodePath("ReloadTimer")
 reload_duration = 1.2
 mag_size = 6
-reload_timer_progress_bar = NodePath("TextureProgressBar")
 gravity = 10.0
 jump_height = 40.0
 jump_time_to_peak = 0.3

@@ -46,12 +46,15 @@ var sound_emitter: SoundEmitterComponent = null
 @export var max_landing_volume: float = 300
 @export var footsteps_volume: float = 100
 @export var wall_and_ceiling_volume: float = 70
-@export var footsteps_interval: float = 0.2
+@export var footsteps_interval: float = 0.5
 var last_footstep_time: float = 0
 
 @export var audio: AudioStreamPlayer2D
 @export var possession_exit_sound: AudioStream
 @export var possession_enter_sound: AudioStream
+@export var footsteps: Array[AudioStream]
+@export var jump_sound: AudioStream
+@export var land_sound: AudioStream
 
 @export_category("Possess")
 @export var possess_projectile: PackedScene
@@ -211,11 +214,13 @@ func _try_emit_sound(sound_range: float):
 	sound_emitter.emit_sound(sound_range)
 
 func _jump():
+	play_sound(jump_sound)
 	velocity.y = jump_velocity
 	_jump_animation()
 	_try_emit_sound(jump_volume)
 
 func _on_landing():
+	play_sound(land_sound)
 	_try_emit_sound(max_landing_volume)
 	_landing_animation()
 
@@ -229,6 +234,7 @@ func _moving_sounds():
 		MoveStates.NORMAL:
 			if direction_x and is_on_floor():
 				_try_emit_sound(footsteps_volume)
+				play_sound(footsteps.pick_random())
 		MoveStates.WALL:
 			if direction_y:
 				_try_emit_sound(wall_and_ceiling_volume)
@@ -247,6 +253,7 @@ func _try_shoot_projectile():
 	get_tree().current_scene.add_child(projectile)
 	projectile.set_projectile(global_position, Vector2(dash_direction), self)
 	GameManager.SetCameraTarget.emit(projectile as Node2D)
+	play_sound(possession_enter_sound)
 	if possess_cooldown_timer_bar:     
 		possess_cooldown_timer_bar.value = possess_cooldown_duration
 	disable_control()
@@ -342,3 +349,6 @@ func _on_take_damage(amount: int):
 	if damage_effect != null:
 		if not damage_effect.emitting:
 			damage_effect.emitting = true
+
+func _exit_tree() -> void:
+	GameManager.PlayerDefeated.emit()
