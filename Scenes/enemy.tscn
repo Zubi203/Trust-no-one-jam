@@ -7,7 +7,9 @@
 [ext_resource type="Script" uid="uid://vtswvvywpbhe" path="res://Scripts/health_component.gd" id="4_287tu"]
 [ext_resource type="Texture2D" uid="uid://bd5nyk8pnn2oy" path="res://Graphics/Question 256 px.png" id="4_0830c"]
 [ext_resource type="AudioStream" uid="uid://c0ugtoqmnq4ys" path="res://Audio/Ping fully alert.wav" id="4_ta2yt"]
+[ext_resource type="PackedScene" uid="uid://cwydli72j1cqg" path="res://Scenes/shadow_burst.tscn" id="5_ta2yt"]
 [ext_resource type="Script" uid="uid://dpv1jn585hnr1" path="res://Scripts/vision_cone_component.gd" id="6_ghaa6"]
+[ext_resource type="PackedScene" uid="uid://oucnildl2bb3" path="res://Scenes/damage_fx.tscn" id="6_m4x7e"]
 [ext_resource type="Script" uid="uid://colc37fd136ad" path="res://Scripts/state_machine.gd" id="7_auwsv"]
 [ext_resource type="Script" uid="uid://dabjn6elwxib8" path="res://Scripts/state.gd" id="8_8uf12"]
 [ext_resource type="Script" uid="uid://tsvcgjjalj1a" path="res://Scripts/possessed_state.gd" id="8_auwsv"]
@@ -30,6 +32,8 @@ audio = NodePath("EnemyAudio")
 possession_enter_sound = ExtResource("2_po0sg")
 suspicious_sound = ExtResource("3_56vhr")
 alert_sound = ExtResource("4_ta2yt")
+burst = ExtResource("5_ta2yt")
+damage_effect = ExtResource("6_m4x7e")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2113224878]
 texture = ExtResource("2_afpow")

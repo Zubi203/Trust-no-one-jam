@@ -17,7 +17,7 @@ scale_max = 1.5
 color = Color(0.105882354, 0.105882354, 0.105882354, 1)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_h2w44"]
-radius = 4.1231055
+radius = 5.0990195
 
 [sub_resource type="Animation" id="Animation_mgi07"]
 length = 0.001
@@ -57,7 +57,10 @@ _data = {
 &"possess_projectile": SubResource("Animation_kgs2e")
 }
 
-[node name="PossessProjectile" type="Area2D" unique_id=1872032264]
+[sub_resource type="CircleShape2D" id="CircleShape2D_xpw1u"]
+radius = 9.055386
+
+[node name="PossessProjectile" type="CharacterBody2D" unique_id=1939683689]
 collision_layer = 0
 collision_mask = 5
 script = ExtResource("1_jhqlw")
@@ -83,4 +86,15 @@ shape = SubResource("CircleShape2D_h2w44")
 libraries/ = SubResource("AnimationLibrary_rq2q0")
 autoplay = &"possess_projectile"
 
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[node name="DetectionArea" type="Area2D" parent="." unique_id=1288331164]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea" unique_id=1273161491]
+shape = SubResource("CircleShape2D_xpw1u")
+
+[node name="DestroyTimer" type="Timer" parent="." unique_id=1436139084]
+wait_time = 0.7
+autostart = true
+
+[connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]
+[connection signal="timeout" from="DestroyTimer" to="." method="_on_destroy_timer_timeout"]

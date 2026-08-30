@@ -1,5 +1,5 @@
 class_name PossessProjectile
-extends Area2D
+extends CharacterBody2D
 
 var direction: Vector2 = Vector2.RIGHT
 @export var move_speed: float = 250
@@ -14,13 +14,13 @@ func set_projectile(pos: Vector2, dir: Vector2, player: PlayerMovement):
 	player_controller = player
 
 func _physics_process(delta: float) -> void:
-	translate(direction * move_speed * delta)
+	velocity = direction * move_speed
 	rotation = direction.angle()
+	move_and_slide()
+	
 
 func _process(_delta: float) -> void:
 	_get_input(_delta)
-	_check_tether_distance()
-	pass
 
 func _get_input(delta: float):
 	var dir = Input.get_vector("move_left", "move_right", "move_up", "move_down")
@@ -41,8 +41,11 @@ func _check_tether_distance():
 	if dist > max_range:
 		_destroy()
 
+func _disable_collider():
+	$CollisionShape2D.disabled = true
 
-func _on_body_entered(body: Node2D) -> void:
+
+func _on_detection_area_body_entered(body: Node2D) -> void:
 	if body == player_controller:
 		return
 	if body.is_in_group("Enemy"):
@@ -50,12 +53,12 @@ func _on_body_entered(body: Node2D) -> void:
 		if body is EnemyMovementComponent:
 			var possessed = body.try_possess_enemy()
 			if possessed:
-				GameManager.SetCameraTarget.emit(body)
+				GameManager.SetCameraTarget.emit(body as Node2D)
 				_possess()
 			else:
 				_destroy()
 		return
-	_destroy()
 
-func _disable_collider():
-	$CollisionShape2D.disabled = true
+
+func _on_destroy_timer_timeout() -> void:
+	_destroy()

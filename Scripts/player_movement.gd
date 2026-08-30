@@ -56,6 +56,8 @@ var last_footstep_time: float = 0
 @export_category("Visuals")
 var sprite: Sprite2D = null
 var base_sprite_scale: Vector2
+@export var burst: PackedScene = null
+@export var damage_effect: PackedScene = null
 
 func _ready() -> void:
 	GameManager.PossessionEnd.connect(enable_control_jump)
@@ -67,6 +69,8 @@ func _ready() -> void:
 		if child is Sprite2D:
 			sprite = child
 			base_sprite_scale = sprite.scale
+		if child is HealthComponent:
+			child.DamageTaken.connect(_on_take_damage)
 	if possess_cooldown_timer_bar:
 		possess_cooldown_timer_bar.max_value = possess_cooldown_duration
 
@@ -105,11 +109,11 @@ func _get_input(delta: float):
 			if Input.is_action_just_released("jump") and velocity.y < 0:
 				velocity.y = move_toward(velocity.y, velocity.y / 4, delta * jump_cut_damping_rate)
 			
-			if Input.is_action_pressed("grab"):
-				if is_on_ceiling_only():
-					current_state = MoveStates.CEILING
-				elif is_on_wall():
-					current_state = MoveStates.WALL
+			#if Input.is_action_pressed("grab"):
+			#	if is_on_ceiling_only():
+			#		current_state = MoveStates.CEILING
+			#	elif is_on_wall():
+			#		current_state = MoveStates.WALL
 			
 			if Input.is_action_just_pressed("possess"):
 				_try_shoot_projectile()
@@ -212,6 +216,10 @@ func _try_shoot_projectile():
 	disable_control()
 
 func disable_control():
+	if burst != null:
+		var effect = burst.instantiate()
+		effect.global_position = global_position
+		get_tree().current_scene.add_child(effect)
 	play_sound(possession_exit_sound)
 	GameManager.ShakeCamera.emit(1)
 	set_process(false)
@@ -235,6 +243,10 @@ func enable_control(pos: Vector2):
 	control_enabled = true
 	if not visible:
 		show()
+	if burst != null:
+		var effect = burst.instantiate()
+		effect.global_position = global_position
+		get_tree().current_scene.add_child(effect)
 
 func enable_control_jump(pos: Vector2):
 	enable_control(pos)
@@ -288,3 +300,10 @@ func play_sound(sound: AudioStream):
 		return
 	audio.stream = sound
 	audio.play()
+
+func _on_take_damage(amount: int):
+	GameManager.ShakeCamera.emit(amount)
+	if damage_effect != null:
+		var effect = burst.instantiate()
+		effect.global_position = global_position
+		get_tree().current_scene.add_child(effect)

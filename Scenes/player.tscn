@@ -6,7 +6,9 @@
 [ext_resource type="Script" uid="uid://duh5xmnwt5ujc" path="res://Scripts/hurtbox_component.gd" id="3_6t5aa"]
 [ext_resource type="AudioStream" uid="uid://d022lqia3322j" path="res://Audio/Depossession.wav" id="3_8erm5"]
 [ext_resource type="Texture2D" uid="uid://yfh7768juin7" path="res://Graphics/placeholders/player_character.png" id="3_x3wgy"]
+[ext_resource type="PackedScene" uid="uid://cwydli72j1cqg" path="res://Scenes/shadow_burst.tscn" id="5_f1ek2"]
 [ext_resource type="Script" uid="uid://vtswvvywpbhe" path="res://Scripts/health_component.gd" id="6_3smsa"]
+[ext_resource type="PackedScene" uid="uid://oucnildl2bb3" path="res://Scenes/damage_fx.tscn" id="6_tx1dd"]
 [ext_resource type="Script" uid="uid://dmi6igee3ffww" path="res://Scripts/SoundEmitterComponent.gd" id="6_x3wgy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fkybt"]
@@ -66,6 +68,8 @@ possess_cooldown_timer = NodePath("Timers/PossessCooldown")
 possess_cooldown_duration = 1.0
 possess_cooldown_timer_bar = NodePath("PlayerUI/HBoxContainer/PossessCooldownBar")
 collider = NodePath("CollisionShape2D")
+burst = ExtResource("5_f1ek2")
+damage_effect = ExtResource("6_tx1dd")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=738153155]
 scale = Vector2(0.8, 1)
