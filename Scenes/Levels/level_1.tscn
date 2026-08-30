@@ -19,7 +19,7 @@ tile_map_data = PackedByteArray("AAAHAAAAAAAKAAAAAAAGAAAAAAAKAAAAAAAFAAAAAAAKAAA
 position = Vector2(259, -35)
 
 [node name="Player" parent="." index="5" unique_id=2022812981 instance=ExtResource("2_4dpyx")]
-position = Vector2(185, -32)
+position = Vector2(185, -34)
 
 [node name="Guard" parent="." index="6" unique_id=661474157 instance=ExtResource("3_3mqfk")]
 position = Vector2(1552, -411)
