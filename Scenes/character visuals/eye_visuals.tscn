@@ -1,46 +1,46 @@
 [gd_scene format=3 uid="uid://c2ckof5obl280"]
 
-[ext_resource type="Script" uid="uid://cb8iunddb0twx" path="res://Scripts/character visual scripts/enemy_eye_visuals.gd" id="1_1ql2j"]
-[ext_resource type="Texture2D" uid="uid://d0utyh4g1s7n" path="res://Graphics/Character/eye enemy/flying enemy body.png" id="1_ylaqb"]
-[ext_resource type="Texture2D" uid="uid://d1xoc8sn6ueje" path="res://Graphics/Character/eye enemy/flying enemy eye veoms.png" id="2_uxx3p"]
-[ext_resource type="Texture2D" uid="uid://dag3c6jq83fj0" path="res://Graphics/Character/eye enemy/flying enemy eye.png" id="3_ba3ev"]
-[ext_resource type="Texture2D" uid="uid://dlvkgypevbhu5" path="res://Graphics/Character/eye enemy/flying enemy eye closing.png" id="5_qd635"]
-[ext_resource type="Texture2D" uid="uid://dh76p80rbf23" path="res://Graphics/Character/eye enemy/flying enemy mouth.png" id="6_54xi2"]
-[ext_resource type="Texture2D" uid="uid://bgq7otf40214m" path="res://Graphics/Character/eye enemy/flying enemy mouth veins.png" id="7_agjpm"]
+[ext_resource type="Script" uid="uid://cb8iunddb0twx" path="res://Scripts/character visual scripts/enemy_eye_visuals.gd" id="1_q28y7"]
+[ext_resource type="Texture2D" uid="uid://dh76p80rbf23" path="res://Graphics/Character/eye enemy/flying enemy mouth.png" id="2_8ablm"]
+[ext_resource type="Texture2D" uid="uid://d1xoc8sn6ueje" path="res://Graphics/Character/eye enemy/flying enemy eye veoms.png" id="3_kbgqq"]
+[ext_resource type="Texture2D" uid="uid://dag3c6jq83fj0" path="res://Graphics/Character/eye enemy/flying enemy eye.png" id="4_7away"]
+[ext_resource type="Texture2D" uid="uid://dlvkgypevbhu5" path="res://Graphics/Character/eye enemy/flying enemy eye closing.png" id="5_wea5n"]
+[ext_resource type="Texture2D" uid="uid://bgq7otf40214m" path="res://Graphics/Character/eye enemy/flying enemy mouth veins.png" id="6_knr5x"]
+[ext_resource type="Texture2D" uid="uid://d0utyh4g1s7n" path="res://Graphics/Character/eye enemy/flying enemy body.png" id="7_rh3w0"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_e7nyl"]
-atlas = ExtResource("6_54xi2")
+[sub_resource type="AtlasTexture" id="AtlasTexture_q28y7"]
+atlas = ExtResource("7_rh3w0")
 region = Rect2(18, 18, 27, 27)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_r5xu5"]
-atlas = ExtResource("3_ba3ev")
+atlas = ExtResource("4_7away")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_54xi2"]
-atlas = ExtResource("5_qd635")
+atlas = ExtResource("5_wea5n")
 region = Rect2(0, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_agjpm"]
-atlas = ExtResource("5_qd635")
+atlas = ExtResource("5_wea5n")
 region = Rect2(64, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ses8u"]
-atlas = ExtResource("5_qd635")
+atlas = ExtResource("5_wea5n")
 region = Rect2(128, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_54o43"]
-atlas = ExtResource("5_qd635")
+atlas = ExtResource("5_wea5n")
 region = Rect2(192, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nffm5"]
-atlas = ExtResource("5_qd635")
+atlas = ExtResource("5_wea5n")
 region = Rect2(256, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tyqc2"]
-atlas = ExtResource("5_qd635")
+atlas = ExtResource("5_wea5n")
 region = Rect2(320, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_be0uy"]
-atlas = ExtResource("5_qd635")
+atlas = ExtResource("5_wea5n")
 region = Rect2(384, 0, 64, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_e7nyl"]
@@ -96,7 +96,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false]
+"values": [true]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -108,7 +108,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true]
+"values": [false]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -120,7 +120,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [SubResource("AtlasTexture_e7nyl")]
+"values": [SubResource("AtlasTexture_q28y7")]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -132,7 +132,7 @@ tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true]
+"values": [false]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
@@ -148,7 +148,11 @@ tracks/5/keys = {
 }
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xoaoc"]
-atlas = ExtResource("1_ylaqb")
+atlas = ExtResource("7_rh3w0")
+region = Rect2(18, 18, 27, 27)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e7nyl"]
+atlas = ExtResource("2_8ablm")
 region = Rect2(18, 18, 27, 27)
 
 [sub_resource type="Animation" id="Animation_w7d3i"]
@@ -234,12 +238,12 @@ _data = {
 
 [node name="eye_visuals" type="Node2D" unique_id=39211393]
 texture_filter = 1
-script = ExtResource("1_1ql2j")
+script = ExtResource("1_q28y7")
 
 [node name="Visuals" type="Node2D" parent="." unique_id=954294890]
 
 [node name="Base" type="Sprite2D" parent="Visuals" unique_id=1589772240]
-texture = SubResource("AtlasTexture_e7nyl")
+texture = SubResource("AtlasTexture_q28y7")
 offset = Vector2(0.5, 0.5)
 
 [node name="veins" type="Polygon2D" parent="Visuals" unique_id=1502059531]
@@ -250,20 +254,21 @@ polygon = PackedVector2Array(-4, -13, 3, -13, 3, -12, 5, -12, 5, -11, 7, -11, 7,
 
 [node name="Sprite2D" type="Sprite2D" parent="Visuals/veins" unique_id=1852431455]
 modulate = Color(0, 0.7921569, 0.3019608, 0.40784314)
-texture = ExtResource("2_uxx3p")
+texture = ExtResource("3_kbgqq")
 
 [node name="Eye" type="Sprite2D" parent="Visuals" unique_id=1423933939]
-visible = false
 texture = SubResource("AtlasTexture_r5xu5")
 
 [node name="Animated Eye Close" type="AnimatedSprite2D" parent="Visuals" unique_id=1344178597]
+visible = false
 sprite_frames = SubResource("SpriteFrames_e7nyl")
 animation = &"close_eye"
 speed_scale = 2.0
 
 [node name="mouth_veins" type="Sprite2D" parent="Visuals" unique_id=1927683263]
+visible = false
 modulate = Color(0.65882355, 0.3137255, 0.31764707, 0.78431374)
-texture = ExtResource("7_agjpm")
+texture = ExtResource("6_knr5x")
 offset = Vector2(1, 1)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=718438011]
