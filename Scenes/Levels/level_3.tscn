@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://caldp4r2nqs1p" path="res://Scenes/Levels/level_base.tscn" id="1_us8ef"]
 [ext_resource type="PackedScene" uid="uid://dk6hug7k1gxbo" path="res://Scenes/dog_spawner.tscn" id="2_nfly3"]
 [ext_resource type="PackedScene" uid="uid://bcsilowh3oyr6" path="res://Scenes/player.tscn" id="3_t8c31"]
+[ext_resource type="PackedScene" uid="uid://c5uk4kqn5iqp8" path="res://Scenes/level_end_trigger.tscn" id="4_rc141"]
 [ext_resource type="PackedScene" uid="uid://c57mhse7noj83" path="res://Scenes/guard.tscn" id="4_t8c31"]
 
 [node name="Level3" unique_id=82871209 instance=ExtResource("1_us8ef")]
@@ -21,12 +22,22 @@ position = Vector2(833, -450)
 
 [node name="Guard" parent="Tilemap" parent_id_path=PackedInt32Array(880648551) index="5" unique_id=661474157 instance=ExtResource("4_t8c31")]
 position = Vector2(380, -507)
+possession_enter_sound = null
 
 [node name="Guard2" parent="Tilemap" parent_id_path=PackedInt32Array(880648551) index="6" unique_id=1935729618 instance=ExtResource("4_t8c31")]
 position = Vector2(637, -609)
+possession_enter_sound = null
 
 [node name="Guard3" parent="Tilemap" parent_id_path=PackedInt32Array(880648551) index="7" unique_id=1525773499 instance=ExtResource("4_t8c31")]
 position = Vector2(811, -538)
+possession_enter_sound = null
+
+[node name="LevelEndTrigger" parent="Tilemap" parent_id_path=PackedInt32Array(880648551) index="8" unique_id=1729793490 instance=ExtResource("4_rc141")]
+position = Vector2(103, -660)
+target_level = 5
+
+[node name="Camera2D" parent="." index="1" unique_id=1028112961]
+position = Vector2(1001, 97)
 
 [node name="DogSpawner" parent="." index="5" unique_id=1436147868 instance=ExtResource("2_nfly3")]
 position = Vector2(578, 99)
@@ -39,9 +50,12 @@ position = Vector2(337, -125)
 
 [node name="Guard" parent="." index="8" unique_id=1187879833 instance=ExtResource("4_t8c31")]
 position = Vector2(432, -145)
+possession_enter_sound = null
 
 [node name="Guard2" parent="." index="9" unique_id=2105698433 instance=ExtResource("4_t8c31")]
 position = Vector2(592, -150)
+possession_enter_sound = null
 
 [node name="Guard3" parent="." index="10" unique_id=1306608477 instance=ExtResource("4_t8c31")]
 position = Vector2(738, -118)
+possession_enter_sound = null

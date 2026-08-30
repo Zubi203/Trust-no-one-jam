@@ -6,6 +6,7 @@ func transition(target_level: GameManager.Scenes, current_level: GameManager.Sce
 	animation_player.play("transition_enter")
 	await get_tree().create_timer(0.7).timeout
 	_change_scene(target_level, current_level)
+	await get_tree().create_timer(0.3).timeout
 	animation_player.play("transition_exit")
 	
 func _change_scene(target_level: GameManager.Scenes, _current_level: GameManager.Scenes):
@@ -15,4 +16,4 @@ func _change_scene(target_level: GameManager.Scenes, _current_level: GameManager
 	get_tree().root.add_child(scene)
 	get_tree().current_scene = scene
 	GameManager.current_scene = target_level
-	#MusicPlayer._on_scene_changed(GameManager.current_scene)
+	MusicManager._on_scene_changed(GameManager.current_scene)

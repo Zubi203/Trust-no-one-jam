@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dr2vwcho7aevg"
+path="res://.godot/imported/Ping alert.wav-90f9df079a974919a60d6f79d33bcebb.sample"
+
+[deps]
+
+source_file="res://Audio/Ping alert.wav"
+dest_files=["res://.godot/imported/Ping alert.wav-90f9df079a974919a60d6f79d33bcebb.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

@@ -14,6 +14,7 @@ func enter() -> void:
 	is_moving = true
 	duration_timer = state_duration
 	if character_body is EnemyMovementComponent:
+		character_body.play_sound(character_body.suspicious_sound)
 		if not character_body.TargetSighted.is_connected(_transition_to_alert):
 			character_body.TargetSighted.connect(_transition_to_alert)
 		aim_direction = character_body.global_position.direction_to(character_body.target_point)

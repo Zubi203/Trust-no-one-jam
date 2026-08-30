@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://dls2y7kvmemn2"]
+
+[ext_resource type="Script" uid="uid://dihnc15njda3s" path="res://Scripts/music_manager.gd" id="1_b40f5"]
+[ext_resource type="AudioStream" uid="uid://crvnfdrtjqq00" path="res://Audio/Chill weird.wav" id="2_a0g8o"]
+[ext_resource type="AudioStream" uid="uid://rpxmtljgy834" path="res://Audio/Main theme.wav" id="3_1u5ih"]
+[ext_resource type="AudioStream" uid="uid://dbw6k4bfc05mn" path="res://Audio/Alterted.wav" id="4_m1xhr"]
+
+[node name="MusicManager" type="Node" unique_id=730886758 node_paths=PackedStringArray("battle_music", "menu_music", "chill_music")]
+script = ExtResource("1_b40f5")
+level_scenes = Array[int]([2, 3, 4, 5])
+menu_scenes = Array[int]([0])
+battle_music = NodePath("HypeMusic")
+menu_music = NodePath("TitleMusic")
+chill_music = NodePath("ChillMusic")
+
+[node name="TitleMusic" type="AudioStreamPlayer" parent="." unique_id=2049792572]
+stream = ExtResource("2_a0g8o")
+
+[node name="ChillMusic" type="AudioStreamPlayer" parent="." unique_id=1509192264]
+stream = ExtResource("3_1u5ih")
+
+[node name="HypeMusic" type="AudioStreamPlayer" parent="." unique_id=1998727442]
+stream = ExtResource("4_m1xhr")

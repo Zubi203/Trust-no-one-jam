@@ -14,6 +14,7 @@ var last_jump_time: float = 0
 func enter() -> void:
 	if character_body is EnemyMovementComponent:
 		character_body.speed_multiplier = 1.2
+		character_body.play_sound(character_body.alert_sound)
 
 func physics_update(delta: float) -> void:
 	if character_body is EnemyMovementComponent:

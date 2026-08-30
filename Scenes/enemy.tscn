@@ -2,8 +2,11 @@
 
 [ext_resource type="Script" uid="uid://iu53fsp7nj7o" path="res://Scripts/enemy_movement_component.gd" id="1_287tu"]
 [ext_resource type="Texture2D" uid="uid://bort4u1kumq5" path="res://Graphics/placeholders/enemy_1_spritesheet.png" id="2_afpow"]
+[ext_resource type="AudioStream" uid="uid://d022lqia3322j" path="res://Audio/Depossession.wav" id="2_po0sg"]
+[ext_resource type="AudioStream" uid="uid://dr2vwcho7aevg" path="res://Audio/Ping alert.wav" id="3_56vhr"]
 [ext_resource type="Script" uid="uid://vtswvvywpbhe" path="res://Scripts/health_component.gd" id="4_287tu"]
 [ext_resource type="Texture2D" uid="uid://bd5nyk8pnn2oy" path="res://Graphics/Question 256 px.png" id="4_0830c"]
+[ext_resource type="AudioStream" uid="uid://c0ugtoqmnq4ys" path="res://Audio/Ping fully alert.wav" id="4_ta2yt"]
 [ext_resource type="Script" uid="uid://dpv1jn585hnr1" path="res://Scripts/vision_cone_component.gd" id="6_ghaa6"]
 [ext_resource type="Script" uid="uid://colc37fd136ad" path="res://Scripts/state_machine.gd" id="7_auwsv"]
 [ext_resource type="Script" uid="uid://dabjn6elwxib8" path="res://Scripts/state.gd" id="8_8uf12"]
@@ -14,7 +17,7 @@
 radius = 8.0
 height = 34.0
 
-[node name="Enemy" type="CharacterBody2D" unique_id=661474157 node_paths=PackedStringArray("detection_indicator", "line_of_sight", "wall_detector_right", "wall_detector_left", "ledge_end_detector_right", "ledge_end_detector_left") groups=["Enemy"]]
+[node name="Enemy" type="CharacterBody2D" unique_id=661474157 node_paths=PackedStringArray("detection_indicator", "line_of_sight", "wall_detector_right", "wall_detector_left", "ledge_end_detector_right", "ledge_end_detector_left", "audio") groups=["Enemy"]]
 collision_mask = 12
 script = ExtResource("1_287tu")
 detection_indicator = NodePath("DetectionIndicator")
@@ -23,6 +26,10 @@ wall_detector_right = NodePath("Raycasts/WallDetectorRight")
 wall_detector_left = NodePath("Raycasts/WallDetectorLeft")
 ledge_end_detector_right = NodePath("Raycasts/LedgeEndDetectorRight")
 ledge_end_detector_left = NodePath("Raycasts/LedgeEndDetectorLeft")
+audio = NodePath("EnemyAudio")
+possession_enter_sound = ExtResource("2_po0sg")
+suspicious_sound = ExtResource("3_56vhr")
+alert_sound = ExtResource("4_ta2yt")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2113224878]
 texture = ExtResource("2_afpow")
@@ -101,3 +108,5 @@ collision_mask = 4
 [node name="WallDetectorLeft" type="RayCast2D" parent="Raycasts" unique_id=1271537339]
 target_position = Vector2(-24, 0)
 collision_mask = 4
+
+[node name="EnemyAudio" type="AudioStreamPlayer2D" parent="." unique_id=612272393]

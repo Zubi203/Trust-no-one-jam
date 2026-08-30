@@ -8,6 +8,7 @@ var move_direction: Vector2 = Vector2.ZERO
 func enter() -> void:
 	movement_start = false
 	if character_body is EnemyMovementComponent:
+		character_body.play_sound(character_body.alert_sound)
 		character_body.jump_input()
 		character_body.speed_multiplier = 5
 		await get_tree().create_timer(1).timeout
