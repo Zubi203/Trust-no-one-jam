@@ -3,6 +3,10 @@
 [ext_resource type="Script" uid="uid://bdpfd44noir3q" path="res://Scripts/possess_projectile.gd" id="1_jhqlw"]
 [ext_resource type="Texture2D" uid="uid://yfh7768juin7" path="res://Graphics/placeholders/player_character.png" id="2_jhqlw"]
 
+[sub_resource type="Curve" id="Curve_f1ek2"]
+_data = [Vector2(0.18725097, 1), 0.0, 0.0, 0, 0, Vector2(0.76095617, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.4710744), -4.525911, -5.9051433, 0, 0]
+point_count = 3
+
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jhqlw"]
 particle_flag_disable_z = true
 emission_shape_offset = Vector3(-0.28, -13.005, 0)
@@ -64,6 +68,8 @@ radius = 9.055386
 collision_layer = 0
 collision_mask = 5
 script = ExtResource("1_jhqlw")
+speed_curve = SubResource("Curve_f1ek2")
+move_speed = 400.0
 
 [node name="BodyParticles" type="GPUParticles2D" parent="." unique_id=1601250002]
 position = Vector2(0, 13)
@@ -93,8 +99,11 @@ collision_layer = 0
 shape = SubResource("CircleShape2D_xpw1u")
 
 [node name="DestroyTimer" type="Timer" parent="." unique_id=1436139084]
-wait_time = 0.6
+wait_time = 0.3
 autostart = true
+
+[node name="DashControlTimer" type="Timer" parent="." unique_id=360528249]
 
 [connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]
 [connection signal="timeout" from="DestroyTimer" to="." method="_on_destroy_timer_timeout"]
+[connection signal="timeout" from="DashControlTimer" to="." method="_on_dash_control_timer_timeout"]

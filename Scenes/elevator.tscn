@@ -2,14 +2,17 @@
 
 [ext_resource type="Texture2D" uid="uid://b30qbv58hngm2" path="res://Graphics/parts sheet.png" id="1_cyba6"]
 
-[sub_resource type="Curve2D" id="Curve2D_cyba6"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, -1, 2)
-}
-point_count = 1
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h2w44"]
-size = Vector2(60, 12)
+size = Vector2(60, 6)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_65ton"]
+size = Vector2(62, 6)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xpw1u"]
+size = Vector2(4, 13)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yhcui"]
+size = Vector2(4, 13)
 
 [sub_resource type="Animation" id="Animation_cyba6"]
 length = 0.001
@@ -50,22 +53,35 @@ _data = {
 }
 
 [node name="Elevator" type="Path2D" unique_id=1787862854]
-curve = SubResource("Curve2D_cyba6")
 
 [node name="AnimatableBody2D" type="AnimatableBody2D" parent="." unique_id=2041433755]
+position = Vector2(-1, 2)
 collision_layer = 4
 collision_mask = 5
 
 [node name="Sprite2D" type="Sprite2D" parent="AnimatableBody2D" unique_id=764852663]
 texture = ExtResource("1_cyba6")
 region_enabled = true
-region_rect = Rect2(224, 144, 64, 19)
+region_rect = Rect2(224, 144, 64, 51)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatableBody2D" unique_id=866392890]
-position = Vector2(0, -3)
+position = Vector2(0, -22)
 shape = SubResource("RectangleShape2D_h2w44")
 
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="AnimatableBody2D" unique_id=1605089613]
+position = Vector2(0, 22)
+shape = SubResource("RectangleShape2D_65ton")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="AnimatableBody2D" unique_id=1295427712]
+position = Vector2(-30, -13.5)
+shape = SubResource("RectangleShape2D_xpw1u")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="AnimatableBody2D" unique_id=1677041360]
+position = Vector2(30, -13.5)
+shape = SubResource("RectangleShape2D_yhcui")
+
 [node name="PathFollow2D" type="PathFollow2D" parent="." unique_id=1630570580]
+position = Vector2(-1, 2)
 rotates = false
 loop = false
 

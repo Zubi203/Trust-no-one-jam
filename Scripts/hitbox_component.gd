@@ -19,6 +19,7 @@ func _on_body_entered(_body: Node2D):
 	for child in _body.get_children():
 		if child is HealthComponent:
 			child.take_damage(damage)
+	_destroy()
 
 func _destroy():
 	get_parent().queue_free()

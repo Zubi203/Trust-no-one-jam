@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://did014xnmhf13" path="res://Scenes/locked_door.tscn" id="13_d5k22"]
 [ext_resource type="PackedScene" uid="uid://c57mhse7noj83" path="res://Scenes/guard.tscn" id="14_hu42c"]
 [ext_resource type="PackedScene" uid="uid://bv1mlthamlh5l" path="res://Scenes/switch.tscn" id="14_svxlu"]
+[ext_resource type="PackedScene" uid="uid://b3pljbi2c56mo" path="res://Scenes/one_way_platform.tscn" id="18_kwtxw"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qyls8"]
 texture = ExtResource("3_qg8gv")
@@ -3759,9 +3760,9 @@ sources/8 = SubResource("TileSetAtlasSource_3re7x")
 sources/11 = SubResource("TileSetAtlasSource_w3bih")
 sources/15 = SubResource("TileSetAtlasSource_mgclg")
 
-[sub_resource type="Curve2D" id="Curve2D_d5k22"]
+[sub_resource type="Curve2D" id="Curve2D_svxlu"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 0, -37, 0, 0, 0, 0, 0, -168)
+"points": PackedVector2Array(0, 0, 0, 0, 0, -65, 0, 0, 0, 0, 0, -195)
 }
 point_count = 2
 
@@ -3824,7 +3825,7 @@ position = Vector2(3115, 294)
 
 [node name="Elevator" parent="." index="15" unique_id=1787862854 instance=ExtResource("13_7c3i5")]
 position = Vector2(1697, 398)
-curve = SubResource("Curve2D_d5k22")
+curve = SubResource("Curve2D_svxlu")
 
 [node name="LockedDoor" parent="." index="16" unique_id=1092191354 instance=ExtResource("13_d5k22")]
 position = Vector2(2362, 286)
@@ -3832,3 +3833,6 @@ position = Vector2(2362, 286)
 [node name="Switch" parent="." index="17" unique_id=1685327847 node_paths=PackedStringArray("connected_doors") instance=ExtResource("14_svxlu")]
 position = Vector2(2480, 174)
 connected_doors = [NodePath("../LockedDoor")]
+
+[node name="OneWayPlatform" parent="." index="18" unique_id=1634404840 instance=ExtResource("18_kwtxw")]
+position = Vector2(2240, 194)

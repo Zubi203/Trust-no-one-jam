@@ -60,7 +60,8 @@ gravity = Vector3(0, 98, 0)
 scale_max = 3.0
 scale_curve = SubResource("CurveTexture_f1ek2")
 
-[node name="Player" type="CharacterBody2D" unique_id=2022812981 node_paths=PackedStringArray("coyote_timer", "jump_buffer_timer", "audio", "possess_cooldown_timer", "possess_cooldown_timer_bar", "collider", "sprite", "damage_effect") groups=["Player"]]
+[node name="Player" type="CharacterBody2D" unique_id=2022812981 node_paths=PackedStringArray("coyote_timer", "jump_buffer_timer", "dash_buffer_timer", "audio", "possess_cooldown_timer", "possess_cooldown_timer_bar", "collider", "sprite", "damage_effect") groups=["Player"]]
+z_index = 1
 collision_mask = 12
 script = ExtResource("1_cvnsp")
 move_speed = 200.0
@@ -75,6 +76,7 @@ jump_cut_damping_rate = 100000.0
 jump_time_to_peak = 0.4
 jump_time_to_descent = 0.3
 jump_buffer_timer = NodePath("Timers/JumpBuffer")
+dash_buffer_timer = NodePath("Timers/DashBuffer")
 jump_volume = 50.0
 max_landing_volume = 80.0
 footsteps_volume = 30.0
@@ -115,6 +117,10 @@ wait_time = 0.1
 one_shot = true
 
 [node name="JumpBuffer" type="Timer" parent="Timers" unique_id=1883872660]
+wait_time = 0.15
+one_shot = true
+
+[node name="DashBuffer" type="Timer" parent="Timers" unique_id=2113421039]
 wait_time = 0.15
 one_shot = true
 

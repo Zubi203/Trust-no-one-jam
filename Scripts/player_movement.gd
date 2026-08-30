@@ -20,6 +20,7 @@ var direction_x: float
 var direction_y: float
 var facing_direction: float
 var was_on_floor: bool = false
+var dash_direction: Vector2
 
 @export var coyote_time_duration: float = 0.3
 @export var coyote_timer: Timer
@@ -35,6 +36,9 @@ var on_floor: bool
 
 @export var jump_buffer_timer: Timer
 @export var jump_buffer_duration: float = 0.15
+
+@export var dash_buffer_timer: Timer
+@export var dash_buffer_duration: float = 0.15
 
 @export_category("Sounds")
 var sound_emitter: SoundEmitterComponent = null
@@ -123,6 +127,9 @@ func _get_input(delta: float):
 	
 	direction_x = Input.get_axis("move_left", "move_right")
 	direction_y = Input.get_axis("move_up", "move_down")
+	var dash_vector = Input.get_vector("move_left", "move_right", "move_up", "move_down")
+	if dash_vector:
+		dash_direction = dash_vector.normalized()
 	
 	match current_state:
 		MoveStates.NORMAL:
@@ -142,6 +149,9 @@ func _get_input(delta: float):
 			#		current_state = MoveStates.WALL
 			
 			if Input.is_action_just_pressed("possess"):
+				dash_buffer_timer.start(dash_buffer_duration)
+			
+			if dash_buffer_timer.time_left:
 				_try_shoot_projectile()
 		MoveStates.WALL:
 			
@@ -235,9 +245,9 @@ func _try_shoot_projectile():
 		return
 	var projectile: PossessProjectile = possess_projectile.instantiate()
 	get_tree().current_scene.add_child(projectile)
-	projectile.set_projectile(global_position, Vector2(facing_direction, 0), self)
-	GameManager.SetCameraTarget.emit(projectile)
-	if possess_cooldown_timer_bar:
+	projectile.set_projectile(global_position, Vector2(dash_direction), self)
+	GameManager.SetCameraTarget.emit(projectile as Node2D)
+	if possess_cooldown_timer_bar:     
 		possess_cooldown_timer_bar.value = possess_cooldown_duration
 	disable_control()
 
@@ -247,7 +257,7 @@ func disable_control():
 		effect.global_position = global_position
 		get_tree().current_scene.add_child(effect)
 	play_sound(possession_exit_sound)
-	GameManager.ShakeCamera.emit(1)
+	GameManager.ShakeCamera.emit(0.5)
 	set_process(false)
 	set_physics_process(false)
 	_disable_collider.call_deferred()
@@ -256,12 +266,12 @@ func disable_control():
 		hide()
 
 func enable_control(pos: Vector2):
-	GameManager.ShakeCamera.emit(1)
+	GameManager.ShakeCamera.emit(0.5)
 	play_sound(possession_enter_sound)
 	_enable_collider.call_deferred()
 	if possess_cooldown_timer:
 		possess_cooldown_timer.start(possess_cooldown_duration)
-	GameManager.SetCameraTarget.emit(self)
+	GameManager.SetCameraTarget.emit(self as Node2D)
 	global_position = pos
 	velocity = Vector2.ZERO
 	set_process(true)
@@ -272,7 +282,7 @@ func enable_control(pos: Vector2):
 	if burst != null:
 		var effect = burst.instantiate()
 		effect.global_position = global_position
-		get_tree().current_scene.add_child(effect)
+		get_tree().current_scene.add_child.call_deferred(effect)
 
 func enable_control_jump(pos: Vector2):
 	enable_control(pos)
