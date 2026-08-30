@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bwh5nkw31gw8f"
-path="res://.godot/imported/enemy 1 walking color.png-3164d9bdfd2c622287145ee8319f42ce.ctex"
+uid="uid://dlvkgypevbhu5"
+path="res://.godot/imported/flying enemy eye closing.png-847dad1b5c0bd1cc5bdf0f1518f45d4e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Graphics/Character/enemy 1 walking color.png"
-dest_files=["res://.godot/imported/enemy 1 walking color.png-3164d9bdfd2c622287145ee8319f42ce.ctex"]
+source_file="res://Graphics/Character/eye enemy/flying enemy eye closing.png"
+dest_files=["res://.godot/imported/flying enemy eye closing.png-847dad1b5c0bd1cc5bdf0f1518f45d4e.ctex"]
 
 [params]
 
