@@ -56,7 +56,7 @@ func action_input(dir: Vector2):
 func jump_input():
 	pass
 
-func move(delta: float):
+func move(_delta: float):
 	pass
 
 func _physics_process(delta: float) -> void:

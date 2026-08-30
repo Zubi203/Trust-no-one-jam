@@ -1,0 +1,154 @@
+[gd_scene format=3 uid="uid://did014xnmhf13"]
+
+[ext_resource type="Script" uid="uid://bblx1y01hj06f" path="res://Scripts/locked_door.gd" id="1_vqfuk"]
+[ext_resource type="Texture2D" uid="uid://b30qbv58hngm2" path="res://Graphics/parts sheet.png" id="2_43430"]
+[ext_resource type="AudioStream" uid="uid://hs8ucpl2dopw" path="res://Audio/Selector menu.wav" id="2_x7wjr"]
+
+[sub_resource type="Animation" id="Animation_x7wjr"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Door/DoorTop:offset:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [-31.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Door/DoorBotton:offset:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [31.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Door/DoorMiddle:offset:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_7fjom"]
+resource_name = "open"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Door/DoorTop:offset:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.5, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [-31.0, -31.0, -31.0, -56.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Door/DoorMiddle:offset:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.5, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -31.0, -31.0, -56.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Door/DoorBotton:offset:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.5, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [31.0, 31.0, 31.0, 56.0]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"_disable_collider"
+}, {
+"args": [],
+"method": &"_play_sound"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rlsur"]
+_data = {
+&"RESET": SubResource("Animation_x7wjr"),
+&"open": SubResource("Animation_7fjom")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fldqa"]
+size = Vector2(14, 78)
+
+[node name="LockedDoor" type="StaticBody2D" unique_id=1092191354]
+collision_layer = 4
+script = ExtResource("1_vqfuk")
+
+[node name="DoorAudio" type="AudioStreamPlayer2D" parent="." unique_id=1507096435]
+stream = ExtResource("2_x7wjr")
+
+[node name="Door" type="Node2D" parent="." unique_id=81750305]
+
+[node name="DoorTop" type="Sprite2D" parent="Door" unique_id=1946943374]
+texture = ExtResource("2_43430")
+offset = Vector2(0, -31)
+region_enabled = true
+region_rect = Rect2(136, 160, 16, 32)
+
+[node name="DoorMiddle" type="Sprite2D" parent="Door" unique_id=1989758182]
+texture = ExtResource("2_43430")
+region_enabled = true
+region_rect = Rect2(136, 160, 16, 32)
+
+[node name="DoorBotton" type="Sprite2D" parent="Door" unique_id=1446719773]
+texture = ExtResource("2_43430")
+offset = Vector2(0, 31)
+region_enabled = true
+region_rect = Rect2(136, 160, 16, 32)
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=460133631]
+texture = ExtResource("2_43430")
+offset = Vector2(0, 56)
+region_enabled = true
+region_rect = Rect2(64, 160, 32, 32)
+
+[node name="Sprite2D2" type="Sprite2D" parent="." unique_id=1997522675]
+texture = ExtResource("2_43430")
+offset = Vector2(0, -56)
+flip_v = true
+region_enabled = true
+region_rect = Rect2(64, 160, 32, 32)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1459253956]
+libraries/ = SubResource("AnimationLibrary_rlsur")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1696699993]
+shape = SubResource("RectangleShape2D_fldqa")

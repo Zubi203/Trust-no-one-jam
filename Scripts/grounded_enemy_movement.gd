@@ -26,7 +26,7 @@ func jump_input():
 	if is_on_floor():
 		velocity.y = jump_velocity
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pass
 
 func _get_custom_gravity() -> float:

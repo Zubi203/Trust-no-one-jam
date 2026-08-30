@@ -173,8 +173,4 @@ process_material = SubResource("ParticleProcessMaterial_pu2lt")
 
 [node name="Player Visuals" parent="." unique_id=1131838389 instance=ExtResource("9_f1ek2")]
 
-[node name="Main animations" parent="Player Visuals" index="0" unique_id=1407210419]
-animation = &"walk"
-offset = Vector2(6.64, 0)
-
 [editable path="Player Visuals"]

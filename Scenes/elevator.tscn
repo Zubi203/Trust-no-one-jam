@@ -1,0 +1,78 @@
+[gd_scene format=3 uid="uid://dhtdd1stutd"]
+
+[ext_resource type="Texture2D" uid="uid://b30qbv58hngm2" path="res://Graphics/parts sheet.png" id="1_cyba6"]
+
+[sub_resource type="Curve2D" id="Curve2D_cyba6"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -1, 2)
+}
+point_count = 1
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h2w44"]
+size = Vector2(60, 12)
+
+[sub_resource type="Animation" id="Animation_cyba6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PathFollow2D:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_7i85y"]
+resource_name = "elevator_move"
+length = 6.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PathFollow2D:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2, 3, 4.9666667, 6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 1.0, 1.0, 0.0, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jd6vs"]
+_data = {
+&"RESET": SubResource("Animation_cyba6"),
+&"elevator_move": SubResource("Animation_7i85y")
+}
+
+[node name="Elevator" type="Path2D" unique_id=1787862854]
+curve = SubResource("Curve2D_cyba6")
+
+[node name="AnimatableBody2D" type="AnimatableBody2D" parent="." unique_id=2041433755]
+collision_layer = 4
+collision_mask = 5
+
+[node name="Sprite2D" type="Sprite2D" parent="AnimatableBody2D" unique_id=764852663]
+texture = ExtResource("1_cyba6")
+region_enabled = true
+region_rect = Rect2(224, 144, 64, 19)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatableBody2D" unique_id=866392890]
+position = Vector2(0, -3)
+shape = SubResource("RectangleShape2D_h2w44")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="." unique_id=1630570580]
+rotates = false
+loop = false
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="PathFollow2D" unique_id=653774127]
+remote_path = NodePath("../../AnimatableBody2D")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1647935082]
+callback_mode_process = 0
+libraries/ = SubResource("AnimationLibrary_jd6vs")
+autoplay = &"elevator_move"

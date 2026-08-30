@@ -13,7 +13,7 @@ func enter() -> void:
 		if not character_body.TargetSighted.is_connected(_transition_to_alert):
 			character_body.TargetSighted.connect(_transition_to_alert)
 
-func physics_update(delta: float) -> void:
+func physics_update(_delta: float) -> void:
 	if character_body is EnemyMovementComponent:
 		if not is_moving:
 			move_direction = Vector2.ZERO

@@ -60,6 +60,7 @@ var last_footstep_time: float = 0
 @export var sprite: AnimatedSprite2D = null
 var animation_manager: PlayerVisuals = null
 var base_sprite_scale: Vector2
+var base_offset: Vector2
 @export var burst: PackedScene = null
 @export var damage_effect: GPUParticles2D = null
 
@@ -78,6 +79,7 @@ func _ready() -> void:
 		possess_cooldown_timer_bar.max_value = possess_cooldown_duration
 	if sprite:
 		base_sprite_scale = sprite.scale
+		base_offset = sprite.offset
 
 
 func _physics_process(delta: float) -> void:
@@ -280,7 +282,7 @@ func _landing_animation():
 	if sprite == null:
 		return
 	sprite.scale = base_sprite_scale
-	var base_offset = sprite.offset
+	sprite.offset = base_offset
 	var tween = get_tree().create_tween()
 	tween.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK).set_parallel(true)
 	tween.tween_property(sprite, "scale:x", base_sprite_scale.x + 0.2, 0.1)

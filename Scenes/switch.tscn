@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://bv1mlthamlh5l"]
+
+[ext_resource type="Texture2D" uid="uid://b30qbv58hngm2" path="res://Graphics/parts sheet.png" id="1_hinho"]
+[ext_resource type="Script" uid="uid://3ps06aqtcgxn" path="res://Scripts/switch.gd" id="1_swbo4"]
+[ext_resource type="AudioStream" uid="uid://clmbd7yp5vu04" path="res://Audio/Deselect menu.wav" id="3_og4gy"]
+[ext_resource type="Script" uid="uid://dmi6igee3ffww" path="res://Scripts/SoundEmitterComponent.gd" id="4_1xkr6"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_og4gy"]
+atlas = ExtResource("1_hinho")
+region = Rect2(384, 176, 12, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1xkr6"]
+atlas = ExtResource("1_hinho")
+region = Rect2(352, 176, 12, 14)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_swbo4"]
+radius = 11.045361
+
+[node name="Switch" type="Area2D" unique_id=1685327847]
+collision_layer = 0
+script = ExtResource("1_swbo4")
+switch_textures = Array[Texture2D]([SubResource("AtlasTexture_og4gy"), SubResource("AtlasTexture_1xkr6")])
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=345324918]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1261608618]
+shape = SubResource("CircleShape2D_swbo4")
+
+[node name="SwitchAudio" type="AudioStreamPlayer2D" parent="." unique_id=1229439190]
+stream = ExtResource("3_og4gy")
+
+[node name="SoundEmitterComponent" type="Node2D" parent="." unique_id=1083734217]
+script = ExtResource("4_1xkr6")
+metadata/_custom_type_script = "uid://dmi6igee3ffww"
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

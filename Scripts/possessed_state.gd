@@ -8,7 +8,7 @@ func enter() -> void:
 	if character_body is EnemyMovementComponent:
 		character_body.speed_multiplier = 1
 
-func update(delta: float) -> void:
+func update(_delta: float) -> void:
 	get_input()
 
 func get_input():

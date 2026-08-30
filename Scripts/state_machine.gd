@@ -11,7 +11,7 @@ func _ready() -> void:
 			states[child.name.to_lower()] = child
 			child.state_transition.connect(change_state)
 
-func init(body: CharacterBody2D, animated_sprite: AnimatedSprite2D = null, animation_player: AnimationPlayer = null) -> void:
+func init(body: CharacterBody2D, _animated_sprite: AnimatedSprite2D = null, _animation_player: AnimationPlayer = null) -> void:
 	for key in states.keys():
 		if states[key] is State:
 			states[key].character_body = body

@@ -6,6 +6,7 @@ var animation_player: AnimationPlayer
 var character_body: CharacterBody2D
 @export var animation_name: String
 
+@warning_ignore_start("unused_signal")
 signal state_transition (source_state: State, new_state_name: String)
 
 func enter() -> void:
@@ -15,6 +16,7 @@ func enter() -> void:
 func exit() -> void:
 	pass
 
+@warning_ignore_start("unused_parameter")
 func update(delta: float) -> void:
 	pass
 

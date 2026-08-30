@@ -13,7 +13,7 @@ func set_projectile(pos: Vector2, dir: Vector2, player: PlayerMovement):
 	direction = dir
 	player_controller = player
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	velocity = direction * move_speed
 	rotation = direction.angle()
 	move_and_slide()
