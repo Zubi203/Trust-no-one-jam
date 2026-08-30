@@ -80,7 +80,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_52deb")
 }],
 "loop": 1,
-"name": &"default",
+"name": &"walking",
 "speed": 6.0
 }]
 
@@ -158,8 +158,8 @@ texture = SubResource("AtlasTexture_e7nyl")
 [node name="walking feet" type="AnimatedSprite2D" parent="Feet" unique_id=1378119683]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_e7nyl")
-autoplay = "default"
-frame_progress = 0.8465035
+animation = &"walking"
+frame_progress = 0.5407939
 
 [node name="Standing feet" type="Sprite2D" parent="Feet" unique_id=986716709]
 visible = false

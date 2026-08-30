@@ -8,6 +8,14 @@
 [ext_resource type="Script" uid="uid://bw0qlx545nufr" path="res://Scripts/character visual scripts/eye_follow_polish.gd" id="4_t2fth"]
 [ext_resource type="PackedScene" uid="uid://c57mhse7noj83" path="res://Scenes/guard.tscn" id="5_hura2"]
 [ext_resource type="Texture2D" uid="uid://cmivjpqbtulug" path="res://Graphics/Character/eyeball.png" id="5_u2nfs"]
+[ext_resource type="PackedScene" uid="uid://dk6hug7k1gxbo" path="res://Scenes/dog_spawner.tscn" id="8_kqd6v"]
+[ext_resource type="PackedScene" uid="uid://dhtdd1stutd" path="res://Scenes/elevator.tscn" id="10_a4wgy"]
+
+[sub_resource type="Curve2D" id="Curve2D_a4wgy"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -1, -2, 0, 0, 0, 0, -2, -224)
+}
+point_count = 2
 
 [node name="LevelBase" unique_id=82871209 instance=ExtResource("1_2l3n8")]
 
@@ -47,7 +55,7 @@ texture = ExtResource("5_u2nfs")
 offset = Vector2(-14, -14)
 
 [node name="Player" parent="." index="5" unique_id=2022812981 instance=ExtResource("3_vhmir")]
-position = Vector2(882, 197)
+position = Vector2(372, -2308)
 
 [node name="Doors" type="Node2D" parent="." index="6" unique_id=1600281851]
 position = Vector2(-14, 0)
@@ -90,7 +98,19 @@ position = Vector2(562, -1040)
 [node name="LockedDoor10" parent="Doors" index="9" unique_id=1218887695 instance=ExtResource("4_5rf5w")]
 position = Vector2(1353, -1040)
 
-[node name="Enemies" type="Node2D" parent="." index="7" unique_id=841621487]
+[node name="DogSpawner" parent="." index="7" unique_id=540580413 instance=ExtResource("8_kqd6v")]
+position = Vector2(1761, -423)
+
+[node name="DogSpawner2" parent="." index="8" unique_id=1997659042 instance=ExtResource("8_kqd6v")]
+position = Vector2(326, -1000)
+
+[node name="DogSpawner3" parent="." index="9" unique_id=632328375 instance=ExtResource("8_kqd6v")]
+position = Vector2(1272, -2056)
+
+[node name="DogSpawner4" parent="." index="10" unique_id=653727895 instance=ExtResource("8_kqd6v")]
+position = Vector2(496, -2280)
+
+[node name="Enemies" type="Node2D" parent="." index="11" unique_id=841621487]
 
 [node name="Guard" parent="Enemies" index="0" unique_id=661474157 instance=ExtResource("5_hura2")]
 position = Vector2(1189, -439)
@@ -169,3 +189,7 @@ position = Vector2(538, -2080)
 
 [node name="Guard22" parent="Enemies" index="25" unique_id=836831393 instance=ExtResource("5_hura2")]
 position = Vector2(1872, -2234)
+
+[node name="Elevator" parent="." index="12" unique_id=1787862854 instance=ExtResource("10_a4wgy")]
+position = Vector2(449, -2065)
+curve = SubResource("Curve2D_a4wgy")

@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://nrktwtgs8ot0" path="res://Scripts/dog_movement.gd" id="2_y1yv2"]
 [ext_resource type="PackedScene" uid="uid://by4jq0vnfxvux" path="res://Scenes/explosion.tscn" id="3_wkkfr"]
 [ext_resource type="Texture2D" uid="uid://onmu6kivxq8a" path="res://Graphics/placeholders/crab.png" id="3_y1yv2"]
+[ext_resource type="PackedScene" uid="uid://vqgx6a5ghd5r" path="res://Scenes/character visuals/mech_crab_visuals.tscn" id="4_2qe13"]
 [ext_resource type="Script" uid="uid://c454tpnr6cqvg" path="res://Scripts/dog_patrol.gd" id="4_bno1h"]
 [ext_resource type="Script" uid="uid://c4vrwa04b7dqo" path="res://Scripts/dog_suspicious.gd" id="5_6yb15"]
 [ext_resource type="Script" uid="uid://bo7h0f4ash4rb" path="res://Scenes/alert.gd" id="6_usue5"]
@@ -24,14 +25,17 @@ acceleration = 500.0
 braking = 800.0
 move_speed = 250.0
 
-[node name="Sprite2D" parent="." index="0" unique_id=2113224878]
+[node name="MechCrabVisuals" parent="." index="0" unique_id=236096607 instance=ExtResource("4_2qe13")]
+
+[node name="Sprite2D" parent="." index="1" unique_id=2113224878]
+visible = false
 texture = ExtResource("3_y1yv2")
 region_rect = Rect2(0, 4, 15, 11)
 
-[node name="CollisionShape2D" parent="." index="1" unique_id=1275131203]
+[node name="CollisionShape2D" parent="." index="2" unique_id=1275131203]
 shape = SubResource("RectangleShape2D_uny1q")
 
-[node name="VisionConeComponent" parent="." index="5" unique_id=511229003]
+[node name="VisionConeComponent" parent="." index="6" unique_id=511229003]
 fov_angle = 20.0
 cone_range = 120.0
 
@@ -59,6 +63,6 @@ target_position = Vector2(20, 0)
 [node name="WallDetectorLeft" parent="Raycasts" parent_id_path=PackedInt32Array(918429820) index="4" unique_id=1271537339]
 target_position = Vector2(-20, 0)
 
-[node name="SoundEmitterComponent" type="Node2D" parent="." index="8" unique_id=1401351276]
+[node name="SoundEmitterComponent" type="Node2D" parent="." index="9" unique_id=1401351276]
 script = ExtResource("7_12smy")
 metadata/_custom_type_script = "uid://dmi6igee3ffww"
