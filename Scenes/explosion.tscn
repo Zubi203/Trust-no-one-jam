@@ -1,0 +1,118 @@
+[gd_scene format=3 uid="uid://by4jq0vnfxvux"]
+
+[ext_resource type="Script" uid="uid://duopbnpcq0y6" path="res://Scripts/explosion.gd" id="1_a801j"]
+[ext_resource type="Texture2D" uid="uid://nth6ke7nlejc" path="res://Graphics/explosion.png" id="1_aayv4"]
+
+[sub_resource type="Animation" id="Animation_a801j"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PointLight2D:energy")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.5]
+}
+
+[sub_resource type="Animation" id="Animation_4okmj"]
+resource_name = "explode"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.19999999, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.2, 0.4, 0.76666665),
+"transitions": PackedFloat32Array(1, 1, 1),
+"values": [{
+"args": [],
+"method": &"enable_collider"
+}, {
+"args": [],
+"method": &"disable_collider"
+}, {
+"args": [],
+"method": &"queue_free"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PointLight2D:energy")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.73333335),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.5, 0.5, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_k2xjm"]
+_data = {
+&"RESET": SubResource("Animation_a801j"),
+&"explode": SubResource("Animation_4okmj")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_h2w44"]
+radius = 32.280025
+
+[sub_resource type="Gradient" id="Gradient_k2xcd"]
+offsets = PackedFloat32Array(0.28125, 0.68990386)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_aayv4"]
+gradient = SubResource("Gradient_k2xcd")
+fill = 1
+fill_from = Vector2(0.5052083, 0.5086806)
+
+[node name="Explosion" type="Area2D" unique_id=1481622306]
+script = ExtResource("1_a801j")
+damage = 5
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=898849197]
+libraries/ = SubResource("AnimationLibrary_k2xjm")
+autoplay = &"explode"
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1547604264]
+texture = ExtResource("1_aayv4")
+hframes = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1710620829]
+shape = SubResource("CircleShape2D_h2w44")
+disabled = true
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=713608354]
+color = Color(0.93333334, 0.5803922, 0.20784314, 1)
+energy = 0.5
+texture = SubResource("GradientTexture2D_aayv4")
