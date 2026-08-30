@@ -2,14 +2,16 @@
 
 [ext_resource type="Script" uid="uid://iu53fsp7nj7o" path="res://Scripts/enemy_movement_component.gd" id="1_287tu"]
 [ext_resource type="Texture2D" uid="uid://bort4u1kumq5" path="res://Graphics/placeholders/enemy_1_spritesheet.png" id="2_afpow"]
-[ext_resource type="AudioStream" uid="uid://d022lqia3322j" path="res://Audio/Depossession.wav" id="2_po0sg"]
+[ext_resource type="AudioStream" uid="uid://bsbhxfg0pu60u" path="res://Audio/27_Depossession.wav" id="2_hgeoe"]
 [ext_resource type="AudioStream" uid="uid://dr2vwcho7aevg" path="res://Audio/Ping alert.wav" id="3_56vhr"]
 [ext_resource type="Script" uid="uid://vtswvvywpbhe" path="res://Scripts/health_component.gd" id="4_287tu"]
 [ext_resource type="Texture2D" uid="uid://bd5nyk8pnn2oy" path="res://Graphics/Question 256 px.png" id="4_0830c"]
 [ext_resource type="AudioStream" uid="uid://c0ugtoqmnq4ys" path="res://Audio/Ping fully alert.wav" id="4_ta2yt"]
+[ext_resource type="AudioStream" uid="uid://b07w8ft7g30ua" path="res://Audio/00_gunshot.wav" id="5_hgeoe"]
 [ext_resource type="PackedScene" uid="uid://cwydli72j1cqg" path="res://Scenes/shadow_burst.tscn" id="5_ta2yt"]
 [ext_resource type="Script" uid="uid://dpv1jn585hnr1" path="res://Scripts/vision_cone_component.gd" id="6_ghaa6"]
 [ext_resource type="Shader" uid="uid://i5gwhx72h1g2" path="res://Scripts/damage_flash.gdshader" id="6_m4x7e"]
+[ext_resource type="AudioStream" uid="uid://dk4fhn6crg40v" path="res://Audio/10_gunreload.wav" id="6_tk7xo"]
 [ext_resource type="Script" uid="uid://colc37fd136ad" path="res://Scripts/state_machine.gd" id="7_auwsv"]
 [ext_resource type="Script" uid="uid://dabjn6elwxib8" path="res://Scripts/state.gd" id="8_8uf12"]
 [ext_resource type="Script" uid="uid://tsvcgjjalj1a" path="res://Scripts/possessed_state.gd" id="8_auwsv"]
@@ -52,9 +54,11 @@ wall_detector_left = NodePath("Raycasts/WallDetectorLeft")
 ledge_end_detector_right = NodePath("Raycasts/LedgeEndDetectorRight")
 ledge_end_detector_left = NodePath("Raycasts/LedgeEndDetectorLeft")
 audio = NodePath("EnemyAudio")
-possession_enter_sound = ExtResource("2_po0sg")
+possession_enter_sound = ExtResource("2_hgeoe")
 suspicious_sound = ExtResource("3_56vhr")
 alert_sound = ExtResource("4_ta2yt")
+attack_sound = ExtResource("5_hgeoe")
+reload_sound = ExtResource("6_tk7xo")
 burst = ExtResource("5_ta2yt")
 damage_effect = NodePath("damagefx")
 

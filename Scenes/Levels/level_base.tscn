@@ -3,12 +3,21 @@
 [ext_resource type="Script" uid="uid://ce5sbhcumwkw7" path="res://Scripts/level_manager.gd" id="1_3ne40"]
 [ext_resource type="TileSet" uid="uid://cqjx1focsl3du" path="res://Resources/main_tileset.tres" id="1_38dla"]
 [ext_resource type="Script" uid="uid://dwfagqcyqsykg" path="res://Scripts/camera_controller.gd" id="2_n5e7m"]
+[ext_resource type="Theme" uid="uid://b1x0cslrvyl6r" path="res://Resources/ui_theme.tres" id="5_ej2hx"]
+[ext_resource type="Texture2D" uid="uid://b5ryjae7quiw8" path="res://Graphics/Pause 256 px.png" id="7_614yd"]
 [ext_resource type="Script" uid="uid://di7duo2v10ds5" path="res://Scripts/level_ui.gd" id="8_614yd"]
+[ext_resource type="Script" uid="uid://cvyttypgl4gmn" path="res://Scripts/defeated_label.gd" id="9_4f6dp"]
 [ext_resource type="Script" uid="uid://cfw7hx86xxpor" path="res://Scripts/animated_button_component.gd" id="9_ouscj"]
 [ext_resource type="PackedScene" uid="uid://kw2wu7hwd6xu" path="res://Scenes/settings_menu.tscn" id="10_ls6f5"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_614yd"]
 font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_h2w44"]
+font_size = 60
+font_color = Color(1, 0.04000002, 0.04000002, 1)
+shadow_size = 7
+shadow_color = Color(0.23, 0.009200005, 0.009200005, 1)
 
 [node name="LevelBase" type="Node2D" unique_id=82871209]
 script = ExtResource("1_3ne40")
@@ -43,9 +52,31 @@ offset_top = 50.0
 offset_right = -50.0
 offset_bottom = 8.0
 grow_horizontal = 0
-text = "PAUSE"
+theme = ExtResource("5_ej2hx")
 icon_alignment = 1
 expand_icon = true
+
+[node name="AnimatedButtonComponent" type="Node2D" parent="LevelUI/PauseButton" unique_id=65591179]
+script = ExtResource("9_ouscj")
+metadata/_custom_type_script = "uid://cfw7hx86xxpor"
+
+[node name="MarginContainer" type="MarginContainer" parent="LevelUI/PauseButton" unique_id=1654670012]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="TextureRect" type="TextureRect" parent="LevelUI/PauseButton/MarginContainer" unique_id=938842194]
+layout_mode = 2
+texture = ExtResource("7_614yd")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="PauseMenu" type="ColorRect" parent="LevelUI" unique_id=564634113]
 visible = false
@@ -54,6 +85,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("5_ej2hx")
 color = Color(0, 0, 0, 0.23529412)
 
 [node name="CenterContainer" type="CenterContainer" parent="LevelUI/PauseMenu" unique_id=261600712]
@@ -119,6 +151,21 @@ metadata/_custom_type_script = "uid://cfw7hx86xxpor"
 
 [node name="SettingsMenu" parent="LevelUI" unique_id=607017261 instance=ExtResource("10_ls6f5")]
 visible = false
+
+[node name="CenterContainer" type="CenterContainer" parent="LevelUI" unique_id=2118367430]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="DefeatedLabel" type="Label" parent="LevelUI/CenterContainer" unique_id=64010853]
+visible = false
+layout_mode = 2
+text = "DEFEATED"
+label_settings = SubResource("LabelSettings_h2w44")
+script = ExtResource("9_4f6dp")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=494796227]
 color = Color(0.5069199, 0.5069203, 0.5069202, 1)

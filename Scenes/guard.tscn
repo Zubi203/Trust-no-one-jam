@@ -10,24 +10,12 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h2w44"]
 size = Vector2(6, 26)
 
-[sub_resource type="Gradient" id="Gradient_fkybt"]
-offsets = PackedFloat32Array(0.62435234, 0.66580313, 0.6761658)
-colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_cnet1"]
-gradient = SubResource("Gradient_fkybt")
-width = 32
-height = 32
-fill = 1
-fill_from = Vector2(0.521978, 0.489011)
-
-[node name="Guard" unique_id=661474157 node_paths=PackedStringArray("reload_timer", "reload_timer_progress_bar") instance=ExtResource("1_smm0d")]
+[node name="Guard" unique_id=661474157 node_paths=PackedStringArray("reload_timer") instance=ExtResource("1_smm0d")]
 script = ExtResource("2_cnet1")
 shoot_interval = 0.3
 reload_timer = NodePath("ReloadTimer")
 reload_duration = 1.2
 mag_size = 6
-reload_timer_progress_bar = NodePath("TextureProgressBar")
 gravity = 10.0
 jump_height = 40.0
 jump_time_to_peak = 0.3
@@ -47,23 +35,12 @@ shape = SubResource("RectangleShape2D_h2w44")
 script = ExtResource("2_smm0d")
 metadata/_custom_type_script = "uid://jyd4i0dvnfdf"
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="." index="3" unique_id=413061350]
-modulate = Color(0.6814234, 0.6814234, 0.6814234, 0.65882355)
-offset_left = -16.0
-offset_top = -106.66666
-offset_right = 16.0
-offset_bottom = -74.66666
-step = 0.0
-value = 68.0
-fill_mode = 4
-texture_progress = SubResource("GradientTexture2D_cnet1")
-
-[node name="ReloadTimer" type="Timer" parent="." index="4" unique_id=691403276]
+[node name="ReloadTimer" type="Timer" parent="." index="3" unique_id=691403276]
 wait_time = 0.1
 one_shot = true
 autostart = true
 
-[node name="VisionConeComponent" parent="." index="8" unique_id=511229003]
+[node name="VisionConeComponent" parent="." index="7" unique_id=511229003]
 cone_range = 50.0
 
 [node name="Patrol" parent="FiniteStateMachine" parent_id_path=PackedInt32Array(1983450659) index="0" unique_id=1735616744]
