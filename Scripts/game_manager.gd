@@ -30,8 +30,8 @@ const SCENE_PATHS: Dictionary[Scenes, String] = {
 	Scenes.TITLE: "uid://b1axeffq6ci6j",
 	Scenes.LEVEL_SELECT: "uid://bn680qg8um0nn",
 	Scenes.LEVEL_1: "uid://rew3i22algr4",
-	Scenes.LEVEL_2: "uid://ftygoenq1x0i",
-	Scenes.LEVEL_3: "uid://bla2rsfxadmio",
+	Scenes.LEVEL_2: "uid://bxmlm8l6fj32p",
+	Scenes.LEVEL_3: "uid://blpt0nt8wb04w",
 	Scenes.LEVEL_4: "uid://cjrgmly40eurd",
 	Scenes.LEVEL_5: "uid://5xwblun4mhpr",
 	Scenes.LEVEL_6: "uid://bpuuciaulhhts"
