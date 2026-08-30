@@ -1,8 +1,10 @@
 [gd_scene format=3 uid="uid://bcsilowh3oyr6"]
 
 [ext_resource type="Script" uid="uid://dianwojmulqsw" path="res://Scripts/player_movement.gd" id="1_cvnsp"]
+[ext_resource type="AudioStream" uid="uid://dou37mdjmsvvw" path="res://Audio/Possession.wav" id="2_3smsa"]
 [ext_resource type="PackedScene" uid="uid://chmxcmn5d6617" path="res://Scenes/possess_projectile.tscn" id="2_fkybt"]
 [ext_resource type="Script" uid="uid://duh5xmnwt5ujc" path="res://Scripts/hurtbox_component.gd" id="3_6t5aa"]
+[ext_resource type="AudioStream" uid="uid://d022lqia3322j" path="res://Audio/Depossession.wav" id="3_8erm5"]
 [ext_resource type="Texture2D" uid="uid://yfh7768juin7" path="res://Graphics/placeholders/player_character.png" id="3_x3wgy"]
 [ext_resource type="Script" uid="uid://vtswvvywpbhe" path="res://Scripts/health_component.gd" id="6_3smsa"]
 [ext_resource type="Script" uid="uid://dmi6igee3ffww" path="res://Scripts/SoundEmitterComponent.gd" id="6_x3wgy"]
@@ -38,7 +40,7 @@ scale_min = 0.5
 scale_max = 1.5
 color = Color(0.105882354, 0.105882354, 0.105882354, 1)
 
-[node name="Player" type="CharacterBody2D" unique_id=2022812981 node_paths=PackedStringArray("coyote_timer", "possess_cooldown_timer", "possess_cooldown_timer_bar", "collider") groups=["Player"]]
+[node name="Player" type="CharacterBody2D" unique_id=2022812981 node_paths=PackedStringArray("coyote_timer", "audio", "possess_cooldown_timer", "possess_cooldown_timer_bar", "collider") groups=["Player"]]
 collision_mask = 12
 script = ExtResource("1_cvnsp")
 move_speed = 200.0
@@ -56,6 +58,9 @@ jump_volume = 50.0
 max_landing_volume = 80.0
 footsteps_volume = 30.0
 wall_and_ceiling_volume = 20.0
+audio = NodePath("PlayerAudio")
+possession_exit_sound = ExtResource("2_3smsa")
+possession_enter_sound = ExtResource("3_8erm5")
 possess_projectile = ExtResource("2_fkybt")
 possess_cooldown_timer = NodePath("Timers/PossessCooldown")
 possess_cooldown_duration = 1.0
@@ -131,3 +136,6 @@ position = Vector2(0, 13)
 amount = 20
 randomness = 1.0
 process_material = SubResource("ParticleProcessMaterial_h2w44")
+
+[node name="PlayerAudio" type="AudioStreamPlayer2D" parent="." unique_id=1709419882]
+bus = &"SFX"

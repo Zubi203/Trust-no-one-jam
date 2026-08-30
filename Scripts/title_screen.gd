@@ -4,11 +4,12 @@ extends Control
 @export var credits: Control
 
 func _ready() -> void:
+	MusicManager.menu_music.play()
 	GameManager.ShowSettingsMenu.connect(hide_title_menu)
 	GameManager.HideSettingsMenu.connect(show_title_menu)
 
 func _on_play_button_pressed() -> void:
-	SceneTransition.transition(GameManager.Scenes.LEVEL_SELECT, GameManager.Scenes.TITLE)
+	SceneTransition.transition(GameManager.Scenes.LEVEL_1, GameManager.Scenes.TITLE)
 
 
 func _on_settings_button_pressed() -> void:

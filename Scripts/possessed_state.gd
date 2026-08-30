@@ -4,6 +4,7 @@ var move_direction: Vector2
 var aim_direction: Vector2
 
 func enter() -> void:
+	GameManager.ShakeCamera.emit(2)
 	if character_body is EnemyMovementComponent:
 		character_body.speed_multiplier = 1
 

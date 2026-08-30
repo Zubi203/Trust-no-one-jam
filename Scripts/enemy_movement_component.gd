@@ -25,6 +25,11 @@ var target_point: Vector2
 var state_machine: FiniteStateMachine = null
 var vision_cone: VisionConeComponent = null
 
+@export var audio: AudioStreamPlayer2D
+@export var possession_enter_sound: AudioStream
+@export var suspicious_sound: AudioStream
+@export var alert_sound: AudioStream
+
 
 func _ready() -> void:
 	_enemy_ready.call_deferred()
@@ -106,9 +111,18 @@ func _target_defeated():
 func try_possess_enemy() -> bool:
 	if state_machine.states.find_key(state_machine.current_state) == "patrol":
 		state_machine.change_state(state_machine.current_state, "possessed")
+		play_sound(possession_enter_sound)
 		return true
 	return false
 
 func _exit_tree() -> void:
 	if state_machine.states.find_key(state_machine.current_state) == "possessed":
 		GameManager.PossessionEnd.emit(global_position)
+
+func play_sound(sound: AudioStream):
+	if sound == null:
+		return
+	if audio == null:
+		return
+	audio.stream = sound
+	audio.play()

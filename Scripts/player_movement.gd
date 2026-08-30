@@ -42,6 +42,10 @@ var sound_emitter: SoundEmitterComponent = null
 @export var footsteps_interval: float = 0.2
 var last_footstep_time: float = 0
 
+@export var audio: AudioStreamPlayer2D
+@export var possession_exit_sound: AudioStream
+@export var possession_enter_sound: AudioStream
+
 @export_category("Possess")
 @export var possess_projectile: PackedScene
 @export var possess_cooldown_timer: Timer
@@ -54,7 +58,7 @@ var sprite: Sprite2D = null
 var base_sprite_scale: Vector2
 
 func _ready() -> void:
-	GameManager.PossessionEnd.connect(enable_control)
+	GameManager.PossessionEnd.connect(enable_control_jump)
 	GameManager.SetCameraTarget.emit.call_deferred(self)
 	GameManager.EnablePlayerControl.connect(enable_control)
 	for child in get_children():
@@ -208,6 +212,8 @@ func _try_shoot_projectile():
 	disable_control()
 
 func disable_control():
+	play_sound(possession_exit_sound)
+	GameManager.ShakeCamera.emit(1)
 	set_process(false)
 	set_physics_process(false)
 	_disable_collider.call_deferred()
@@ -216,6 +222,8 @@ func disable_control():
 		hide()
 
 func enable_control(pos: Vector2):
+	GameManager.ShakeCamera.emit(1)
+	play_sound(possession_enter_sound)
 	_enable_collider.call_deferred()
 	if possess_cooldown_timer:
 		possess_cooldown_timer.start(possess_cooldown_duration)
@@ -225,9 +233,12 @@ func enable_control(pos: Vector2):
 	set_process(true)
 	set_physics_process(true)
 	control_enabled = true
-	_jump()
 	if not visible:
 		show()
+
+func enable_control_jump(pos: Vector2):
+	enable_control(pos)
+	_jump()
 
 func _landing_animation():
 	if sprite == null:
@@ -269,3 +280,11 @@ func _disable_collider():
 	if collider == null:
 		return
 	collider.disabled = true
+
+func play_sound(sound: AudioStream):
+	if sound == null:
+		return
+	if audio == null:
+		return
+	audio.stream = sound
+	audio.play()
