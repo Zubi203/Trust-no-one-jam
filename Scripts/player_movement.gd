@@ -80,6 +80,7 @@ func _ready() -> void:
 			sound_emitter = child
 		if child is HealthComponent:
 			child.DamageTaken.connect(_on_take_damage)
+			child.HealthDepleted.connect(_on_defeat)
 		if child is PlayerVisuals:
 			animation_manager = child
 	if possess_cooldown_timer_bar:
@@ -350,5 +351,5 @@ func _on_take_damage(amount: int):
 		if not damage_effect.emitting:
 			damage_effect.emitting = true
 
-func _exit_tree() -> void:
+func _on_defeat() -> void:
 	GameManager.PlayerDefeated.emit()

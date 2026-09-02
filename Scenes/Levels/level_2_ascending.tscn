@@ -61,12 +61,10 @@ connected_doors = [NodePath("../../Doors/LockedDoor"), NodePath("../../Doors/Loc
 position = Vector2(998, -2089)
 connected_doors = [NodePath("../../Doors/LockedDoor2"), NodePath("../../Doors/LockedDoor4"), NodePath("../../Doors/LockedDoor6"), NodePath("../../Doors/LockedDoor8")]
 
-[node name="Camera2D" parent="." index="1" unique_id=1028112961]
-zoom = Vector2(6, 6)
-
-[node name="Background" type="Sprite2D" parent="Camera2D" index="0" unique_id=71804104]
+[node name="Background" type="Sprite2D" parent="Camera2D" parent_id_path=PackedInt32Array(1028112961) index="0" unique_id=71804104]
 z_index = -1
 texture_filter = 1
+scale = Vector2(2, 2)
 texture = ExtResource("3_13rke")
 script = ExtResource("4_t2fth")
 
